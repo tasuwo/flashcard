@@ -9,11 +9,25 @@
 import Cocoa
 
 class ViewController: NSViewController {
+    let defaultSize = NSSize(width: 800, height: 50)
+    
+    override func loadView() {
+        let view = NSView(frame: NSMakeRect(0,0,defaultSize.width,defaultSize.height))
+        view.wantsLayer = true
+        view.layer?.borderWidth = 2
+        view.layer?.borderColor = NSColor.red.cgColor
+        self.view = view
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear() {
+        // Change view size to fit with window
+        if let winSize = self.view.window?.frame.size {
+            self.view.frame = NSMakeRect(0,0,winSize.width,winSize.height)
+        }
     }
 
     override var representedObject: Any? {
@@ -21,7 +35,4 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
 }
-
