@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController {
+class SearchViewController: NSViewController {
     let defaultSize = NSSize(width: 800, height: 50)
     
     override func loadView() {

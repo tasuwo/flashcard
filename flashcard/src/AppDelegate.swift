@@ -9,11 +9,11 @@
 import Cocoa
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    let winSize = NSSize(width: 800, height: 50)
-    var win: NSWindow?
-    var controller: ViewController?
+    var searchWC: SearchWindowController?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        // Calculate window's rect
+        let winSize = SearchWindowController.winSize
         let winRect: NSRect
         if let scrnSize = getScreenSize() {
             winRect = NSMakeRect(scrnSize.width/2-winSize.width/2, scrnSize.height*2/3, winSize.width, winSize.height)
@@ -21,13 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             winRect = NSMakeRect(0, 0, winSize.width, winSize.height)
         }
 
-        win = NSWindow(contentRect: winRect, styleMask: NSWindowStyleMask.resizable, backing: NSBackingStoreType.buffered, defer: false)
-        controller = ViewController()
-        let content = win!.contentView! as NSView
-        let view = controller!.view
-        content.addSubview(view)
-            
-        win!.makeKeyAndOrderFront(nil)
+        self.searchWC = SearchWindowController(window: NSWindow(contentRect: winRect, styleMask: NSWindowStyleMask.resizable, backing: NSBackingStoreType.buffered, defer: false))
+        self.searchWC!.showWindow(self)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

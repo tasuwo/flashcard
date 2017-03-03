@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5B1E68DBF700D4F083 /* main.swift */; };
 		A0B2ED5F1E68E13300D4F083 /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5E1E68E13300D4F083 /* util.swift */; };
+		A0B2ED611E68EE5400D4F083 /* SearchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* SearchWindowController.swift */; };
 		A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */; };
-		A0DCC2D11E66DA1C0071A00E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* ViewController.swift */; };
+		A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */; };
 		A0DCC2D31E66DA1C0071A00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DCC2D21E66DA1C0071A00E /* Assets.xcassets */; };
 		A0DCC2E11E66DA1C0071A00E /* flashcardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2E01E66DA1C0071A00E /* flashcardTests.swift */; };
 /* End PBXBuildFile section */
@@ -28,9 +29,10 @@
 /* Begin PBXFileReference section */
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A0B2ED5E1E68E13300D4F083 /* util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = util.swift; path = flashcard/src/util.swift; sourceTree = SOURCE_ROOT; };
+		A0B2ED601E68EE5400D4F083 /* SearchWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWindowController.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A0DCC2D01E66DA1C0071A00E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		A0DCC2D21E66DA1C0071A00E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0DCC2D71E66DA1C0071A00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0DCC2DC1E66DA1C0071A00E /* flashcardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = flashcardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +97,8 @@
 		A0923E031E683F5F003642FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				A0DCC2D01E66DA1C0071A00E /* ViewController.swift */,
+				A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */,
+				A0B2ED601E68EE5400D4F083 /* SearchWindowController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -237,8 +240,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0DCC2D11E66DA1C0071A00E /* ViewController.swift in Sources */,
+				A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */,
 				A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */,
+				A0B2ED611E68EE5400D4F083 /* SearchWindowController.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,
 				A0B2ED5F1E68E13300D4F083 /* util.swift in Sources */,
 			);
