@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             winRect = NSMakeRect(0, 0, winSize.width, winSize.height)
         }
 
-        self.searchWC = SearchWindowController(window: NSWindow(contentRect: winRect, styleMask: NSWindowStyleMask.resizable, backing: NSBackingStoreType.buffered, defer: false))
+        self.searchWC = SearchWindowController(window: InputableWindow(contentRect: winRect, styleMask: NSWindowStyleMask.resizable, backing: NSBackingStoreType.buffered, defer: false))
         self.searchWC!.showWindow(self)
     }
 
@@ -30,3 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+class InputableWindow : NSWindow {
+    override var canBecomeKey: Bool {
+        return true
+    }
+}
