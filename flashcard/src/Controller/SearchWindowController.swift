@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SearchWindowController : NSWindowController, NSWindowDelegate {
+class SearchWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
     
     override init(window: NSWindow?) {
@@ -28,7 +28,10 @@ class SearchWindowController : NSWindowController, NSWindowDelegate {
         super.windowDidLoad()
         self.window?.delegate = self
     }
-    
+}
+
+// MARK: - NSWindowDelegate
+extension SearchWindowController : NSWindowDelegate {
     func windowDidMiniaturize(_ notification: Notification) {
         print("Window minimized")
     }
