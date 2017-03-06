@@ -98,8 +98,13 @@ extension SettingsWindowController : NSToolbarDelegate {
     func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         return self.toolbarTabsIdentifierArray
     }
-    
+}
+
+// MARK: - View Transition
+extension SettingsWindowController {
     func viewSelected(_ sender: NSToolbarItem) {
         Swift.print(sender.itemIdentifier)
+        
+        // Transition by identifier
     }
 }
