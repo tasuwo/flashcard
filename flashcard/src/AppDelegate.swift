@@ -35,7 +35,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         self.searchWC = SearchWindowController(window: InputableWindow(contentRect: searchWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
-        self.settingsWC = SettingsWindowController(window: NSWindow(contentRect: settingsWinRect, styleMask: [.resizable], backing: .buffered, defer: false))
+        self.settingsWC = SettingsWindowController(window: NSWindow(contentRect: settingsWinRect, styleMask: [.resizable, .titled], backing: .buffered, defer: false))
         
         self.searchWC!.showWindow(self)
         self.settingsWC!.showWindow(self)
