@@ -12,16 +12,19 @@ class SearchViewController: NSViewController {
     override func loadView() {
         let winSize = SearchWindowController.winSize
         let view = SearchView(frame: NSMakeRect(0,0,winSize.width, winSize.height))
+        view.delegate = self
         self.view = view
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
     
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
+    }
+}
+
+extension SearchViewController : SearchViewDelegate {
+    func didChangeText(_ text: String) {
+        print(text)
     }
 }
