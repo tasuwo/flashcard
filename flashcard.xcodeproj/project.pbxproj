@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0809A8A1E6A286F005F3724 /* SearchView.swift */; };
 		A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5B1E68DBF700D4F083 /* main.swift */; };
-		A0B2ED5F1E68E13300D4F083 /* util.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5E1E68E13300D4F083 /* util.swift */; };
 		A0B2ED611E68EE5400D4F083 /* SearchWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* SearchWindowController.swift */; };
 		A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */; };
 		A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */; };
@@ -30,7 +29,6 @@
 /* Begin PBXFileReference section */
 		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = flashcard/src/Controller/SearchView.swift; sourceTree = SOURCE_ROOT; };
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		A0B2ED5E1E68E13300D4F083 /* util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = util.swift; sourceTree = "<group>"; };
 		A0B2ED601E68EE5400D4F083 /* SearchWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWindowController.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -84,7 +82,6 @@
 		A0923E011E683F54003642FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A0B2ED5E1E68E13300D4F083 /* util.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -248,7 +245,6 @@
 				A0B2ED611E68EE5400D4F083 /* SearchWindowController.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,
 				A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */,
-				A0B2ED5F1E68E13300D4F083 /* util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

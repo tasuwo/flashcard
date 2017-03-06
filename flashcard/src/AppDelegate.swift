@@ -13,9 +13,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Calculate window's rect
+        var screenSize : CGSize? = nil
+        if let screens = NSScreen.screens(),
+            let screen  = screens.first {
+            screenSize = screen.frame.size
+        }
+
         let winSize = SearchWindowController.winSize
         let winRect: NSRect
-        if let scrnSize = getScreenSize() {
+        if let scrnSize = screenSize {
             winRect = NSMakeRect(scrnSize.width/2-winSize.width/2, scrnSize.height*2/3, winSize.width, winSize.height)
         } else {
             winRect = NSMakeRect(0, 0, winSize.width, winSize.height)
