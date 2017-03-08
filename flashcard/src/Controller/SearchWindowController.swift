@@ -8,6 +8,10 @@
 
 import Cocoa
 
+protocol DelegateToSearchWindow {
+    func lookup(_ word: String)
+}
+
 class SearchWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
     
@@ -15,6 +19,7 @@ class SearchWindowController : NSWindowController {
         super.init(window: window)
         
         let controller = SearchViewController()
+        controller.delegate = self
         let content = self.window!.contentView! as NSView
         let view = controller.view
         content.addSubview(view)
@@ -38,5 +43,13 @@ extension SearchWindowController : NSWindowDelegate {
     
     func windowWillClose(_ notification: Notification) {
         print("Window closing")
+    }
+}
+
+// MARK: - DElegateToSearchWindow
+extension SearchWindowController : DelegateToSearchWindow {
+    func lookup(_ word: String) {
+        // TODO: Dictionary search
+        print("Look up text: " + word)
     }
 }

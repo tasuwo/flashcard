@@ -9,10 +9,13 @@
 import Cocoa
 
 class SearchViewController: NSViewController {
+    open var delegate : DelegateToSearchWindow?
+    
     override func loadView() {
         let winSize = SearchWindowController.winSize
         let view = SearchView(frame: NSMakeRect(0,0,winSize.width, winSize.height))
         view.delegate = self
+        
         self.view = view
     }
     
@@ -25,6 +28,6 @@ class SearchViewController: NSViewController {
 
 extension SearchViewController : SearchViewDelegate {
     func didChangeText(_ text: String) {
-        print(text)
+        self.delegate?.lookup(text)
     }
 }
