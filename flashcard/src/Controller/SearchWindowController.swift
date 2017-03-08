@@ -10,6 +10,7 @@ import Cocoa
 
 protocol DelegateToSearchWindow {
     func lookup(_ word: String)
+    func resize(_ size: NSSize, animate: Bool)
 }
 
 class SearchWindowController : NSWindowController {
@@ -51,5 +52,14 @@ extension SearchWindowController : DelegateToSearchWindow {
     func lookup(_ word: String) {
         // TODO: Dictionary search
         print("Look up text: " + word)
+    }
+    
+    func resize(_ size: NSSize, animate: Bool) {
+        // TODO: Coordiante window's origin position
+        let origin = (
+            x: self.window!.frame.origin.x + self.window!.frame.width/2 - size.width/2,
+            y: self.window!.frame.origin.y + self.window!.frame.height - size.height
+        )
+        self.window?.setFrame(NSMakeRect(origin.x, origin.y, size.width, size.height), display: true, animate: animate)
     }
 }
