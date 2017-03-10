@@ -11,7 +11,7 @@ import Cocoa
 enum QuickWindowViewType {
     case search
     case editCard
-    
+
     func isType(of view: NSView) -> Bool {
         switch self {
         case .search:
@@ -20,8 +20,8 @@ enum QuickWindowViewType {
             return (view is EditCardView)
         }
     }
-    
-    func viewControllerType() -> NSViewController.Type {
+
+    func viewControllerType() -> ViewControllerForQuickWindow.Type {
         switch self {
         case .search:
             return SearchViewController.self
@@ -37,11 +37,15 @@ protocol DelegateToQuickWindow {
     func transitionTo(_ view: QuickWindowViewType)
 }
 
+class ViewControllerForQuickWindow : NSViewController {
+    open var delegate : DelegateToQuickWindow?
+}
+
 class QuickWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
 
     let dic = CoreServiceDictionary()
-    
+
     override init(window: NSWindow?) {
         super.init(window: window)
 
@@ -49,11 +53,11 @@ class QuickWindowController : NSWindowController {
         searchVC.delegate = self
         self.window!.contentViewController = searchVC
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.delegate = self
@@ -75,9 +79,9 @@ extension QuickWindowController : NSWindowDelegate {
 extension QuickWindowController : DelegateToQuickWindow {
     func transitionTo(_ T: QuickWindowViewType) {
         if T.isType(of: self.contentViewController!.view) { return }
-        
-        // TODO: Set delegate
+
         let newVC = T.viewControllerType().init()
+        newVC.delegate = self
         self.contentViewController = newVC
     }
 
