@@ -20,7 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             screenSize = screen.frame.size
         }
 
-        let quickWinSize = QuickWindowController.winSize
+        // TODO: Size setting for window
+        let quickWinSize = SearchViewController.getDefaultSize()
         let settingsWinSize = SettingsWindowController.winSize
         
         let quickWinRect: NSRect

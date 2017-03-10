@@ -20,6 +20,15 @@ enum QuickWindowViewType {
             return (view is EditCardView)
         }
     }
+    
+    func type() -> NSView.Type {
+        switch self {
+        case .search:
+            return SearchView.self
+        case .editCard:
+            return EditCardView.self
+        }
+    }
 
     func viewControllerType() -> ViewControllerForQuickWindow.Type {
         switch self {
@@ -39,11 +48,12 @@ protocol DelegateToQuickWindow {
 
 class ViewControllerForQuickWindow : NSViewController {
     open var delegate : DelegateToQuickWindow?
+    class func getDefaultSize() -> NSSize {
+        return NSSize(width: 0, height: 0)
+    }
 }
 
 class QuickWindowController : NSWindowController {
-    static let winSize = NSSize(width: 800, height: 50)
-
     let dic = CoreServiceDictionary()
 
     override init(window: NSWindow?) {
@@ -82,6 +92,7 @@ extension QuickWindowController : DelegateToQuickWindow {
 
         let newVC = T.viewControllerType().init()
         newVC.delegate = self
+        self.resize(T.viewControllerType().getDefaultSize(), animate: true)
         self.contentViewController = newVC
     }
 
