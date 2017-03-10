@@ -20,12 +20,6 @@ class SearchViewController: ViewControllerForQuickWindow {
         
         self.view = view
     }
-    
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
 }
 
 extension SearchViewController : SearchViewDelegate {
