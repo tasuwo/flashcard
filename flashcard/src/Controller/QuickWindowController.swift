@@ -16,9 +16,6 @@ protocol DelegateToQuickWindow {
 
 class ViewControllerForQuickWindow : NSViewController {
     open var delegate : DelegateToQuickWindow?
-    class func getDefaultSize() -> NSSize {
-        return NSSize(width: 0, height: 0)
-    }
 }
 
 class QuickWindowController : NSWindowController {

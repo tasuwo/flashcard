@@ -7,3 +7,10 @@
 //
 
 import Foundation
+import Cocoa
+
+extension NSViewController {
+    class func getDefaultSize() -> NSSize {
+        return NSSize(width: 0, height: 0)
+    }
+}
