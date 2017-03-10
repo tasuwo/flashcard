@@ -14,10 +14,6 @@ protocol DelegateToQuickWindow {
     func transitionTo(_ view: QuickWindowViewType)
 }
 
-class ViewControllerForQuickWindow : NSViewController {
-    open var delegate : DelegateToQuickWindow?
-}
-
 class QuickWindowController : NSWindowController {
     let dic = CoreServiceDictionary()
 

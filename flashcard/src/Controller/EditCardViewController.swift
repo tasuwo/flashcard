@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class EditCardViewController: ViewControllerForQuickWindow {
+class EditCardViewController: QuickWindowViewController {
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 800, height: 500)
     }

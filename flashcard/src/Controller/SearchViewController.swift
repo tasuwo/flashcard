@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class SearchViewController: ViewControllerForQuickWindow {
+class SearchViewController: QuickWindowViewController {
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 800, height: 50)
     }

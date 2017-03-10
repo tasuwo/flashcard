@@ -30,7 +30,7 @@ enum QuickWindowViewType {
         }
     }
     
-    func viewControllerType() -> ViewControllerForQuickWindow.Type {
+    func viewControllerType() -> QuickWindowViewController.Type {
         switch self {
         case .search:
             return SearchViewController.self
