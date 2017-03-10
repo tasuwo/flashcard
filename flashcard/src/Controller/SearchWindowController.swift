@@ -16,6 +16,8 @@ protocol DelegateToSearchWindow {
 class SearchWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
     
+    let dic = CoreServiceDictionary()
+    
     override init(window: NSWindow?) {
         super.init(window: window)
         
@@ -51,7 +53,12 @@ extension SearchWindowController : NSWindowDelegate {
 extension SearchWindowController : DelegateToSearchWindow {
     func lookup(_ word: String) {
         // TODO: Dictionary search
-        print("Look up text: " + word)
+        let result = dic.lookUp(word)
+        if let r = result {
+            print("Result: " + r)
+        } else {
+            print("No result")
+        }
     }
     
     func resize(_ size: NSSize, animate: Bool) {
