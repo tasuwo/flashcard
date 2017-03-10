@@ -8,38 +8,6 @@
 
 import Cocoa
 
-enum QuickWindowViewType {
-    case search
-    case editCard
-
-    func isType(of view: NSView) -> Bool {
-        switch self {
-        case .search:
-            return (view is SearchView)
-        case .editCard:
-            return (view is EditCardView)
-        }
-    }
-    
-    func type() -> NSView.Type {
-        switch self {
-        case .search:
-            return SearchView.self
-        case .editCard:
-            return EditCardView.self
-        }
-    }
-
-    func viewControllerType() -> ViewControllerForQuickWindow.Type {
-        switch self {
-        case .search:
-            return SearchViewController.self
-        case .editCard:
-            return EditCardViewController.self
-        }
-    }
-}
-
 protocol DelegateToQuickWindow {
     func lookup(_ word: String)
     func resize(_ size: NSSize, animate: Bool)
