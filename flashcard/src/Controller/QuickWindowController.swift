@@ -8,7 +8,7 @@
 
 import Cocoa
 
-enum SearchWindowViewType {
+enum QuickWindowViewType {
     case search
     case editCard
     
@@ -31,13 +31,13 @@ enum SearchWindowViewType {
     }
 }
 
-protocol DelegateToSearchWindow {
+protocol DelegateToQuickWindow {
     func lookup(_ word: String)
     func resize(_ size: NSSize, animate: Bool)
-    func transitionTo(_ view: SearchWindowViewType)
+    func transitionTo(_ view: QuickWindowViewType)
 }
 
-class SearchWindowController : NSWindowController {
+class QuickWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
 
     let dic = CoreServiceDictionary()
@@ -61,7 +61,7 @@ class SearchWindowController : NSWindowController {
 }
 
 // MARK: - NSWindowDelegate
-extension SearchWindowController : NSWindowDelegate {
+extension QuickWindowController : NSWindowDelegate {
     func windowDidMiniaturize(_ notification: Notification) {
         print("Window minimized")
     }
@@ -72,8 +72,8 @@ extension SearchWindowController : NSWindowDelegate {
 }
 
 // MARK: - DElegateToSearchWindow
-extension SearchWindowController : DelegateToSearchWindow {
-    func transitionTo(_ T: SearchWindowViewType) {
+extension QuickWindowController : DelegateToQuickWindow {
+    func transitionTo(_ T: QuickWindowViewType) {
         if T.isType(of: self.contentViewController!.view) { return }
         
         // TODO: Set delegate

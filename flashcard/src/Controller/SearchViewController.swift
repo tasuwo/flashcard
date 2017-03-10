@@ -9,10 +9,10 @@
 import Cocoa
 
 class SearchViewController: NSViewController {
-    open var delegate : DelegateToSearchWindow?
+    open var delegate : DelegateToQuickWindow?
     
     override func loadView() {
-        let winSize = SearchWindowController.winSize
+        let winSize = QuickWindowController.winSize
         let view = SearchView(frame: NSMakeRect(0,0,winSize.width, winSize.height))
         view.delegate = self
         
