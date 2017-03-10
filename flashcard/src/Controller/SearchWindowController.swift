@@ -8,24 +8,46 @@
 
 import Cocoa
 
+enum SearchWindowViewType {
+    case search
+    case editCard
+    
+    func isType(of view: NSView) -> Bool {
+        switch self {
+        case .search:
+            return (view is SearchView)
+        case .editCard:
+            return (view is EditCardView)
+        }
+    }
+    
+    func viewControllerType() -> NSViewController.Type {
+        switch self {
+        case .search:
+            return SearchViewController.self
+        case .editCard:
+            return EditCardViewController.self
+        }
+    }
+}
+
 protocol DelegateToSearchWindow {
     func lookup(_ word: String)
     func resize(_ size: NSSize, animate: Bool)
+    func transitionTo(_ view: SearchWindowViewType)
 }
 
 class SearchWindowController : NSWindowController {
     static let winSize = NSSize(width: 800, height: 50)
-    
+
     let dic = CoreServiceDictionary()
     
     override init(window: NSWindow?) {
         super.init(window: window)
-        
-        let controller = SearchViewController()
-        controller.delegate = self
-        let content = self.window!.contentView! as NSView
-        let view = controller.view
-        content.addSubview(view)
+
+        let searchVC = SearchViewController()
+        searchVC.delegate = self
+        self.window!.contentViewController = searchVC
     }
     
     required init?(coder: NSCoder) {
@@ -51,6 +73,14 @@ extension SearchWindowController : NSWindowDelegate {
 
 // MARK: - DElegateToSearchWindow
 extension SearchWindowController : DelegateToSearchWindow {
+    func transitionTo(_ T: SearchWindowViewType) {
+        if T.isType(of: self.contentViewController!.view) { return }
+        
+        // TODO: Set delegate
+        let newVC = T.viewControllerType().init()
+        self.contentViewController = newVC
+    }
+
     func lookup(_ word: String) {
         // TODO: Dictionary search
         let result = dic.lookUp(word)
