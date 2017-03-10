@@ -30,4 +30,8 @@ extension SearchViewController : SearchViewDelegate {
     func didChangeText(_ text: String) {
         self.delegate?.lookup(text)
     }
+    
+    func didPressEnter() {
+        Swift.print("Enter key pressed")
+    }
 }

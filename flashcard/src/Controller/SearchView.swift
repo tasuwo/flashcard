@@ -10,6 +10,7 @@ import Cocoa
 
 protocol SearchViewDelegate : class {
     func didChangeText(_ text: String)
+    func didPressEnter()
 }
 
 // MARK: -
@@ -43,5 +44,13 @@ class SearchView : NSView {
 extension SearchView : NSTextFieldDelegate {
     override func controlTextDidChange(_ obj: Notification) {
         self.delegate?.didChangeText(self.textField.stringValue)
+    }
+    
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+            self.delegate?.didPressEnter()
+            return true
+        }
+        return false
     }
 }
