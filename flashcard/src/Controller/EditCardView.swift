@@ -27,13 +27,13 @@ class EditCardView : NSView {
         
         self.addConstraints([
             NSLayoutConstraint(item: frontTextField, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: frontTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: frontTextField, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 800),
-            NSLayoutConstraint(item: frontTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: frontTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.5, constant: 0),
+            NSLayoutConstraint(item: frontTextField, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 500),
+            NSLayoutConstraint(item: frontTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 120),
             NSLayoutConstraint(item: backTextField, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: backTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 2, constant: 0),
-            NSLayoutConstraint(item: backTextField, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 800),
-            NSLayoutConstraint(item: backTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            NSLayoutConstraint(item: backTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.5, constant: 0),
+            NSLayoutConstraint(item: backTextField, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 500),
+            NSLayoutConstraint(item: backTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 120)
             ])
         
         frontTextField.delegate = self

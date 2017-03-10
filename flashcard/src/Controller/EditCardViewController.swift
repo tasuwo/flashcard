@@ -10,7 +10,7 @@ import Cocoa
 
 class EditCardViewController: QuickWindowViewController {
     override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 800, height: 500)
+        return NSSize(width: 550, height: 300)
     }
 
     override func loadView() {
