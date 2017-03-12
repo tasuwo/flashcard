@@ -25,6 +25,8 @@ class SearchViewController: QuickWindowViewController {
 extension SearchViewController : SearchViewDelegate {
     func didChangeText(_ text: String) {
         self.delegate?.lookup(text)
+        
+        // Display results to quick window
     }
     
     func didPressEnter() {
