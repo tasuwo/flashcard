@@ -85,7 +85,7 @@ extension SearchViewController : SearchViewDelegate {
     }
     
     func didPressEnter() {
-        Swift.print("Enter key pressed")
+        self.delegate?.transitionTo(.editCard)
     }
     
     func didMoveUp() {
