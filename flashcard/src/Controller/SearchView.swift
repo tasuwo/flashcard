@@ -23,6 +23,7 @@ class SearchView : NSView {
         
         textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.focusRingType = .none
         self.addSubview(textField)
         
         self.addConstraints([
