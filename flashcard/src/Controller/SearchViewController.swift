@@ -35,7 +35,7 @@ class SearchViewController: QuickWindowViewController {
 
 extension SearchViewController {
     func displayResult(_ results: [SearchResultInfo]) {
-        self.initResults()
+        self.clearResults()
 
         let rvHeight = SearchViewController.getResultViewHeight()
         
@@ -68,12 +68,14 @@ extension SearchViewController {
         self.iSelectedResult = Int(y-1)
     }
     
-    func initResults() {
+    func clearResults() {
         for v in self.resultsView.subviews {
             v.removeFromSuperview()
         }
         self.results = []
         self.iSelectedResult = nil
+        
+        self.delegate?.resize(SearchViewController.getDefaultSize(), animate: false)
     }
 }
 
