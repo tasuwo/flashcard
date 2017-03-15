@@ -10,6 +10,8 @@ import Cocoa
 
 class SearchViewController: QuickWindowViewController {
     var resultsView: SearchResultsView!
+    var results: [SearchResultView] = []
+    var iSelectedResult: Int? = nil
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 800, height: 50)
@@ -47,18 +49,21 @@ extension SearchViewController {
         // Append Views
         var y: CGFloat = 0
         for result in results {
-            let view = SearchResultView(frame: NSMakeRect(0, y, 800, rvHeight))
+            let view = SearchResultView(frame: NSMakeRect(0, y * rvHeight, 800, rvHeight))
             
             view.setText(result.body)
-            if y == 0 {
-                view.isSelected = true
-            }
+            
             
             self.resultsView.resultViews?.append(view)
             self.resultsView.addSubview(view)
             
-            y += rvHeight
+            self.results.append(view)
+            
+            y += 1
         }
+        
+        self.results[Int(y-1)].isSelected = true
+        self.iSelectedResult = Int(y-1)
     }
 }
 
@@ -74,10 +79,22 @@ extension SearchViewController : SearchViewDelegate {
     }
     
     func didMoveUp() {
-        Swift.print("Up")
+        if let i = self.iSelectedResult {
+            if i < self.results.count-1 {
+                self.results[i].isSelected = false
+                self.results[i+1].isSelected = true
+                self.iSelectedResult = i+1
+            }
+        }
     }
     
     func didMoveDown() {
-        Swift.print("Down")
+        if let i = self.iSelectedResult {
+            if i > 0 {
+                self.results[i].isSelected = false
+                self.results[i-1].isSelected = true
+                self.iSelectedResult = i-1
+            }
+        }
     }
 }
