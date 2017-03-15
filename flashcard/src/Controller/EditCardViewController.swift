@@ -9,6 +9,8 @@
 import Cocoa
 
 class EditCardViewController: QuickWindowViewController {
+    var targetDefinition: SearchResultInfo? = nil
+
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 550, height: 300)
     }

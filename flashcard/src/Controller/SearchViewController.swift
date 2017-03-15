@@ -10,7 +10,8 @@ import Cocoa
 
 class SearchViewController: QuickWindowViewController {
     var resultsView: SearchResultsView!
-    var results: [SearchResultView] = []
+    var resultViews: [SearchResultView] = []
+    var resultInfos: [SearchResultInfo] = []
     var iSelectedResult: Int? = nil
     
     override class func getDefaultSize() -> NSSize {
@@ -55,16 +56,16 @@ extension SearchViewController {
             
             view.setText(result.body)
             
+            self.resultInfos.append(result)
             
             self.resultsView.resultViews?.append(view)
             self.resultsView.addSubview(view)
-            
-            self.results.append(view)
+            self.resultViews.append(view)
             
             y += 1
         }
         
-        self.results[Int(y-1)].isSelected = true
+        self.resultViews[Int(y-1)].isSelected = true
         self.iSelectedResult = Int(y-1)
     }
     
@@ -72,7 +73,8 @@ extension SearchViewController {
         for v in self.resultsView.subviews {
             v.removeFromSuperview()
         }
-        self.results = []
+        self.resultViews = []
+        self.resultInfos = []
         self.iSelectedResult = nil
         
         self.delegate?.resize(SearchViewController.getDefaultSize(), animate: false)
@@ -85,14 +87,18 @@ extension SearchViewController : SearchViewDelegate {
     }
     
     func didPressEnter() {
+        let win = self.view.window
         self.delegate?.transitionTo(.editCard)
+
+        let vc = win?.contentViewController as? EditCardViewController
+        vc?.targetDefinition = self.resultInfos[self.iSelectedResult!]
     }
     
     func didMoveUp() {
         if let i = self.iSelectedResult {
-            if i < self.results.count-1 {
-                self.results[i].isSelected = false
-                self.results[i+1].isSelected = true
+            if i < self.resultViews.count-1 {
+                self.resultViews[i].isSelected = false
+                self.resultViews[i+1].isSelected = true
                 self.iSelectedResult = i+1
             }
         }
@@ -101,8 +107,8 @@ extension SearchViewController : SearchViewDelegate {
     func didMoveDown() {
         if let i = self.iSelectedResult {
             if i > 0 {
-                self.results[i].isSelected = false
-                self.results[i-1].isSelected = true
+                self.resultViews[i].isSelected = false
+                self.resultViews[i-1].isSelected = true
                 self.iSelectedResult = i-1
             }
         }
