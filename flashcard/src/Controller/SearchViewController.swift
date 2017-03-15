@@ -35,6 +35,8 @@ class SearchViewController: QuickWindowViewController {
 
 extension SearchViewController {
     func displayResult(_ results: [SearchResultInfo]) {
+        self.initResults()
+
         let rvHeight = SearchViewController.getResultViewHeight()
         
         // Resize window
@@ -64,6 +66,14 @@ extension SearchViewController {
         
         self.results[Int(y-1)].isSelected = true
         self.iSelectedResult = Int(y-1)
+    }
+    
+    func initResults() {
+        for v in self.resultsView.subviews {
+            v.removeFromSuperview()
+        }
+        self.results = []
+        self.iSelectedResult = nil
     }
 }
 
