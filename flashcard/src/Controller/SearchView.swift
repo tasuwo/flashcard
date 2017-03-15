@@ -11,6 +11,8 @@ import Cocoa
 protocol SearchViewDelegate : class {
     func didChangeText(_ text: String)
     func didPressEnter()
+    func didMoveUp()
+    func didMoveDown()
 }
 
 // MARK: -
@@ -50,6 +52,12 @@ extension SearchView : NSTextFieldDelegate {
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
             self.delegate?.didPressEnter()
+            return true
+        } else if commandSelector == #selector(NSResponder.moveUp(_:)) {
+            self.delegate?.didMoveUp()
+            return true
+        } else if commandSelector == #selector(NSResponder.moveDown(_:)) {
+            self.delegate?.didMoveDown()
             return true
         }
         return false

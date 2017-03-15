@@ -72,4 +72,12 @@ extension SearchViewController : SearchViewDelegate {
     func didPressEnter() {
         Swift.print("Enter key pressed")
     }
+    
+    func didMoveUp() {
+        Swift.print("Up")
+    }
+    
+    func didMoveDown() {
+        Swift.print("Down")
+    }
 }
