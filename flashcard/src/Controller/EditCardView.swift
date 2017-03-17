@@ -10,9 +10,14 @@ import Foundation
 import Cocoa
 
 class EditCardView : NSView {
-    var definitionField: NSTextField!
-    var frontTextField: NSTextField!
-    var backTextField: NSTextField!
+    var definition: String = "" {
+        didSet {
+            self.definitionField.stringValue = self.definition
+        }
+    }
+    fileprivate var definitionField: NSTextField!
+    fileprivate var frontTextField: NSTextField!
+    fileprivate var backTextField: NSTextField!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
