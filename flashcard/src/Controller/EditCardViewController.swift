@@ -32,7 +32,9 @@ class EditCardViewController: QuickWindowViewController {
 
 extension EditCardViewController: EditCardViewDelegate {
     func didPressEnter() {
-        Swift.print(self.cardText)
+        for c in self.view.constraints {
+            self.view.removeConstraint(c)
+        }
         self.delegate?.transitionTo(.search)
     }
     

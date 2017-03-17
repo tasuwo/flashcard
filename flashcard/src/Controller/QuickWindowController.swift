@@ -53,7 +53,7 @@ extension QuickWindowController : DelegateToQuickWindow {
 
         let newVC = T.viewControllerType().init()
         newVC.delegate = self
-        self.resize(T.viewControllerType().getDefaultSize(), animate: true)
+        self.resize(T.viewControllerType().getDefaultSize(), animate: false)
         self.contentViewController = newVC
     }
 
