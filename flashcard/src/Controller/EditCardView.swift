@@ -9,6 +9,11 @@
 import Foundation
 import Cocoa
 
+protocol EditCardViewDelegate {
+    func didPressEnter()
+    func updateCardText(front: String, back: String)
+}
+
 class EditCardView : NSView {
     var definition: String = "" {
         didSet {
@@ -18,6 +23,7 @@ class EditCardView : NSView {
     fileprivate var definitionField: NSTextField!
     fileprivate var frontTextField: NSTextField!
     fileprivate var backTextField: NSTextField!
+    open var delegate: EditCardViewDelegate!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -71,5 +77,14 @@ class EditCardView : NSView {
 // MARK: - NSTextFieldDelegate
 extension EditCardView : NSTextFieldDelegate {
     override func controlTextDidChange(_ obj: Notification) {
+        self.delegate.updateCardText(front: self.frontTextField.stringValue, back: self.backTextField.stringValue)
+    }
+
+    func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
+        if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+            self.delegate?.didPressEnter()
+            return true
+        }
+        return false
     }
 }
