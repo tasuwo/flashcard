@@ -14,6 +14,7 @@
 		2CA38D701E72EFBD00E850FC /* QuickWindowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D6F1E72EFBD00E850FC /* QuickWindowViewController.swift */; };
 		2CA38D751E736E7700E850FC /* SearchResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D741E736E7700E850FC /* SearchResultsView.swift */; };
 		2CA38D771E73735600E850FC /* SearchResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D761E73735600E850FC /* SearchResultView.swift */; };
+		2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */; };
 		2CD4958D1E6CE6150001B727 /* SettingsWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4958C1E6CE6150001B727 /* SettingsWindowController.swift */; };
 		2CD4958F1E6CE64A0001B727 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4958E1E6CE64A0001B727 /* SettingsViewController.swift */; };
 		2CD495911E6CE7030001B727 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD495901E6CE7030001B727 /* SettingsView.swift */; };
@@ -45,6 +46,7 @@
 		2CA38D6F1E72EFBD00E850FC /* QuickWindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewController.swift; sourceTree = "<group>"; };
 		2CA38D741E736E7700E850FC /* SearchResultsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D761E73735600E850FC /* SearchResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultView.swift; sourceTree = SOURCE_ROOT; };
+		2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSView+removeAllConstraints.swift"; sourceTree = SOURCE_ROOT; };
 		2CD4958C1E6CE6150001B727 /* SettingsWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowController.swift; sourceTree = "<group>"; };
 		2CD4958E1E6CE64A0001B727 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		2CD495901E6CE7030001B727 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = flashcard/src/Controller/SettingsView.swift; sourceTree = SOURCE_ROOT; };
@@ -162,6 +164,7 @@
 				2CA38D691E72ED0B00E850FC /* Settings Window */,
 				2CA38D681E72ECFC00E850FC /* Quick Window */,
 				2CD495901E6CE7030001B727 /* SettingsView.swift */,
+				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -313,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */,
 				A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */,
 				2CD495911E6CE7030001B727 /* SettingsView.swift in Sources */,
 				2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */,
