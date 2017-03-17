@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
+		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D601E72421700E850FC /* EditCardViewController.swift */; };
 		2CA38D631E72424700E850FC /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D621E72424700E850FC /* EditCardView.swift */; };
 		2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */; };
@@ -19,6 +21,7 @@
 		2CD4958F1E6CE64A0001B727 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD4958E1E6CE64A0001B727 /* SettingsViewController.swift */; };
 		2CD495911E6CE7030001B727 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD495901E6CE7030001B727 /* SettingsView.swift */; };
 		2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD495941E7138880001B727 /* CoreServiceDictionary.swift */; };
+		4D021997B161451396FD843C /* Pods_flashcardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */; };
 		A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0809A8A1E6A286F005F3724 /* SearchView.swift */; };
 		A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5B1E68DBF700D4F083 /* main.swift */; };
 		A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */; };
@@ -26,6 +29,7 @@
 		A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */; };
 		A0DCC2D31E66DA1C0071A00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DCC2D21E66DA1C0071A00E /* Assets.xcassets */; };
 		A0DCC2E11E66DA1C0071A00E /* flashcardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2E01E66DA1C0071A00E /* flashcardTests.swift */; };
+		B65422B46C49F8DAB8DC4A9B /* Pods_flashcard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B57CD933797F10DB6B666DD2 /* Pods_flashcard.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2CA38D601E72421700E850FC /* EditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardView.swift; path = flashcard/src/Controller/EditCardView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewType.swift; sourceTree = "<group>"; };
@@ -51,6 +57,8 @@
 		2CD4958E1E6CE64A0001B727 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		2CD495901E6CE7030001B727 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = flashcard/src/Controller/SettingsView.swift; sourceTree = SOURCE_ROOT; };
 		2CD495941E7138880001B727 /* CoreServiceDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreServiceDictionary.swift; sourceTree = "<group>"; };
+		6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flashcardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		96EC89399B92D09C818CF547 /* Pods-flashcardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcardTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = flashcard/src/Controller/SearchView.swift; sourceTree = SOURCE_ROOT; };
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowController.swift; sourceTree = "<group>"; };
@@ -62,6 +70,10 @@
 		A0DCC2DC1E66DA1C0071A00E /* flashcardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = flashcardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2E01E66DA1C0071A00E /* flashcardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardTests.swift; sourceTree = "<group>"; };
 		A0DCC2E21E66DA1C0071A00E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B57CD933797F10DB6B666DD2 /* Pods_flashcard.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flashcard.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8354AEEB114B9B33003A885 /* Pods-flashcard.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcard.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flashcard/Pods-flashcard.debug.xcconfig"; sourceTree = "<group>"; };
+		C9F6736538DABCC989E41A4F /* Pods-flashcardTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcardTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E209058C349CCEA67DFC8363 /* Pods-flashcard.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcard.release.xcconfig"; path = "Pods/Target Support Files/Pods-flashcard/Pods-flashcard.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65422B46C49F8DAB8DC4A9B /* Pods_flashcard.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,12 +89,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D021997B161451396FD843C /* Pods_flashcardTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2036D7FF93F0157A3012EA96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B57CD933797F10DB6B666DD2 /* Pods_flashcard.framework */,
+				6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C471B531E7BAA5A00FCF0DA /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				2C471B541E7BAA6A00FCF0DA /* Card.swift */,
+				2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		2CA38D661E72ECCE00E850FC /* Quick Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +161,17 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		5CB008E08E3D981C336D99A9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B8354AEEB114B9B33003A885 /* Pods-flashcard.debug.xcconfig */,
+				E209058C349CCEA67DFC8363 /* Pods-flashcard.release.xcconfig */,
+				C9F6736538DABCC989E41A4F /* Pods-flashcardTests.debug.xcconfig */,
+				96EC89399B92D09C818CF547 /* Pods-flashcardTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A0923DFF1E683F3F003642FD /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +196,7 @@
 		A0923E011E683F54003642FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2C471B531E7BAA5A00FCF0DA /* DataModel */,
 				2CD495941E7138880001B727 /* CoreServiceDictionary.swift */,
 			);
 			path = Model;
@@ -185,6 +229,8 @@
 				A0DCC2CC1E66DA1C0071A00E /* Products */,
 				A0DCC2CD1E66DA1C0071A00E /* flashcard */,
 				A0DCC2DF1E66DA1C0071A00E /* flashcardTests */,
+				5CB008E08E3D981C336D99A9 /* Pods */,
+				2036D7FF93F0157A3012EA96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,9 +268,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0DCC2E51E66DA1C0071A00E /* Build configuration list for PBXNativeTarget "flashcard" */;
 			buildPhases = (
+				6A6C762DD2A3A0613DC4AB40 /* [CP] Check Pods Manifest.lock */,
 				A0DCC2C71E66DA1C0071A00E /* Sources */,
 				A0DCC2C81E66DA1C0071A00E /* Frameworks */,
 				A0DCC2C91E66DA1C0071A00E /* Resources */,
+				7D542FDA8AB0058124FC3FE0 /* [CP] Embed Pods Frameworks */,
+				596FEECD4D5181D038B0052C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -239,9 +288,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0DCC2E81E66DA1C0071A00E /* Build configuration list for PBXNativeTarget "flashcardTests" */;
 			buildPhases = (
+				3940238AD8EE38B9B9D8FED2 /* [CP] Check Pods Manifest.lock */,
 				A0DCC2D81E66DA1C0071A00E /* Sources */,
 				A0DCC2D91E66DA1C0071A00E /* Frameworks */,
 				A0DCC2DA1E66DA1C0071A00E /* Resources */,
+				8E8F967C23C35DCF0627AD37 /* [CP] Embed Pods Frameworks */,
+				CD93F62770CA3F1BDABB55ED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -311,12 +363,106 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3940238AD8EE38B9B9D8FED2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		596FEECD4D5181D038B0052C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-flashcard/Pods-flashcard-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6A6C762DD2A3A0613DC4AB40 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		7D542FDA8AB0058124FC3FE0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-flashcard/Pods-flashcard-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8E8F967C23C35DCF0627AD37 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CD93F62770CA3F1BDABB55ED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A0DCC2C71E66DA1C0071A00E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */,
+				2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */,
 				A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */,
 				2CD495911E6CE7030001B727 /* SettingsView.swift in Sources */,
 				2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */,
@@ -325,6 +471,7 @@
 				2CA38D751E736E7700E850FC /* SearchResultsView.swift in Sources */,
 				2CA38D701E72EFBD00E850FC /* QuickWindowViewController.swift in Sources */,
 				2CD4958F1E6CE64A0001B727 /* SettingsViewController.swift in Sources */,
+				2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */,
 				A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */,
 				2CA38D631E72424700E850FC /* EditCardView.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
@@ -449,6 +596,7 @@
 		};
 		A0DCC2E61E66DA1C0071A00E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8354AEEB114B9B33003A885 /* Pods-flashcard.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -462,6 +610,7 @@
 		};
 		A0DCC2E71E66DA1C0071A00E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E209058C349CCEA67DFC8363 /* Pods-flashcard.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -475,6 +624,7 @@
 		};
 		A0DCC2E91E66DA1C0071A00E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9F6736538DABCC989E41A4F /* Pods-flashcardTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -490,6 +640,7 @@
 		};
 		A0DCC2EA1E66DA1C0071A00E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 96EC89399B92D09C818CF547 /* Pods-flashcardTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

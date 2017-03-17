@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RealmSwift
 
 class EditCardViewController: QuickWindowViewController {
     var targetDefinition: SearchResultInfo? = nil {
@@ -32,6 +33,27 @@ class EditCardViewController: QuickWindowViewController {
 
 extension EditCardViewController: EditCardViewDelegate {
     func didPressEnter() {
+        // Regist card
+        let realm = try! Realm()
+        let card = Card()
+        card.id = Card.lastId(realm)
+        card.frontText = self.cardText.0
+        card.backText = self.cardText.1
+        let holder = CardHolder()
+        
+        // Regist card to default card holder
+        // TODO: Select target card holder
+        holder.id = 0
+        let lastCards: List<Card> = CardHolder.lastCards(0, realm: realm)
+        holder.cards.append(objectsIn: lastCards)
+        holder.cards.append(card)
+        
+        try! realm.write {
+            realm.add(card)
+            realm.add(holder, update: true)
+        }
+        
+        // Transition
         self.view.removeAllConstraints()
         self.delegate?.transitionTo(.search)
     }

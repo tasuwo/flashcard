@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RealmSwift
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var quickWC: QuickWindowController?
@@ -40,6 +41,20 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         self.quickWC!.showWindow(self)
         self.settingsWC!.showWindow(self)
+        
+        // Initialize database
+        let realm = try! Realm()
+        let defaultHolder = realm.objects(CardHolder.self).filter("id == 0")
+        if defaultHolder.count == 0 {
+            let cardHolder = CardHolder()
+            cardHolder.id = 0
+            cardHolder.name = "default"
+            try! realm.write {
+                realm.add(cardHolder)
+            }
+        }
+        
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
