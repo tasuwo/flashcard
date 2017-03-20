@@ -41,7 +41,11 @@ extension SearchViewController {
         let rvHeight = SearchViewController.getResultViewHeight()
         
         // Resize window
-        let resultsHeight = rvHeight * CGFloat(results.count)
+        let max: CGFloat = 9
+        var resultsHeight = rvHeight * CGFloat(results.count)
+        if CGFloat(results.count) > max {
+            resultsHeight = rvHeight * max
+        }
         let winHeight = resultsHeight + SearchViewController.getDefaultSize().height
         self.delegate?.resize(NSMakeSize(800, winHeight), animate: false)
 
