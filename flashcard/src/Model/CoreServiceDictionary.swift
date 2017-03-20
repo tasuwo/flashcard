@@ -62,10 +62,22 @@ class CoreServiceDictionary {
         updateDictionaryPreferences(newPref)
     }
      */
+    
+    func guessWord(_ text: String) -> [String]? {
+        let checker = NSSpellChecker.shared()
+        let range = NSRange(location: 0, length: text.characters.count)
+        return checker.guesses(forWordRange: range, in: text, language: "en", inSpellDocumentWithTag: 0)
+    }
 
     // TODO: Enable user to choose dictionary
     //       `inDictionary` parameter is reserved for future use, so pass NULL.
-    func lookUp(_ word : String, inDictionary dictionaryPath : String? = nil) -> String? {
+    func lookUp(_ word : String, inDictionary dictionaryPath : String? = nil) -> [SearchResultInfo] {
+        var results: [SearchResultInfo] = []
+        var words = [word]
+        if let suggestions = guessWord(word) {
+            words += suggestions
+        }
+
         // Save current dictionary setting
         /*
         let currentActiveDics = getActiveDictionariesList()
@@ -75,14 +87,15 @@ class CoreServiceDictionary {
         /*
         updateActiveDictionaries([dictionaryPath as NSString])
          */
-        let CFWord = word as CFString
-        let range  = CFRangeMake(0, (word as NSString).length)
-        let result: String?
-        if let r = DCSCopyTextDefinition(nil, CFWord, range) {
-            result = r.takeUnretainedValue() as String
-        } else {
-            result = nil
+        
+        for w in words {
+            let CFWord = w as CFString
+            let range  = CFRangeMake(0, (w as NSString).length)
+            if let r = DCSCopyTextDefinition(nil, CFWord, range) {
+                results.append(SearchResultInfo(title: w, body: r.takeUnretainedValue() as String))
+            }
         }
+        
 
         // Restore dictionary setting
         /*
@@ -91,6 +104,6 @@ class CoreServiceDictionary {
         }
          */
 
-        return result
+        return results
     }
 }

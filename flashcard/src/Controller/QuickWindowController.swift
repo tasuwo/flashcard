@@ -59,15 +59,12 @@ extension QuickWindowController : DelegateToQuickWindow {
 
     func lookup(_ word: String) {
         // TODO: Dictionary search
-        let result = dic.lookUp(word)
-        if let r = result {
-            // Display results
-            // TODO: Extruct title from result. Get result candidates and set.
-            if let v = self.contentViewController as? SearchViewController {
-                v.displayResult([ SearchResultInfo(title: "test", body: r) ])
-            }
-        } else {
-            if let v = self.contentViewController as? SearchViewController {
+        let results = dic.lookUp(word)
+        
+        if let v = self.contentViewController as? SearchViewController {
+            if results.count > 0 {
+                v.displayResult(results)
+            } else {
                 v.clearResults()
             }
         }
