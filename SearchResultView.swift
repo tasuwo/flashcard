@@ -25,6 +25,8 @@ class SearchResultView : NSView {
     override init(frame: NSRect) {
         super.init(frame: frame)
         
+        self.acceptsTouchEvents = true
+        
         label = NSTextField()
         label.isEditable = false
         label.backgroundColor = NSColor.gray
@@ -46,5 +48,23 @@ class SearchResultView : NSView {
     
     func setText(_ text: String) {
         label.stringValue = text
+    }
+}
+
+extension SearchResultView {
+    override func touchesBegan(with event: NSEvent) {
+
+    }
+    
+    override func touchesMoved(with event: NSEvent) {
+
+    }
+    
+    override func touchesEnded(with event: NSEvent) {
+
+    }
+    
+    override func scrollWheel(with event: NSEvent) {
+        Swift.print(event)
     }
 }

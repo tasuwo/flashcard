@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
+		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
 		2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D601E72421700E850FC /* EditCardViewController.swift */; };
 		2CA38D631E72424700E850FC /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D621E72424700E850FC /* EditCardView.swift */; };
 		2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */; };
@@ -45,6 +46,7 @@
 /* Begin PBXFileReference section */
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
+		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
 		2CA38D601E72421700E850FC /* EditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardView.swift; path = flashcard/src/Controller/EditCardView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewType.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				2C471B531E7BAA5A00FCF0DA /* DataModel */,
 				2CD495941E7138880001B727 /* CoreServiceDictionary.swift */,
+				2C471B581E813D0300FCF0DA /* NSRange+contain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */,
 				A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */,
 				2CA38D631E72424700E850FC /* EditCardView.swift in Sources */,
+				2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,
 				2CD4958D1E6CE6150001B727 /* SettingsWindowController.swift in Sources */,

@@ -13,6 +13,7 @@ class SearchViewController: QuickWindowViewController {
     var resultViews: [SearchResultView] = []
     var resultInfos: [SearchResultInfo] = []
     var iSelectedResult: Int? = nil
+    var shownResultsRange: NSRange? = nil
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 800, height: 50)
@@ -36,41 +37,35 @@ class SearchViewController: QuickWindowViewController {
 
 extension SearchViewController {
     func displayResult(_ results: [SearchResultInfo]) {
-        self.clearResults()
-
-        let rvHeight = SearchViewController.getResultViewHeight()
-        
-        // Resize window
+        self.resultInfos = results
         let max: CGFloat = 9
-        var resultsHeight = rvHeight * CGFloat(results.count)
-        if CGFloat(results.count) > max {
-            resultsHeight = rvHeight * max
-        }
+        let nDisplay: CGFloat = CGFloat(results.count) > max ? max : CGFloat(results.count)
+        
+        clearResults()
+
+        // Resize
+        let rvHeight = SearchViewController.getResultViewHeight()
+        // Resize view
+        let resultsHeight = rvHeight * nDisplay
+        self.resultsView.frame.size = NSMakeSize(800, resultsHeight)
+        // Resize window
         let winHeight = resultsHeight + SearchViewController.getDefaultSize().height
         self.delegate?.resize(NSMakeSize(800, winHeight), animate: false)
-
-        // Resize view
-        self.resultsView.frame.size = NSMakeSize(800, resultsHeight)
-        self.resultsView.layer?.backgroundColor = .black
         
-        // Append Views
-        var y: CGFloat = 0
-        for result in results {
-            let view = SearchResultView(frame: NSMakeRect(0, y * rvHeight, 800, rvHeight))
+        // Create views
+        for (i, r) in results.enumerated() {
+            let v = SearchResultView(frame: NSMakeRect(0, CGFloat(Int(nDisplay) - i - 1) * rvHeight, 800, rvHeight))
+            v.setText(r.body)
             
-            view.setText(result.body)
-            
-            self.resultInfos.append(result)
-            
-            self.resultsView.resultViews?.append(view)
-            self.resultsView.addSubview(view)
-            self.resultViews.append(view)
-            
-            y += 1
+            self.resultInfos.append(r)
+            self.resultViews.append(v)
+            self.resultsView.addSubview(v)
         }
-        
-        self.resultViews[Int(y-1)].isSelected = true
-        self.iSelectedResult = Int(y-1)
+
+        // Display results
+        self.resultViews[0].isSelected = true
+        self.iSelectedResult = 0
+        shownResultsRange = NSMakeRange(0, Int(nDisplay))
     }
     
     func clearResults() {
@@ -99,21 +94,33 @@ extension SearchViewController : SearchViewDelegate {
     }
     
     func didMoveUp() {
-        if let i = self.iSelectedResult {
-            if i < self.resultViews.count-1 {
+        if let i = self.iSelectedResult, let r = self.shownResultsRange {
+            if i > 0 {
+                if !r.contain(i-1) {
+                    for v in self.resultViews {
+                        v.frame.origin.y -= SearchViewController.getResultViewHeight()
+                    }
+                    shownResultsRange?.location -= 1
+                }
                 self.resultViews[i].isSelected = false
-                self.resultViews[i+1].isSelected = true
-                self.iSelectedResult = i+1
+                self.resultViews[i-1].isSelected = true
+                self.iSelectedResult = i-1
             }
         }
     }
     
     func didMoveDown() {
-        if let i = self.iSelectedResult {
-            if i > 0 {
+        if let i = self.iSelectedResult, let r = self.shownResultsRange {
+            if i < self.resultViews.count-1 {
+                if !r.contain(i+1) {
+                    for v in self.resultViews {
+                        v.frame.origin.y += SearchViewController.getResultViewHeight()
+                    }
+                    shownResultsRange?.location += 1
+                }
                 self.resultViews[i].isSelected = false
-                self.resultViews[i-1].isSelected = true
-                self.iSelectedResult = i-1
+                self.resultViews[i+1].isSelected = true
+                self.iSelectedResult = i+1
             }
         }
     }
