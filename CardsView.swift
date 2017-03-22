@@ -1,18 +1,14 @@
 //
-//  SettingsView.swift
+//  CardsView.swift
 //  flashcard
 //
-//  Created by Tasuku Tozawa on 2017/03/06.
+//  Created by Tasuku Tozawa on 2017/03/22.
 //  Copyright © 2017年 tasuku tozawa. All rights reserved.
 //
 
 import Cocoa
 
-protocol SettingsViewDelegate : class {}
-
-class SettingsView : NSView {
-    open var delegate : SettingsViewDelegate?
-    
+class CardsView : NSView {
     override init(frame: NSRect) {
         super.init(frame: frame)
     }
