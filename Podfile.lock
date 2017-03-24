@@ -1,4 +1,7 @@
 PODS:
+  - KeyHolder (2.0.0):
+    - Magnet (~> 2.0)
+  - Magnet (2.0.0)
   - Realm (2.4.4):
     - Realm/Headers (= 2.4.4)
   - Realm/Headers (2.4.4)
@@ -6,12 +9,16 @@ PODS:
     - Realm (= 2.4.4)
 
 DEPENDENCIES:
+  - KeyHolder
+  - Magnet
   - RealmSwift
 
 SPEC CHECKSUMS:
+  KeyHolder: 2389c8c9f911d56c413b1b288efa072e7a992c81
+  Magnet: b30d2807dd0d8a349ce4e6574ecefa38012d02ca
   Realm: 5a280a1f5a9a3c267bebf4f41ee47911137703d7
   RealmSwift: 0c02b9f2d4be4301c497ed10e53a0580584eb1dd
 
-PODFILE CHECKSUM: 73fa8c40fe72a58001a5987fc3aa6559e3c14fb1
+PODFILE CHECKSUM: 6dfa7a7a5266be425ce47c4ad5d34bbceb5dd3e7
 
 COCOAPODS: 1.2.0

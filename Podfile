@@ -7,6 +7,8 @@ target 'flashcard' do
 
   # Pods for flashcard
   pod 'RealmSwift'
+  pod 'Magnet'
+  pod 'KeyHolder'
 
   target 'flashcardTests' do
     inherit! :search_paths
