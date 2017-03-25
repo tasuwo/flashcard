@@ -159,6 +159,7 @@
 		2C47697D1E86A28400814D28 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
 				2C471B581E813D0300FCF0DA /* NSRange+contain.swift */,
 				2C4769791E8696DB00814D28 /* Collection+shuffle.swift */,
 				2C47697B1E86971500814D28 /* MutableCollection+shuffleInPlace.swift */,
@@ -263,7 +264,6 @@
 				2C4769711E85EABE00814D28 /* Play Window */,
 				2CA38D691E72ED0B00E850FC /* Settings Window */,
 				2CA38D681E72ECFC00E850FC /* Quick Window */,
-				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

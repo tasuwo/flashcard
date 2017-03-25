@@ -79,8 +79,10 @@ extension PlayCardView {
         switch character {
         case leftArrowKey:
             self.delegate?.flipToPrevious()
+            break
         case rightArrowKey:
             self.delegate?.flipToNext()
+            break
         default:
             super.keyUp(with: event)
         }
