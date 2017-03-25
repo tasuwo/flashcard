@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var quickWC: QuickWindowController?
     var playWC: PlayCardWindowController?
     var settingsWC: SettingsWindowController?
+    var statusBarController: StatusBarController!
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Calculate window's rect
@@ -42,12 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         self.quickWC = QuickWindowController(window: InputableWindow(contentRect: quickWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
-        self.settingsWC = SettingsWindowController(window: NSWindow(contentRect: settingsWinRect, styleMask: [.resizable, .titled], backing: .buffered, defer: false))
+        self.settingsWC = SettingsWindowController(window: InputableWindow(contentRect: settingsWinRect, styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView, .resizable], backing: .buffered, defer: false))
+        self.settingsWC?.window?.collectionBehavior = [ .fullScreenAuxiliary, .fullScreenPrimary ]
         self.playWC = PlayCardWindowController(window: KeyDetectableBorderlessWindow(contentRect: playWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
-        
-        self.quickWC!.showWindow(self)
-        self.settingsWC!.showWindow(self)
-        self.playWC!.showWindow(self)
         
         // Initialize database
         let realm = try! Realm()
@@ -61,11 +59,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
         
+        // Initialize Status bar
+        self.statusBarController = StatusBarController()
+        
         print(Realm.Configuration.defaultConfiguration.fileURL!)
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+    }
+}
+
+extension AppDelegate {
+    func didSelectPreferences() {
+        NSApp.activate(ignoringOtherApps: true)
+        self.settingsWC?.showWindow(self)
+    }
+    
+    func toggleQuickWindow() {
+        if self.quickWC!.window!.isVisible {
+            self.quickWC?.window?.orderOut(self)
+        } else {
+            NSApp.activate(ignoringOtherApps: true)
+            self.quickWC?.showWindow(self)
+        }
     }
 }
 

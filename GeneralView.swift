@@ -86,7 +86,8 @@ extension GeneralView : RecordViewDelegate {
     }
     
     func didHotkeyPressed (_ event: NSEvent) -> Void {
-        Swift.print("pressed!")
+        let appDelegate = NSApplication.shared().delegate as? AppDelegate
+        appDelegate?.toggleQuickWindow()
     }
 }
 

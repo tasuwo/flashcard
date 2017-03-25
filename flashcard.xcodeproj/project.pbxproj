@@ -19,6 +19,8 @@
 		2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769771E85F00400814D28 /* PlayCardView.swift */; };
 		2C47697A1E8696DB00814D28 /* Collection+shuffle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769791E8696DB00814D28 /* Collection+shuffle.swift */; };
 		2C47697C1E86971500814D28 /* MutableCollection+shuffleInPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47697B1E86971500814D28 /* MutableCollection+shuffleInPlace.swift */; };
+		2C4769801E86AA4D00814D28 /* StatusBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C47697F1E86AA4D00814D28 /* StatusBarItem.swift */; };
+		2C4769831E86AA8D00814D28 /* StatusBarItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769821E86AA8D00814D28 /* StatusBarItemController.swift */; };
 		2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D601E72421700E850FC /* EditCardViewController.swift */; };
 		2CA38D631E72424700E850FC /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D621E72424700E850FC /* EditCardView.swift */; };
 		2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */; };
@@ -63,6 +65,8 @@
 		2C4769771E85F00400814D28 /* PlayCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayCardView.swift; sourceTree = SOURCE_ROOT; };
 		2C4769791E8696DB00814D28 /* Collection+shuffle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Collection+shuffle.swift"; sourceTree = "<group>"; };
 		2C47697B1E86971500814D28 /* MutableCollection+shuffleInPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MutableCollection+shuffleInPlace.swift"; sourceTree = "<group>"; };
+		2C47697F1E86AA4D00814D28 /* StatusBarItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarItem.swift; sourceTree = SOURCE_ROOT; };
+		2C4769821E86AA8D00814D28 /* StatusBarItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusBarItemController.swift; sourceTree = "<group>"; };
 		2CA38D601E72421700E850FC /* EditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardView.swift; path = flashcard/src/Controller/EditCardView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewType.swift; sourceTree = "<group>"; };
@@ -167,6 +171,22 @@
 			name = extensions;
 			sourceTree = "<group>";
 		};
+		2C47697E1E86AA3400814D28 /* Status bar */ = {
+			isa = PBXGroup;
+			children = (
+				2C47697F1E86AA4D00814D28 /* StatusBarItem.swift */,
+			);
+			name = "Status bar";
+			sourceTree = "<group>";
+		};
+		2C4769811E86AA7F00814D28 /* Status bar */ = {
+			isa = PBXGroup;
+			children = (
+				2C4769821E86AA8D00814D28 /* StatusBarItemController.swift */,
+			);
+			name = "Status bar";
+			sourceTree = "<group>";
+		};
 		2CA38D661E72ECCE00E850FC /* Quick Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +281,7 @@
 		A0923E021E683F5A003642FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C47697E1E86AA3400814D28 /* Status bar */,
 				2C4769711E85EABE00814D28 /* Play Window */,
 				2CA38D691E72ED0B00E850FC /* Settings Window */,
 				2CA38D681E72ECFC00E850FC /* Quick Window */,
@@ -271,6 +292,7 @@
 		A0923E031E683F5F003642FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2C4769811E86AA7F00814D28 /* Status bar */,
 				2C4769721E85EAC900814D28 /* Play Window */,
 				2CA38D661E72ECCE00E850FC /* Quick Window */,
 				2CA38D671E72ECE700E850FC /* Settings Window */,
@@ -525,6 +547,7 @@
 				2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */,
 				A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */,
 				2CA38D771E73735600E850FC /* SearchResultView.swift in Sources */,
+				2C4769831E86AA8D00814D28 /* StatusBarItemController.swift in Sources */,
 				2C471B621E8204A700FCF0DA /* CardsViewController.swift in Sources */,
 				2CA38D751E736E7700E850FC /* SearchResultsView.swift in Sources */,
 				2CA38D701E72EFBD00E850FC /* QuickWindowViewController.swift in Sources */,
@@ -535,6 +558,7 @@
 				2CA38D631E72424700E850FC /* EditCardView.swift in Sources */,
 				2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
+				2C4769801E86AA4D00814D28 /* StatusBarItem.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,
 				2CD4958D1E6CE6150001B727 /* SettingsWindowController.swift in Sources */,
 				2CA38D6D1E72EE8C00E850FC /* ViewController+defaultSize.swift in Sources */,
