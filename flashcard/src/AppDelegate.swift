@@ -43,7 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         self.quickWC = QuickWindowController(window: InputableWindow(contentRect: quickWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
         self.settingsWC = SettingsWindowController(window: NSWindow(contentRect: settingsWinRect, styleMask: [.resizable, .titled], backing: .buffered, defer: false))
-        self.playWC = PlayCardWindowController(window: NSWindow(contentRect: playWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
+        self.playWC = PlayCardWindowController(window: KeyDetectableBorderlessWindow(contentRect: playWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
         
         self.quickWC!.showWindow(self)
         self.settingsWC!.showWindow(self)

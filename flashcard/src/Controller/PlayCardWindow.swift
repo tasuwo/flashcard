@@ -39,3 +39,12 @@ extension PlayCardWindowController : NSWindowDelegate {
     }
 }
 
+class KeyDetectableBorderlessWindow: NSWindow {
+    override var canBecomeMain: Bool {
+        get { return true }
+    }
+    
+    override var canBecomeKey: Bool {
+        get { return true }
+    }
+}
