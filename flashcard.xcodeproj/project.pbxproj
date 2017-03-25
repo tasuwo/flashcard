@@ -14,6 +14,9 @@
 		2C471B5E1E81F50C00FCF0DA /* GeneralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */; };
 		2C471B601E82049500FCF0DA /* CardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B5F1E82049500FCF0DA /* CardsView.swift */; };
 		2C471B621E8204A700FCF0DA /* CardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B611E8204A700FCF0DA /* CardsViewController.swift */; };
+		2C4769741E85EF4100814D28 /* PlayCardWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769731E85EF4100814D28 /* PlayCardWindow.swift */; };
+		2C4769761E85EF9B00814D28 /* PlayCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */; };
+		2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4769771E85F00400814D28 /* PlayCardView.swift */; };
 		2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D601E72421700E850FC /* EditCardViewController.swift */; };
 		2CA38D631E72424700E850FC /* EditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D621E72424700E850FC /* EditCardView.swift */; };
 		2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */; };
@@ -53,6 +56,9 @@
 		2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralViewController.swift; sourceTree = "<group>"; };
 		2C471B5F1E82049500FCF0DA /* CardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsView.swift; sourceTree = SOURCE_ROOT; };
 		2C471B611E8204A700FCF0DA /* CardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsViewController.swift; sourceTree = "<group>"; };
+		2C4769731E85EF4100814D28 /* PlayCardWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayCardWindow.swift; sourceTree = "<group>"; };
+		2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayCardViewController.swift; sourceTree = "<group>"; };
+		2C4769771E85F00400814D28 /* PlayCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayCardView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D601E72421700E850FC /* EditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardView.swift; path = flashcard/src/Controller/EditCardView.swift; sourceTree = SOURCE_ROOT; };
 		2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewType.swift; sourceTree = "<group>"; };
@@ -127,6 +133,23 @@
 				2C471B611E8204A700FCF0DA /* CardsViewController.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2C4769711E85EABE00814D28 /* Play Window */ = {
+			isa = PBXGroup;
+			children = (
+				2C4769771E85F00400814D28 /* PlayCardView.swift */,
+			);
+			name = "Play Window";
+			sourceTree = "<group>";
+		};
+		2C4769721E85EAC900814D28 /* Play Window */ = {
+			isa = PBXGroup;
+			children = (
+				2C4769731E85EF4100814D28 /* PlayCardWindow.swift */,
+				2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */,
+			);
+			name = "Play Window";
 			sourceTree = "<group>";
 		};
 		2CA38D661E72ECCE00E850FC /* Quick Window */ = {
@@ -223,6 +246,7 @@
 		A0923E021E683F5A003642FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C4769711E85EABE00814D28 /* Play Window */,
 				2CA38D691E72ED0B00E850FC /* Settings Window */,
 				2CA38D681E72ECFC00E850FC /* Quick Window */,
 				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
@@ -233,6 +257,7 @@
 		A0923E031E683F5F003642FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				2C4769721E85EAC900814D28 /* Play Window */,
 				2CA38D661E72ECCE00E850FC /* Quick Window */,
 				2CA38D671E72ECE700E850FC /* Settings Window */,
 				2CA38D6C1E72EE8C00E850FC /* ViewController+defaultSize.swift */,
@@ -481,6 +506,7 @@
 				2C471B5B1E81503300FCF0DA /* GeneralView.swift in Sources */,
 				2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */,
 				2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */,
+				2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */,
 				A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */,
 				2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */,
 				A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */,
@@ -500,6 +526,8 @@
 				2C471B5E1E81F50C00FCF0DA /* GeneralViewController.swift in Sources */,
 				2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */,
 				A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */,
+				2C4769761E85EF9B00814D28 /* PlayCardViewController.swift in Sources */,
+				2C4769741E85EF4100814D28 /* PlayCardWindow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

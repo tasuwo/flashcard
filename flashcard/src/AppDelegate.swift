@@ -11,6 +11,7 @@ import RealmSwift
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var quickWC: QuickWindowController?
+    var playWC: PlayCardWindowController?
     var settingsWC: SettingsWindowController?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
@@ -24,23 +25,29 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // TODO: Size setting for window
         let quickWinSize = SearchViewController.getDefaultSize()
         let settingsWinSize = SettingsWindowController.winSize
+        let playWinSize = PlayCardViewController.getDefaultSize()
         
         let quickWinRect: NSRect
         let settingsWinRect: NSRect
+        let playWinRect: NSRect
         
         if let scrnSize = screenSize {
             quickWinRect = NSMakeRect(scrnSize.width/2-quickWinSize.width/2, scrnSize.height*2/3, quickWinSize.width, quickWinSize.height)
             settingsWinRect = NSMakeRect(scrnSize.width/2-settingsWinSize.width/2, scrnSize.height/2-settingsWinSize.height/2, settingsWinSize.width, settingsWinSize.height)
+            playWinRect = NSMakeRect(scrnSize.width/2-playWinSize.width/2, scrnSize.height/2-playWinSize.height/2, playWinSize.width, playWinSize.height)
         } else {
             quickWinRect = NSMakeRect(0, 0, quickWinSize.width, quickWinSize.height)
             settingsWinRect = NSMakeRect(0, 0, settingsWinSize.width, settingsWinSize.height)
+            playWinRect = NSMakeRect(0, 0, playWinSize.width, playWinSize.height)
         }
 
         self.quickWC = QuickWindowController(window: InputableWindow(contentRect: quickWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
         self.settingsWC = SettingsWindowController(window: NSWindow(contentRect: settingsWinRect, styleMask: [.resizable, .titled], backing: .buffered, defer: false))
+        self.playWC = PlayCardWindowController(window: NSWindow(contentRect: playWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
         
         self.quickWC!.showWindow(self)
         self.settingsWC!.showWindow(self)
+        self.playWC!.showWindow(self)
         
         // Initialize database
         let realm = try! Realm()
