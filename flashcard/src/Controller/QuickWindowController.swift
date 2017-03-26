@@ -23,6 +23,8 @@ class QuickWindowController : NSWindowController {
         let searchVC = SearchViewController()
         searchVC.delegate = self
         self.window!.contentViewController = searchVC
+
+        window!.delegate = self
     }
 
     required init?(coder: NSCoder) {
@@ -31,18 +33,13 @@ class QuickWindowController : NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        self.window?.delegate = self
     }
 }
 
 // MARK: - NSWindowDelegate
 extension QuickWindowController : NSWindowDelegate {
-    func windowDidMiniaturize(_ notification: Notification) {
-        print("Window minimized")
-    }
-    
-    func windowWillClose(_ notification: Notification) {
-        print("Window closing")
+    func windowDidResignKey(_ notification: Notification) {
+        self.window?.orderOut(self)
     }
 }
 
