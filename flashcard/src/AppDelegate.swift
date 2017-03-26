@@ -8,6 +8,7 @@
 
 import Cocoa
 import RealmSwift
+import Magnet
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var quickWC: QuickWindowController?
@@ -62,7 +63,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Initialize Status bar
         self.statusBarController = StatusBarController()
         
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        // Load app settings
+        if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
+           let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+            HotKeyCenter.shared.unregisterHotKey(with: "KeyHolderExample")
+            let hotKey = HotKey(identifier: "KeyHolderExample", keyCombo: settings.keyCombo, target: self, action: #selector(AppDelegate.toggleQuickWindow))
+            hotKey.register()
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

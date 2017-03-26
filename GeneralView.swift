@@ -30,6 +30,10 @@ class GeneralView : NSView {
         recordView.translatesAutoresizingMaskIntoConstraints = false
         recordView.tintColor = NSColor(red: 0.164, green: 0.517, blue: 0.823, alpha: 1)
         recordView.delegate = self
+        if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
+           let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+            recordView.keyCombo = settings.keyCombo
+        }
         self.addSubview(recordView)
         
         hotKeyFieldLabel = NSTextField()
@@ -83,6 +87,12 @@ extension GeneralView : RecordViewDelegate {
         HotKeyCenter.shared.unregisterHotKey(with: "KeyHolderExample")
         let hotKey = HotKey(identifier: "KeyHolderExample", keyCombo: keyCombo, target: self, action: #selector(GeneralView.didHotkeyPressed(_:)))
         hotKey.register()
+        
+        // Save settings
+        let data = AppSettings(keyCombo: keyCombo)
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: data)
+        UserDefaults.standard.set(encodedData, forKey: "AppSettings")
+        UserDefaults.standard.synchronize()
     }
     
     func didHotkeyPressed (_ event: NSEvent) -> Void {
