@@ -11,10 +11,7 @@ import Magnet
 import KeyHolder
 
 protocol GeneralViewDelegate : class {
-    func didChangeText(_ text: String)
-    func didPressEnter()
-    func didMoveUp()
-    func didMoveDown()
+    func didChangeHotKey(_ keyCombo: KeyCombo)
 }
 
 // MARK: -
@@ -76,30 +73,14 @@ extension GeneralView : RecordViewDelegate {
     }
     
     func recordViewDidClearShortcut(_ recordView: RecordView) {
-        HotKeyCenter.shared.unregisterHotKey(with: "KeyHolderExample")
+        // TODO: Remove hot key and save it to userdefault
     }
     
     func recordViewDidEndRecording(_ recordView: RecordView) {
     }
-    
+
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
-        HotKeyCenter.shared.unregisterHotKey(with: "KeyHolderExample")
-        let hotKey = HotKey(identifier: "KeyHolderExample", keyCombo: keyCombo, target: self, action: #selector(GeneralView.didHotkeyPressed(_:)))
-        hotKey.register()
-        
-        // Save settings
-        if let settings = AppSettings.get() {
-            settings.keyCombo = keyCombo
-            settings.set()
-        } else {
-            let data = AppSettings(keyCombo: keyCombo)
-            data.set()
-        }
-    }
-    
-    func didHotkeyPressed (_ event: NSEvent) -> Void {
-        let appDelegate = NSApplication.shared().delegate as? AppDelegate
-        appDelegate?.toggleQuickWindow()
+        self.delegate?.didChangeHotKey(keyCombo)
     }
 }
 
