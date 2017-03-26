@@ -26,4 +26,18 @@ class AppSettings: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.keyCombo, forKey: "keyCombo")
     }
+    
+    func set() {
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.set(encodedData, forKey: "AppSettings")
+        UserDefaults.standard.synchronize()
+    }
+    
+    class func get() -> AppSettings? {
+        if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
+           let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+            return settings
+        }
+        return nil
+    }
 }

@@ -63,9 +63,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Initialize Status bar
         self.statusBarController = StatusBarController()
         
-        // Load app settings
-        if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
-           let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+        // Load App Setttings
+        if let settings = AppSettings.get() {
             HotKeyCenter.shared.unregisterHotKey(with: "KeyHolderExample")
             let hotKey = HotKey(identifier: "KeyHolderExample", keyCombo: settings.keyCombo, target: self, action: #selector(AppDelegate.toggleQuickWindow))
             hotKey.register()
