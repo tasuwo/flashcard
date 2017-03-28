@@ -26,13 +26,16 @@ class SearchView : NSView {
         textField = NSTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.focusRingType = .none
+        textField.isBezeled = false
+        textField.drawsBackground = false
+        textField.font = NSFont(name: textField.font!.fontName, size: 33)
         self.addSubview(textField)
         
         self.addConstraints([
-            NSLayoutConstraint(item: textField, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: textField, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: textField, attribute: .left,    relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 10),
+            NSLayoutConstraint(item: textField, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,  multiplier: 1, constant: 10),
             NSLayoutConstraint(item: textField, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 800),
-            NSLayoutConstraint(item: textField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50)
+            NSLayoutConstraint(item: textField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
         ])
         
         textField.delegate = self
@@ -40,6 +43,20 @@ class SearchView : NSView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ dirtyRect: NSRect) {
+        NSGraphicsContext.saveGraphicsState()
+        super.draw(dirtyRect)
+        
+        NSColor.clear.set()
+        NSRectFill(dirtyRect)
+        
+        let path = NSBezierPath(roundedRect: self.bounds, xRadius: 5, yRadius: 5)
+        NSColor.windowBackgroundColor.set()
+        path.fill()
+        
+        NSGraphicsContext.restoreGraphicsState()
     }
 }
 

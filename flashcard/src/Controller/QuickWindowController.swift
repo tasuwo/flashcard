@@ -25,6 +25,8 @@ class QuickWindowController : NSWindowController {
         self.window!.contentViewController = searchVC
 
         window!.delegate = self
+        
+        self.window!.hasShadow = true
     }
 
     required init?(coder: NSCoder) {

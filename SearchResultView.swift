@@ -15,9 +15,9 @@ class SearchResultView : NSView {
     open var isSelected: Bool = false {
         didSet {
             if isSelected {
-                self.label.backgroundColor = NSColor.blue
+                self.label.backgroundColor = NSColor.init(deviceRed: 60/255, green: 107/255, blue: 217/255, alpha: 1)
             } else {
-                self.label.backgroundColor = NSColor.gray
+                self.label.backgroundColor = NSColor.init(deviceRed: 235/255, green: 235/255, blue: 235/255, alpha: 1)
             }
         }
     }
@@ -29,15 +29,17 @@ class SearchResultView : NSView {
         
         label = NSTextField()
         label.isEditable = false
-        label.backgroundColor = NSColor.gray
+        label.isBezeled = false
+        label.cell!.wraps = true
+        label.backgroundColor = NSColor.init(deviceRed: 235/255, green: 235/255, blue: 235/255, alpha: 1)   
         label.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(label)
 
         let rvHeight = SearchViewController.getResultViewHeight()
         self.addConstraints([
-            NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: label, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: label, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,          multiplier: 1, constant: 0),
             NSLayoutConstraint(item: label, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: rvHeight)
         ])
     }

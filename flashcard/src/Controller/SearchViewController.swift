@@ -16,7 +16,7 @@ class SearchViewController: QuickWindowViewController {
     var shownResultsRange: NSRange? = nil
     
     override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 800, height: 50)
+        return NSSize(width: 800, height: 60)
     }
     
     class func getResultViewHeight() -> CGFloat {
