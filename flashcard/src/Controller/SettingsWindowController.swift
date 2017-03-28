@@ -26,9 +26,6 @@ class SettingsWindowController : NSWindowController {
     
     override init(window: NSWindow?) {
         super.init(window: window)
-        
-        let controller = GeneralViewController()
-        self.window!.contentViewController = controller
 
         // Toolbar
         for item in self.toolbarTabsArray {
@@ -37,7 +34,11 @@ class SettingsWindowController : NSWindowController {
         toolbar = NSToolbar(identifier: "id")
         toolbar.allowsUserCustomization = true
         toolbar.delegate = self
-        self.window?.toolbar = toolbar
+        self.window!.toolbar = toolbar
+        
+        // View Controller
+        let controller = GeneralViewController()
+        self.window!.contentViewController = controller
     }
     
     required init?(coder: NSCoder) {
