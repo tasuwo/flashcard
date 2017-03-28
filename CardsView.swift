@@ -7,34 +7,24 @@
 //
 
 import Cocoa
+import RealmSwift
 
 class CardsView : NSView {
     var sideBar: NSScrollView!
-    var holders: NSTableView!
     var editCardSpace: NSView!
+    var holdersList: CardHolderTableView!
 
     override init(frame: NSRect) {
         super.init(frame: frame)
         
-        holders = NSTableView()
-        holders.translatesAutoresizingMaskIntoConstraints = true
-        holders.delegate = self
-        holders.dataSource = CardHolder()
-        holders.focusRingType = .none
-        holders.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
-        holders.headerView = nil
-        
-        let column = NSTableColumn(identifier: "test")
-        column.resizingMask = .autoresizingMask
-        column.sizeToFit()
-
-        holders.addTableColumn(column)
-        holders.reloadData()
-        holders.sizeLastColumnToFit()
+        holdersList = CardHolderTableView()
+        holdersList.translatesAutoresizingMaskIntoConstraints = true
+        holdersList.setupSettings()
+        holdersList.loadHolders()
         
         sideBar = NSScrollView()
         sideBar.translatesAutoresizingMaskIntoConstraints = false
-        sideBar.documentView = holders
+        sideBar.documentView = holdersList
         self.addSubview(sideBar)
         
         editCardSpace = NSView()
@@ -66,23 +56,3 @@ class CardsView : NSView {
     }
 }
 
-extension CardsView: NSTableViewDelegate {
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var result = tableView.make(withIdentifier: "test", owner: nil) as? NSTextField
-        
-        if result == nil {
-            result = NSTextField()
-            result!.isBordered = false
-            result!.drawsBackground = false
-            result!.isBezeled = false
-            result!.isEditable = false
-            result!.identifier = "test"
-        }
-        
-        return result
-    }
-    
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 50
-    }
-}
