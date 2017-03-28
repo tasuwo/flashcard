@@ -9,8 +9,13 @@
 import Cocoa
 import RealmSwift
 
+protocol CardHolderTableViewDelegate {
+    func selectionDidChange(_ row: Int)
+}
+
 class CardHolderTableView: NSTableView {
     var holders = List<CardHolder>()
+    open var cardHolderDelegate: CardHolderTableViewDelegate?
     
     func setupSettings() {
         self.dataSource = self
@@ -40,7 +45,7 @@ class CardHolderTableView: NSTableView {
 
 extension CardHolderTableView: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var result = tableView.make(withIdentifier: "test", owner: nil) as? NSTextField
+        var result = tableView.make(withIdentifier: "caedHolderCell", owner: nil) as? NSTextField
         
         if result == nil {
             result = NSTextField()
@@ -48,7 +53,7 @@ extension CardHolderTableView: NSTableViewDelegate {
             result!.drawsBackground = false
             result!.isBezeled = false
             result!.isEditable = false
-            result!.identifier = "test"
+            result!.identifier = "cardHolderCell"
         }
         
         return result
@@ -56,6 +61,11 @@ extension CardHolderTableView: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 50
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let row = self.selectedRow
+        self.cardHolderDelegate?.selectionDidChange(row)
     }
 }
 
