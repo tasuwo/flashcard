@@ -21,6 +21,9 @@ class CardHolderTableView: NSTableView {
         self.dataSource = self
         self.delegate = self
         
+        self.rowHeight = 50
+        self.backgroundColor = NSColor.init(deviceRed: 239/255, green: 239/255, blue: 239/255, alpha: 1)
+        
         self.focusRingType = .none
         self.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         self.headerView = nil
@@ -46,7 +49,7 @@ class CardHolderTableView: NSTableView {
 extension CardHolderTableView: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         var result = tableView.make(withIdentifier: "caedHolderCell", owner: nil) as? NSTextField
-        
+
         if result == nil {
             result = NSTextField()
             result!.isBordered = false
@@ -55,17 +58,17 @@ extension CardHolderTableView: NSTableViewDelegate {
             result!.isEditable = false
             result!.identifier = "cardHolderCell"
         }
-        
+
         return result
     }
-    
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        return 50
-    }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = self.selectedRow
         self.cardHolderDelegate?.selectionDidChange(row)
+    }
+    
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        rowView.backgroundColor = NSColor.init(deviceRed: 239/255, green: 239/255, blue: 239/255, alpha: 1)
     }
 }
 
