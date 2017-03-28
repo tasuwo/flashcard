@@ -34,3 +34,20 @@ class CardHolder: Object {
         }
     }
 }
+
+extension CardHolder: NSTableViewDataSource {
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        let realm = try! Realm()
+        let holders = realm.objects(CardHolder.self)
+        return holders.count
+    }
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        let realm = try! Realm()
+        let holder = realm.objects(CardHolder.self).filter("id == \(row)")
+        if let h = holder.first {
+            return h.name
+        }
+        return nil
+    }
+}

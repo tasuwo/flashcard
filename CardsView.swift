@@ -12,7 +12,6 @@ class CardsView : NSView {
     var sideBar: NSScrollView!
     var holders: NSTableView!
     var editCardSpace: NSView!
-    var model: fakeModel!
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -20,8 +19,7 @@ class CardsView : NSView {
         holders = NSTableView()
         holders.translatesAutoresizingMaskIntoConstraints = true
         holders.delegate = self
-        model = fakeModel()
-        holders.dataSource = model
+        holders.dataSource = CardHolder()
         holders.focusRingType = .none
         holders.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         holders.headerView = nil
@@ -62,6 +60,10 @@ class CardsView : NSView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewWillDraw() {
+        editCardSpace.layer?.backgroundColor = CGColor(red: 236, green: 236, blue: 236, alpha: 0)
+    }
 }
 
 extension CardsView: NSTableViewDelegate {
@@ -82,15 +84,5 @@ extension CardsView: NSTableViewDelegate {
     
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         return 50
-    }
-}
-
-class fakeModel: NSObject, NSTableViewDataSource {
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return 100
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return "aaa"
     }
 }
