@@ -46,7 +46,8 @@ extension SearchViewController {
         // Resize
         let rvHeight = SearchViewController.getResultViewHeight()
         // Resize view
-        let resultsHeight = rvHeight * nDisplay
+        let margin: CGFloat = 5
+        let resultsHeight = rvHeight * nDisplay + margin
         self.resultsView.frame.size = NSMakeSize(800, resultsHeight)
         // Resize window
         let winHeight = resultsHeight + SearchViewController.getDefaultSize().height
@@ -54,8 +55,8 @@ extension SearchViewController {
         
         // Create views
         for (i, r) in results.enumerated() {
-            let v = SearchResultView(frame: NSMakeRect(0, CGFloat(Int(nDisplay) - i - 1) * rvHeight, 800, rvHeight))
-            v.setText(r.body)
+            let v = SearchResultView(frame: NSMakeRect(0, (CGFloat(Int(nDisplay) - i - 1) * rvHeight + margin), 800, rvHeight))
+            v.setText(r.title, bodyStr: r.body)
             
             self.resultInfos.append(r)
             self.resultViews.append(v)
@@ -123,5 +124,9 @@ extension SearchViewController : SearchViewDelegate {
                 self.iSelectedResult = i+1
             }
         }
+    }
+    
+    func cancel() {
+        self.delegate?.cancel()
     }
 }

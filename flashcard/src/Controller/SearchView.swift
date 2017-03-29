@@ -13,6 +13,7 @@ protocol SearchViewDelegate : class {
     func didPressEnter()
     func didMoveUp()
     func didMoveDown()
+    func cancel()
 }
 
 // MARK: -
@@ -75,6 +76,9 @@ extension SearchView : NSTextFieldDelegate {
             return true
         } else if commandSelector == #selector(NSResponder.moveDown(_:)) {
             self.delegate?.didMoveDown()
+            return true
+        } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+            self.delegate?.cancel()
             return true
         }
         return false

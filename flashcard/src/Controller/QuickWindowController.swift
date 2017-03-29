@@ -12,6 +12,7 @@ protocol DelegateToQuickWindow {
     func lookup(_ word: String)
     func resize(_ size: NSSize, animate: Bool)
     func transitionTo(_ view: QuickWindowViewType)
+    func cancel()
 }
 
 class QuickWindowController : NSWindowController {
@@ -76,5 +77,9 @@ extension QuickWindowController : DelegateToQuickWindow {
             y: self.window!.frame.origin.y + self.window!.frame.height - size.height
         )
         self.window?.setFrame(NSMakeRect(origin.x, origin.y, size.width, size.height), display: true, animate: animate)
+    }
+    
+    func cancel() {
+        self.window?.orderOut(self)
     }
 }
