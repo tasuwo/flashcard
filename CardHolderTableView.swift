@@ -9,13 +9,9 @@
 import Cocoa
 import RealmSwift
 
-protocol CardHolderTableViewDelegate {
-    func selectionDidChange(_ row: Int)
-}
-
 class CardHolderTableView: NSTableView {
     var holders = List<CardHolder>()
-    open var cardHolderDelegate: CardHolderTableViewDelegate?
+    open var cardsViewDelegate: CardsViewDelegate?
     
     func setupSettings() {
         self.dataSource = self
@@ -42,9 +38,12 @@ class CardHolderTableView: NSTableView {
     func loadHolders() {
         let realm = try! Realm()
         let results = realm.objects(CardHolder.self)
+
+        self.holders = List<CardHolder>()
         for holder in results {
             self.holders.append(holder)
         }
+
         self.reloadData()
     }
 }
@@ -67,7 +66,7 @@ extension CardHolderTableView: NSTableViewDelegate {
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = self.selectedRow
-        self.cardHolderDelegate?.selectionDidChange(row)
+        self.cardsViewDelegate?.cardholderSelectionDidChange(row)
     }
     
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {

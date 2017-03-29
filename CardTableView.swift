@@ -9,13 +9,9 @@
 import Cocoa
 import RealmSwift
 
-protocol CardTableViewDelegate {
-    func cardsTextDidChange(row: Int, ColumnId: String)
-}
-
 class CardTableView: NSTableView {
     var cards = List<Card>()
-    open var cardTableViewDelegate: CardTableViewDelegate?
+    open var cardsViewDelegate: CardsViewDelegate?
     
     func setupSettings() {
         self.dataSource = self
@@ -56,8 +52,9 @@ class CardTableView: NSTableView {
 
 extension CardTableView: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-        if let cid = tableColumn?.identifier {
-            self.cardTableViewDelegate?.cardsTextDidChange(row: row, ColumnId: cid)
+        if let cid = tableColumn?.identifier, let v = object as? String {
+            let id = cards[row].id
+            self.cardsViewDelegate?.cardTextDidChange(id: id, prop: cid, value: v)
         }
     }
 }

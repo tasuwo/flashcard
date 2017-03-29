@@ -194,6 +194,15 @@
 			name = "Status bar";
 			sourceTree = "<group>";
 		};
+		2C4769901E8C584500814D28 /* CardsView SubView */ = {
+			isa = PBXGroup;
+			children = (
+				2C47698E1E8A452500814D28 /* CardTableView.swift */,
+				2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */,
+			);
+			name = "CardsView SubView";
+			sourceTree = "<group>";
+		};
 		2CA38D661E72ECCE00E850FC /* Quick Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,8 +239,7 @@
 			children = (
 				2C471B5A1E81503300FCF0DA /* GeneralView.swift */,
 				2C471B5F1E82049500FCF0DA /* CardsView.swift */,
-				2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */,
-				2C47698E1E8A452500814D28 /* CardTableView.swift */,
+				2C4769901E8C584500814D28 /* CardsView SubView */,
 			);
 			name = "Settings Window";
 			sourceTree = "<group>";

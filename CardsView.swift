@@ -9,19 +9,29 @@
 import Cocoa
 import RealmSwift
 
+protocol CardsViewDelegate {
+    func cardTextDidChange(id: Int, prop: String, value: String)
+    func cardholderSelectionDidChange(_ row: Int)
+}
+
 class CardsView : NSView {
     var sideBar: NSScrollView!
     var holdersList: CardHolderTableView!
     var editCardSpace: NSView!
     var cardListContainer: NSScrollView!
     var cardsList: CardTableView!
+    open var delegate: CardsViewDelegate? {
+        didSet {
+            self.cardsList.cardsViewDelegate = self.delegate
+            self.holdersList.cardsViewDelegate = self.delegate
+        }
+    }
 
     override init(frame: NSRect) {
         super.init(frame: frame)
         
         holdersList = CardHolderTableView()
         holdersList.translatesAutoresizingMaskIntoConstraints = true
-        holdersList.cardHolderDelegate = self
         holdersList.setupSettings()
         holdersList.loadHolders()
         
@@ -53,7 +63,6 @@ class CardsView : NSView {
         cardsList.translatesAutoresizingMaskIntoConstraints = true
         cardsList.setupSettings()
         cardsList.loadCards(in: 0)
-        cardsList.cardTableViewDelegate = self
         
         cardListContainer = NSScrollView()
         cardListContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -76,15 +85,3 @@ class CardsView : NSView {
         editCardSpace.layer?.backgroundColor = CGColor(red: 236, green: 236, blue: 236, alpha: 0)
     }
 }
-
-extension CardsView: CardHolderTableViewDelegate {
-    func selectionDidChange(_ row: Int) {
-        cardsList.loadCards(in: row)
-    }
-}
-
-extension CardsView: CardTableViewDelegate {
-    func cardsTextDidChange(row: Int, ColumnId: String) {
-    }
-}
-
