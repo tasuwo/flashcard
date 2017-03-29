@@ -53,6 +53,7 @@ class CardsView : NSView {
         cardsList.translatesAutoresizingMaskIntoConstraints = true
         cardsList.setupSettings()
         cardsList.loadCards(in: 0)
+        cardsList.cardTableViewDelegate = self
         
         cardListContainer = NSScrollView()
         cardListContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +80,11 @@ class CardsView : NSView {
 extension CardsView: CardHolderTableViewDelegate {
     func selectionDidChange(_ row: Int) {
         cardsList.loadCards(in: row)
+    }
+}
+
+extension CardsView: CardTableViewDelegate {
+    func cardsTextDidChange(row: Int, ColumnId: String) {
     }
 }
 

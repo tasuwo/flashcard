@@ -10,11 +10,12 @@ import Cocoa
 import RealmSwift
 
 protocol CardTableViewDelegate {
-    func selectionDidChange()
+    func cardsTextDidChange(row: Int, ColumnId: String)
 }
 
 class CardTableView: NSTableView {
     var cards = List<Card>()
+    open var cardTableViewDelegate: CardTableViewDelegate?
     
     func setupSettings() {
         self.dataSource = self
@@ -52,19 +53,10 @@ class CardTableView: NSTableView {
 }
 
 extension CardTableView: NSTableViewDelegate {
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var result = tableView.make(withIdentifier: "cardCell", owner: nil) as? NSTextField
-        
-        if result == nil {
-            result = NSTextField()
-            result!.isBordered = false
-            result!.drawsBackground = false
-            result!.isBezeled = false
-            result!.isEditable = false
-            result!.identifier = "cardCell"
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+        if let cid = tableColumn?.identifier {
+            self.cardTableViewDelegate?.cardsTextDidChange(row: row, ColumnId: cid)
         }
-        
-        return result
     }
 }
 
