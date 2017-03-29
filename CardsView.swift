@@ -60,10 +60,10 @@ class CardsView : NSView {
         editCardSpace.addSubview(cardListContainer)
         
         editCardSpace.addConstraints([
-            NSLayoutConstraint(item: cardListContainer, attribute: .top,     relatedBy: .equal, toItem: editCardSpace, attribute: .top,    multiplier: 1, constant: 150),
+            NSLayoutConstraint(item: cardListContainer, attribute: .top,     relatedBy: .equal, toItem: editCardSpace, attribute: .top,    multiplier: 1, constant: 0),
             NSLayoutConstraint(item: cardListContainer, attribute: .left,    relatedBy: .equal, toItem: editCardSpace, attribute: .left,   multiplier: 1, constant: 0),
             NSLayoutConstraint(item: cardListContainer, attribute: .width,   relatedBy: .equal, toItem: editCardSpace, attribute: .width,  multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: cardListContainer, attribute: .height,  relatedBy: .equal, toItem: editCardSpace, attribute: .height, multiplier: 1, constant: -150),
+            NSLayoutConstraint(item: cardListContainer, attribute: .height,  relatedBy: .equal, toItem: editCardSpace, attribute: .height, multiplier: 1, constant: 0),
         ])
     }
     
