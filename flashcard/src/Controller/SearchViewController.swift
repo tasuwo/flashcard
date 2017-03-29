@@ -56,7 +56,16 @@ extension SearchViewController {
         // Create views
         for (i, r) in results.enumerated() {
             let v = SearchResultView(frame: NSMakeRect(0, (CGFloat(Int(nDisplay) - i - 1) * rvHeight + margin), 800, rvHeight))
-            v.setText(r.title, bodyStr: r.body)
+            
+            let MAX_STR_LENGTH = 140
+            let str = r.body as NSString
+            var bodyStr: String = ""
+            if str.length > MAX_STR_LENGTH {
+                bodyStr = str.substring(to: MAX_STR_LENGTH)
+            } else {
+                bodyStr = str as String
+            }
+            v.setText(r.title, bodyStr: bodyStr)
             
             self.resultInfos.append(r)
             self.resultViews.append(v)
