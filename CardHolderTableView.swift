@@ -28,11 +28,14 @@ class CardHolderTableView: NSTableView {
         self.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         self.headerView = nil
         
-        let column = NSTableColumn(identifier: "test")
+        let idColumn = NSTableColumn(identifier: "id")
+        idColumn.isHidden = true
+        self.addTableColumn(idColumn)
+        let column = NSTableColumn(identifier: "name")
         column.resizingMask = .autoresizingMask
         column.sizeToFit()
-        
         self.addTableColumn(column)
+
         self.sizeLastColumnToFit()
     }
     
@@ -78,7 +81,17 @@ extension CardHolderTableView: NSTableViewDataSource {
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        let holder = self.holders[row]
-        return holder.name
+        if let cid = tableColumn?.identifier {
+            let holder = self.holders[row]
+            switch cid {
+            case "id":
+                return holder.id
+            case "name":
+                return holder.name
+            default:
+                return nil
+            }
+        }
+        return nil
     }
 }

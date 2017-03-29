@@ -26,8 +26,10 @@ class CardTableView: NSTableView {
         
         self.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         
+        let idColumn = NSTableColumn(identifier: "id")
         let frontColumn = NSTableColumn(identifier: "front")
         let backColumn = NSTableColumn(identifier: "back")
+        idColumn.isHidden = true
         frontColumn.headerCell.stringValue = "FRONT"
         frontColumn.resizingMask = .autoresizingMask
         frontColumn.sizeToFit()
@@ -68,6 +70,8 @@ extension CardTableView: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         let card = cards[row]
         switch tableColumn!.identifier {
+        case "id":
+            return card.id
         case "front":
             return card.frontText
         case "back":
