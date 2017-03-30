@@ -41,12 +41,10 @@ class CardTableView: NSTableView {
     }
     
     func loadCards(in holderId: Int) {
-        let realm = try! Realm()
-        let holders = realm.objects(CardHolder.self).filter("id == \(holderId)")
-        if let holder = holders.first {
-            self.cards = holder.cards
+        if let c =  CardHolder.get(holderId)?.cards {
+            self.cards = c
+            self.reloadData()
         }
-        self.reloadData()
     }
 }
 

@@ -36,14 +36,7 @@ class CardHolderTableView: NSTableView {
     }
     
     func loadHolders() {
-        let realm = try! Realm()
-        let results = realm.objects(CardHolder.self)
-
-        self.holders = List<CardHolder>()
-        for holder in results {
-            self.holders.append(holder)
-        }
-
+        self.holders = List(CardHolder.all())
         self.reloadData()
     }
 }

@@ -19,11 +19,28 @@ class Card: Object {
         return "id"
     }
     
-    static func lastId(_ realm: Realm) -> Int {
-        if let user = realm.objects(Card.self).sorted(byKeyPath: "id").last {
-            return user.id + 1
-        } else {
-            return 1
+    static func lastId() -> Int {
+        let realm = try! Realm()
+        return realm.objects(Card.self).last?.id ?? -1
+    }
+}
+
+// MARK: - Entity model methods
+
+extension Card {
+    static func all(_ holderId: Int) -> List<Card>? {
+        let realm = try! Realm()
+        return realm.objects(CardHolder.self).filter("id == \(holderId)").first?.cards
+    }
+    
+    static func add(_ card: Card, to holder: CardHolder) {
+        holder.cards.append(card)
+        let realm = try! Realm()
+        try! realm.write {
+            try! realm.write {
+                realm.add(card)
+                realm.add(holder, update: true)
+            }
         }
     }
 }
