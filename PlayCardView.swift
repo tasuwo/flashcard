@@ -10,6 +10,8 @@ import Cocoa
 
 let leftArrowKey = 123
 let rightArrowKey = 124
+let downArrowKey = 125
+let upArrowKey = 126
 
 protocol PlayCardViewDelegate {
     func flipToNext()
@@ -67,7 +69,7 @@ extension PlayCardView {
     override func keyDown(with event: NSEvent) {
         let character = Int(event.keyCode)
         switch character {
-        case leftArrowKey, rightArrowKey:
+        case leftArrowKey, rightArrowKey, upArrowKey, downArrowKey:
             break
         default:
             super.keyDown(with: event)
@@ -77,10 +79,10 @@ extension PlayCardView {
     override func keyUp(with event: NSEvent) {
         let character = Int(event.keyCode)
         switch character {
-        case leftArrowKey:
+        case leftArrowKey, upArrowKey:
             self.delegate?.flipToPrevious()
             break
-        case rightArrowKey:
+        case rightArrowKey, downArrowKey:
             self.delegate?.flipToNext()
             break
         default:
