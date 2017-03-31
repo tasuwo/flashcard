@@ -16,6 +16,10 @@ class PlayCardWindowController : NSWindowController {
         
         let vc = PlayCardViewController()
         self.window!.contentViewController = vc
+        self.window?.hasShadow = true
+        self.window?.titleVisibility = .hidden
+        self.window?.titlebarAppearsTransparent = true
+        self.window?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -24,7 +28,8 @@ class PlayCardWindowController : NSWindowController {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        self.window?.delegate = self
+        
+        self.window?.titleVisibility = .hidden
     }
 }
 
@@ -36,6 +41,10 @@ extension PlayCardWindowController : NSWindowDelegate {
     
     func windowWillClose(_ notification: Notification) {
         print("Window closing")
+    }
+    
+    func windowDidResignKey(_ notification: Notification) {
+        self.window?.orderOut(self)
     }
 }
 

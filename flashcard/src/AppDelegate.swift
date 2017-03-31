@@ -46,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.quickWC = QuickWindowController(window: InputableWindow(contentRect: quickWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
         self.settingsWC = SettingsWindowController(window: InputableWindow(contentRect: settingsWinRect, styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView, .resizable], backing: .buffered, defer: false))
         self.settingsWC?.window?.collectionBehavior = [ .fullScreenAuxiliary, .fullScreenPrimary ]
-        self.playWC = PlayCardWindowController(window: KeyDetectableBorderlessWindow(contentRect: playWinRect, styleMask: [.borderless], backing: .buffered, defer: false))
+        self.playWC = PlayCardWindowController(window: KeyDetectableBorderlessWindow(contentRect: playWinRect, styleMask: [.titled, .closable], backing: .buffered, defer: false))
         
         // Initialize database
         let realm = try! Realm()
