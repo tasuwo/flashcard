@@ -82,6 +82,11 @@ extension AppDelegate {
         self.settingsWC?.showWindow(self)
     }
     
+    func didSelectPlay() {
+        NSApp.activate(ignoringOtherApps: true)
+        self.playWC?.showWindow(self)
+    }
+    
     func toggleQuickWindow() {
         if self.quickWC!.window!.isVisible {
             self.quickWC?.window?.orderOut(self)
