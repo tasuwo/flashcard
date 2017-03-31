@@ -21,19 +21,15 @@ extension CardsListPresenter: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if let c = cards, let colId = tableColumn?.identifier, let v = object as? String {
             let id = c[row].id
-            if let card = Card.get(id) {
-                switch colId {
-                case "front":
-                    card.frontText = v
-                    break
-                case "back":
-                    card.backText = v
-                    break
-                default:
-                    return
-                }
-                // TODO: fix bug
-                // Card.add(card.copy() as! Card)
+            switch colId {
+            case "front":
+                Card.update(id, frontText: v, backText: nil)
+                break
+            case "back":
+                Card.update(id, frontText: nil, backText: v)
+                break
+            default:
+                return
             }
         }
     }

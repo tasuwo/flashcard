@@ -57,4 +57,15 @@ extension Card {
             }
         }
     }
+    
+    static func update(_ id: Int, frontText: String?, backText: String?) {
+        let realm = try! Realm()
+        if let card = Card.get(id) {
+            try! realm.write {
+                if let f = frontText { card.frontText = f }
+                if let b = backText { card.backText = b }
+                realm.create(Card.self, value: card, update: true)
+            }
+        }
+    }
 }
