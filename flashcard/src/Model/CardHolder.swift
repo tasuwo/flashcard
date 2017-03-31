@@ -36,4 +36,15 @@ extension CardHolder {
         let realm = try! Realm()
         return realm.objects(CardHolder.self).filter("id == \(id)").first
     }
+    
+    static func add(_ holder: CardHolder) {
+        let realm = try! Realm()
+        try! realm.write {
+            if realm.object(ofType: CardHolder.self, forPrimaryKey: holder.id) != nil {
+                realm.create(CardHolder.self, value: holder, update: true)
+            } else {
+                realm.add(holder)
+            }
+        }
+    }
 }

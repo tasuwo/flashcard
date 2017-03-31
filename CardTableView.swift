@@ -7,14 +7,16 @@
 //
 
 import Cocoa
-import RealmSwift
 
 class CardTableView: NSTableView {
-    var cards = List<Card>()
+    var presenter: CardsListPresenter? {
+        didSet {
+            self.dataSource = self.presenter
+        }
+    }
     open var cardsViewDelegate: CardsViewDelegate?
     
     func setupSettings() {
-        self.dataSource = self
         self.delegate = self
         
         self.focusRingType = .none
@@ -32,6 +34,7 @@ class CardTableView: NSTableView {
         backColumn.headerCell.stringValue = "BACK"
         backColumn.resizingMask = .autoresizingMask
         backColumn.sizeToFit()
+        self.addTableColumn(idColumn)
         self.addTableColumn(frontColumn)
         self.addTableColumn(backColumn)
         
@@ -41,38 +44,9 @@ class CardTableView: NSTableView {
     }
     
     func loadCards(in holderId: Int) {
-        if let c =  CardHolder.get(holderId)?.cards {
-            self.cards = c
-            self.reloadData()
-        }
+        self.presenter?.loadCards(in: holderId)
+        self.reloadData()
     }
 }
 
-extension CardTableView: NSTableViewDelegate {
-    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
-        if let cid = tableColumn?.identifier, let v = object as? String {
-            let id = cards[row].id
-            self.cardsViewDelegate?.cardTextDidChange(id: id, prop: cid, value: v)
-        }
-    }
-}
-
-extension CardTableView: NSTableViewDataSource {
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.cards.count
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        let card = cards[row]
-        switch tableColumn!.identifier {
-        case "id":
-            return card.id
-        case "front":
-            return card.frontText
-        case "back":
-            return card.backText
-        default:
-            return nil
-        }
-    }
-}
+extension CardTableView: NSTableViewDelegate {}

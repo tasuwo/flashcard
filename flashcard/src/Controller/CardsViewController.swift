@@ -21,8 +21,6 @@ class CardsViewController: NSViewController {
 extension CardsViewController: CardsViewDelegate {
     func cardholderSelectionDidChange(_ row: Int) {
         let view = self.view as! CardsView
-        view.holdersList.loadHolders()
+        view.cardsList.loadCards(in: row)
     }
-    
-    func cardTextDidChange(id: Int, prop: String, value: String) {}
 }

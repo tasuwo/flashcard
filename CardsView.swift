@@ -10,7 +10,6 @@ import Cocoa
 import RealmSwift
 
 protocol CardsViewDelegate {
-    func cardTextDidChange(id: Int, prop: String, value: String)
     func cardholderSelectionDidChange(_ row: Int)
 }
 
@@ -33,7 +32,9 @@ class CardsView : NSView {
         holdersList = CardHolderTableView()
         holdersList.translatesAutoresizingMaskIntoConstraints = true
         holdersList.setupSettings()
-        holdersList.loadHolders()
+        let holdersPresenter = CardHoldersListPresenter()
+        holdersPresenter.load()
+        holdersList.dataSource = holdersPresenter
         
         sideBar = NSScrollView()
         sideBar.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +63,8 @@ class CardsView : NSView {
         cardsList = CardTableView()
         cardsList.translatesAutoresizingMaskIntoConstraints = true
         cardsList.setupSettings()
-        cardsList.loadCards(in: 0)
+        let cardsPresenter = CardsListPresenter()
+        cardsList.presenter = cardsPresenter
         
         cardListContainer = NSScrollView()
         cardListContainer.translatesAutoresizingMaskIntoConstraints = false

@@ -7,14 +7,16 @@
 //
 
 import Cocoa
-import RealmSwift
 
 class CardHolderTableView: NSTableView {
-    var holders = List<CardHolder>()
+    var presenter: CardHoldersListPresenter? {
+        didSet {
+            self.dataSource = self.presenter
+        }
+    }
     open var cardsViewDelegate: CardsViewDelegate?
     
     func setupSettings() {
-        self.dataSource = self
         self.delegate = self
         
         self.rowHeight = 50
@@ -33,11 +35,6 @@ class CardHolderTableView: NSTableView {
         self.addTableColumn(column)
 
         self.sizeLastColumnToFit()
-    }
-    
-    func loadHolders() {
-        self.holders = List(CardHolder.all())
-        self.reloadData()
     }
 }
 
@@ -61,29 +58,5 @@ extension CardHolderTableView: NSTableViewDelegate {
         let row = self.selectedRow
         self.cardsViewDelegate?.cardholderSelectionDidChange(row)
     }
-    
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        rowView.backgroundColor = NSColor.init(deviceRed: 239/255, green: 239/255, blue: 239/255, alpha: 1)
-    }
 }
 
-extension CardHolderTableView: NSTableViewDataSource {
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return self.holders.count
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        if let cid = tableColumn?.identifier {
-            let holder = self.holders[row]
-            switch cid {
-            case "id":
-                return holder.id
-            case "name":
-                return holder.name
-            default:
-                return nil
-            }
-        }
-        return nil
-    }
-}
