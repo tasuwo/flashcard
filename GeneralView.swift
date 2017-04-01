@@ -17,59 +17,54 @@ protocol GeneralViewDelegate : class {
 // MARK: -
 class GeneralView : NSView {
     open var delegate : GeneralViewDelegate?
-    var hotKeyField: NSTextField!
-    var hotKeyFieldLabel: NSTextField!
+    var searchHotKeyLabel: myTextLabel!
+    var playHotKeyLabel: myTextLabel!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
         
-        let searchHotKeyRecordView = RecordView()
-        searchHotKeyRecordView.translatesAutoresizingMaskIntoConstraints = false
-        searchHotKeyRecordView.tintColor = NSColor(red: 0.164, green: 0.517, blue: 0.823, alpha: 1)
+        let searchHotKeyRecordView = myRecordView(id: "Search")
         searchHotKeyRecordView.delegate = self
         if let settings = AppSettings.get(), let keycombo = settings.searchKeyCombo {
             searchHotKeyRecordView.keyCombo = keycombo
         }
-        searchHotKeyRecordView.identifier = "Search"
         self.addSubview(searchHotKeyRecordView)
         
-        let playHotKeyRecordView = RecordView()
-        playHotKeyRecordView.translatesAutoresizingMaskIntoConstraints = false
-        playHotKeyRecordView.tintColor = NSColor(red: 0.164, green: 0.517, blue: 0.823, alpha: 1)
+        let playHotKeyRecordView = myRecordView(id: "Play")
         playHotKeyRecordView.delegate = self
         if let settings = AppSettings.get(), let keycombo = settings.playKeyCombo {
             playHotKeyRecordView.keyCombo = keycombo
         }
-        playHotKeyRecordView.identifier = "Play"
         self.addSubview(playHotKeyRecordView)
         
-        hotKeyFieldLabel = NSTextField()
-        hotKeyFieldLabel.translatesAutoresizingMaskIntoConstraints = false
-        hotKeyFieldLabel.stringValue = "Hotkey:"
-        hotKeyFieldLabel.isBezeled = false
-        hotKeyFieldLabel.drawsBackground = false
-        hotKeyFieldLabel.isEditable = false
-        hotKeyFieldLabel.isSelectable = false
-        self.addSubview(hotKeyFieldLabel)
+        searchHotKeyLabel = myTextLabel(with: "Search & Regist word Hotkey:")
+        searchHotKeyLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(searchHotKeyLabel)
+        
+        playHotKeyLabel = myTextLabel(with: "Play HotKey:")
+        playHotKeyLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(playHotKeyLabel)
         
         self.addConstraints([
-            NSLayoutConstraint(item: self, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.width),
-            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.height),
-
-            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 100),
+            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 150),
             NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 300),
-            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 40),
             
-            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 400),
+            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: (150 + 40 + 50)),
             NSLayoutConstraint(item: playHotKeyRecordView, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 300),
-            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: playHotKeyRecordView, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 40),
             
-            NSLayoutConstraint(item: hotKeyFieldLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: -(300/2)),
-            NSLayoutConstraint(item: hotKeyFieldLabel, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 100),
-            NSLayoutConstraint(item: hotKeyFieldLabel, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 100),
-            NSLayoutConstraint(item: hotKeyFieldLabel, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            NSLayoutConstraint(item: searchHotKeyLabel, attribute: .right,   relatedBy: .equal, toItem: searchHotKeyRecordView, attribute: .left, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: searchHotKeyLabel, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: (150 + 10)),
+            NSLayoutConstraint(item: searchHotKeyLabel, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 200),
+            NSLayoutConstraint(item: searchHotKeyLabel, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            
+            NSLayoutConstraint(item: playHotKeyLabel, attribute: .right,   relatedBy: .equal, toItem: playHotKeyRecordView, attribute: .left, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: playHotKeyLabel, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: (150 + 40 + 50 + 10)),
+            NSLayoutConstraint(item: playHotKeyLabel, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 200),
+            NSLayoutConstraint(item: playHotKeyLabel, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
         ])
     }
     

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2C06ABD31E8EA46700B6DE70 /* String+componentsSeparated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD21E8EA46700B6DE70 /* String+componentsSeparated.swift */; };
 		2C06ABD51E8EA48400B6DE70 /* String+removeInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */; };
+		2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */; };
+		2C06ABDA1E8F6AD200B6DE70 /* myRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */; };
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
@@ -62,6 +64,8 @@
 /* Begin PBXFileReference section */
 		2C06ABD21E8EA46700B6DE70 /* String+componentsSeparated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+componentsSeparated.swift"; sourceTree = "<group>"; };
 		2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+removeInt.swift"; sourceTree = "<group>"; };
+		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = SOURCE_ROOT; };
+		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = SOURCE_ROOT; };
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
@@ -137,6 +141,15 @@
 				6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2C06ABD61E8F695F00B6DE70 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */,
+				2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */,
+			);
+			name = Components;
 			sourceTree = "<group>";
 		};
 		2C471B531E7BAA5A00FCF0DA /* DataModel */ = {
@@ -310,6 +323,7 @@
 		A0923E021E683F5A003642FD /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2C06ABD61E8F695F00B6DE70 /* Components */,
 				2C47697E1E86AA3400814D28 /* Status bar */,
 				2C4769711E85EABE00814D28 /* Play Window */,
 				2CA38D691E72ED0B00E850FC /* Settings Window */,
@@ -585,11 +599,13 @@
 				2CA38D751E736E7700E850FC /* SearchResultsView.swift in Sources */,
 				2CA38D701E72EFBD00E850FC /* QuickWindowViewController.swift in Sources */,
 				2C47697A1E8696DB00814D28 /* Collection+shuffle.swift in Sources */,
+				2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */,
 				2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */,
 				A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */,
 				2C06ABD31E8EA46700B6DE70 /* String+componentsSeparated.swift in Sources */,
 				2C471B601E82049500FCF0DA /* CardsView.swift in Sources */,
 				2CA38D631E72424700E850FC /* EditCardView.swift in Sources */,
+				2C06ABDA1E8F6AD200B6DE70 /* myRecordView.swift in Sources */,
 				2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
 				2C4769801E86AA4D00814D28 /* StatusBarItem.swift in Sources */,
