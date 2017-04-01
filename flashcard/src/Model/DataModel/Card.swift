@@ -75,4 +75,11 @@ extension Card {
             }
         }
     }
+    
+    static func delete(_ card: Card) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(card)
+        }
+    }
 }

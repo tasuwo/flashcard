@@ -92,9 +92,11 @@ class CardsView : NSView {
         
         addCardButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAdd))
         addCardButton.translatesAutoresizingMaskIntoConstraints = false
+        addCardButton.sendAction(on: .keyDown)
         cardsListFooter.addSubview(addCardButton)
         removeCardButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemove))
         removeCardButton.translatesAutoresizingMaskIntoConstraints = false
+        removeCardButton.sendAction(on: .keyDown)
         cardsListFooter.addSubview(removeCardButton)
         
         cardsListFooter.addConstraints([
@@ -122,9 +124,15 @@ class CardsView : NSView {
 
 extension CardsView {
     func didPressRemove() {
-        Swift.print("remove")
+        let selectedRow = self.cardsList.selectedRow
+        if selectedRow != -1 {
+            if let selectedCard = self.cardsList.presenter?.cards?[selectedRow] {
+                Card.delete(selectedCard)
+            }
+        }
     }
+
     func didPressAdd() {
-        Swift.print("add")
+        Swift.print("AA")
     }
 }
