@@ -20,6 +20,7 @@ class PlayCardWindowController : NSWindowController {
         self.window?.titleVisibility = .hidden
         self.window?.titlebarAppearsTransparent = true
         self.window?.delegate = self
+        self.window?.styleMask.insert(.fullSizeContentView)
     }
     
     required init?(coder: NSCoder) {
