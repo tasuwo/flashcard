@@ -13,6 +13,7 @@ class EditCardViewController: QuickWindowViewController {
         didSet {
             let view = self.view as? EditCardView
             view?.definition = self.targetDefinition!.body
+            view?.targetWord = self.targetDefinition!.title
         }
     }
     var cardText: (String, String) = (front: "", back: "")

@@ -17,6 +17,11 @@ protocol EditCardViewDelegate {
 }
 
 class EditCardView : NSView {
+    var targetWord: String = "" {
+        didSet {
+            self.frontTextField.stringValue = targetWord
+        }
+    }
     var definition: String = "" {
         didSet {
             self.definitionField.mainFrame.loadHTMLString(CoreServiceDictionary.parseToHTML(self.definition), baseURL: nil)
@@ -92,7 +97,7 @@ class EditCardView : NSView {
     }
     
     func setResponder() {
-        self.frontTextField.becomeFirstResponder()
+        self.backTextField.becomeFirstResponder()
         self.frontTextField.nextKeyView = self.backTextField
         self.backTextField.nextKeyView = self.frontTextField
     }
