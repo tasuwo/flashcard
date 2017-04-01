@@ -23,7 +23,7 @@ class StatusBarItem: NSObject {
         
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Preferences", action: #selector(AppDelegate.didSelectPreferences), keyEquivalent: ","))
-        menu.addItem(NSMenuItem(title: "Play", action: #selector(AppDelegate.didSelectPlay), keyEquivalent: "p"))
+        menu.addItem(NSMenuItem(title: "Play", action: #selector(AppDelegate.togglePlayWindow), keyEquivalent: "p"))
         menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.shared().terminate(_:)), keyEquivalent: "q"))
         statusItem.menu = menu
     }

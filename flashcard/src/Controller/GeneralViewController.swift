@@ -65,7 +65,7 @@ extension GeneralViewController: GeneralViewDelegate {
     
     func didPlayHotkeyPressed (_ event: NSEvent) -> Void {
         let appDelegate = NSApplication.shared().delegate as? AppDelegate
-        appDelegate?.didSelectPlay()
+        appDelegate?.togglePlayWindow()
     }
     
     func didSearchHotkeyPressed(_ event: NSEvent) -> Void {

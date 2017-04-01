@@ -72,7 +72,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
             if let key = settings.playKeyCombo {
                 HotKeyCenter.shared.unregisterHotKey(with: "Search")
-                let hotKey = HotKey(identifier: "Search", keyCombo: key, target: self, action: #selector(AppDelegate.didSelectPlay))
+                let hotKey = HotKey(identifier: "Search", keyCombo: key, target: self, action: #selector(AppDelegate.togglePlayWindow))
                 hotKey.register()
             }
         }
@@ -89,9 +89,13 @@ extension AppDelegate {
         self.settingsWC?.showWindow(self)
     }
     
-    func didSelectPlay() {
-        NSApp.activate(ignoringOtherApps: true)
-        self.playWC?.showWindow(self)
+    func togglePlayWindow() {
+        if self.playWC!.window!.isVisible {
+            self.playWC?.window?.orderOut(self)
+        } else {
+            NSApp.activate(ignoringOtherApps: true)
+            self.playWC?.showWindow(self)
+        }
     }
     
     func toggleQuickWindow() {
