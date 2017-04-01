@@ -120,10 +120,10 @@ extension EditCardView : NSTextFieldDelegate {
             }
         }
 
-        /* if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-            self.backTextField.stringValue += "\n"
+        if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+            control.stringValue = control.stringValue.appending("\n")
             return true
-        } else */ if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+        } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
             self.delegate?.cancel()
             return true
         }
