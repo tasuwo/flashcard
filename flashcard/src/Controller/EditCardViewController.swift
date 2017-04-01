@@ -39,7 +39,16 @@ class EditCardViewController: QuickWindowViewController {
 }
 
 extension EditCardViewController: EditCardViewDelegate {
-    func didPressEnter() {
+    func updateCardText(front: String, back: String) {
+        self.cardText = (front: front, back: back)
+    }
+    
+    func cancel() {
+        self.view.removeAllConstraints()
+        self.delegate?.transitionTo(.search)
+    }
+    
+    func didPressCommandEnter() {
         let card = Card(id: Card.lastId()+1, frontText: self.cardText.0, backText: self.cardText.1)
         // Regist card to default card holder
         // TODO: Select target card holder
@@ -50,15 +59,6 @@ extension EditCardViewController: EditCardViewDelegate {
         }
         
         // Transition
-        self.view.removeAllConstraints()
-        self.delegate?.transitionTo(.search)
-    }
-    
-    func updateCardText(front: String, back: String) {
-        self.cardText = (front: front, back: back)
-    }
-    
-    func cancel() {
         self.view.removeAllConstraints()
         self.delegate?.transitionTo(.search)
     }

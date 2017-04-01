@@ -11,9 +11,9 @@ import Cocoa
 import WebKit
 
 protocol EditCardViewDelegate {
-    func didPressEnter()
     func updateCardText(front: String, back: String)
     func cancel()
+    func didPressCommandEnter()
 }
 
 class EditCardView : NSView {
@@ -103,6 +103,8 @@ class EditCardView : NSView {
     }
 }
 
+let EnterKeyCode: UInt16 = 36
+
 // MARK: - NSTextFieldDelegate
 extension EditCardView : NSTextFieldDelegate {
     override func controlTextDidChange(_ obj: Notification) {
@@ -110,10 +112,18 @@ extension EditCardView : NSTextFieldDelegate {
     }
 
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
-        if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-            self.delegate?.didPressEnter()
+        if let event = NSApp.currentEvent {
+            if (event.modifierFlags.rawValue & NSEventModifierFlags.command.rawValue) != 0
+               && event.keyCode == EnterKeyCode {
+                self.delegate?.didPressCommandEnter()
+                return true
+            }
+        }
+
+        /* if commandSelector == #selector(NSResponder.insertNewline(_:)) {
+            self.backTextField.stringValue += "\n"
             return true
-        } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+        } else */ if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
             self.delegate?.cancel()
             return true
         }
