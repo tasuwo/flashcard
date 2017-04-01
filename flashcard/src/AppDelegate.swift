@@ -65,16 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // Load App Setttings
         if let settings = AppSettings.get() {
-            if let key = settings.searchKeyCombo {
-                HotKeyCenter.shared.unregisterHotKey(with: "Play")
-                let hotKey = HotKey(identifier: "Play", keyCombo: key, target: self, action: #selector(AppDelegate.toggleQuickWindow))
-                hotKey.register()
-            }
-            if let key = settings.playKeyCombo {
-                HotKeyCenter.shared.unregisterHotKey(with: "Search")
-                let hotKey = HotKey(identifier: "Search", keyCombo: key, target: self, action: #selector(AppDelegate.togglePlayWindow))
-                hotKey.register()
-            }
+            settings.setHotKey()
         }
     }
 

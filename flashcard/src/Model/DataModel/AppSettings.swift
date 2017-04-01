@@ -31,8 +31,24 @@ class AppSettings: NSObject, NSCoding {
         aCoder.encode(self.playKeyCombo, forKey: "playKeyCombo")
         aCoder.encode(self.searchKeyCombo, forKey: "searchKeyCombo")
     }
-    
-    func set() {
+}
+
+extension AppSettings {
+    func setHotKey() {
+        let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        if let k = searchKeyCombo {
+            HotKeyCenter.shared.unregisterHotKey(with: "Search")
+            let hotKey = HotKey(identifier: "Search", keyCombo: k, target: appDelegate, action: #selector(appDelegate.toggleQuickWindow))
+            hotKey.register()
+        }
+        if let k = playKeyCombo {
+            HotKeyCenter.shared.unregisterHotKey(with: "Play")
+            let hotKey = HotKey(identifier: "Play", keyCombo: k, target: appDelegate, action: #selector(appDelegate.togglePlayWindow))
+            hotKey.register()
+        }
+    }
+
+    func save() {
         let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self)
         UserDefaults.standard.set(encodedData, forKey: "AppSettings")
         UserDefaults.standard.synchronize()
