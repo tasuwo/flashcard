@@ -10,21 +10,26 @@ import Foundation
 import Magnet
 
 class AppSettings: NSObject, NSCoding {
-    var keyCombo: KeyCombo!
+    var searchKeyCombo: KeyCombo?
+    var playKeyCombo: KeyCombo?
     
-    init (keyCombo: KeyCombo) {
-        self.keyCombo = keyCombo
+    init (playKeyCombo: KeyCombo?, searchKeyCombo: KeyCombo?) {
+        self.playKeyCombo = playKeyCombo
+        self.searchKeyCombo = searchKeyCombo
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        let keycombo = aDecoder.decodeObject(forKey: "keyCombo") as! KeyCombo
+        let playkeycombo = aDecoder.decodeObject(forKey: "playKeyCombo") as! KeyCombo?
+        let searchkeycombo = aDecoder.decodeObject(forKey: "searchKeyCombo") as! KeyCombo?
         self.init(
-            keyCombo: keycombo
+            playKeyCombo: playkeycombo,
+            searchKeyCombo: searchkeycombo
         )
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.keyCombo, forKey: "keyCombo")
+        aCoder.encode(self.playKeyCombo, forKey: "playKeyCombo")
+        aCoder.encode(self.searchKeyCombo, forKey: "searchKeyCombo")
     }
     
     func set() {
