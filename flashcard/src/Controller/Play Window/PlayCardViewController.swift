@@ -59,7 +59,7 @@ class PlayCardViewController: QuickWindowViewController {
     
     func shuffleCards() {
         // TODO: Select holder
-        self.cards = Array(Card.all(in: 0))
+        self.cards = Array(Card.all(in: 0).shuffle())
         self.index = 0
     }
 }
