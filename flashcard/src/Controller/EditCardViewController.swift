@@ -18,7 +18,7 @@ class EditCardViewController: QuickWindowViewController {
     var cardText: (String, String) = (front: "", back: "")
 
     override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 550, height: 300)
+        return NSSize(width: 600, height: 500)
     }
 
     override func loadView() {
@@ -28,15 +28,18 @@ class EditCardViewController: QuickWindowViewController {
 
         self.view = view
     }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        
+        let view = self.view as! EditCardView
+        view.setResponder()
+    }
 }
 
 extension EditCardViewController: EditCardViewDelegate {
     func didPressEnter() {
-        // Regist card
-        let card = Card()
-        card.id = Card.lastId() + 1
-        card.frontText = self.cardText.0
-        card.backText = self.cardText.1
+        let card = Card(id: Card.lastId()+1, frontText: self.cardText.0, backText: self.cardText.1)
         // Regist card to default card holder
         // TODO: Select target card holder
         if let holder = CardHolder.get(0) {
@@ -52,5 +55,10 @@ extension EditCardViewController: EditCardViewDelegate {
     
     func updateCardText(front: String, back: String) {
         self.cardText = (front: front, back: back)
+    }
+    
+    func cancel() {
+        self.view.removeAllConstraints()
+        self.delegate?.transitionTo(.search)
     }
 }

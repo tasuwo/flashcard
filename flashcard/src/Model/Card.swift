@@ -23,6 +23,13 @@ class Card: Object {
         let realm = try! Realm()
         return realm.objects(Card.self).last?.id ?? -1
     }
+    
+    convenience init (id: Int, frontText: String, backText: String) {
+        self.init()
+        self.id = id
+        self.frontText = frontText
+        self.backText = backText
+    }
 }
 
 // MARK: - Entity model methods
@@ -39,9 +46,9 @@ extension Card {
     }
     
     static func add(_ card: Card, to holder: CardHolder) {
-        holder.cards.append(card)
         let realm = try! Realm()
         try! realm.write {
+            holder.cards.append(card)
             realm.add(card)
             realm.add(holder, update: true)
         }

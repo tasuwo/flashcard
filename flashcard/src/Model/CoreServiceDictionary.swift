@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import WebKit
+import Foundation
 
 class CoreServiceDictionary {
     /*
@@ -105,5 +107,79 @@ class CoreServiceDictionary {
          */
 
         return results
+    }
+    
+    static func parseToHTML(_ result: String) -> String {
+        var body = ""
+        
+        let tmp1 = result.componentsSeparatedByAfterStringAt("/", num: 2)
+        let tmp2 = tmp1[0].componentsSeparatedByBeforeStringAt("/", num: 1)
+        let word = tmp2[0]
+        let pronunce = tmp2.count >= 2 ? tmp2[1] : ""
+        var definision = tmp1.count >= 2 ? tmp1[1] : ""
+        var etymology = ""
+        
+        let tmp3 = definision.componentsSeparatedByAfterStringAt("〗", num: 1)
+        if tmp3.count > 1 {
+            etymology = tmp3[0] + "<br>"
+            definision = tmp3[1]
+        }
+        
+        // ▸ で改行
+        let bulletPoints = definision.componentsSeparatedByBeforeString("▸")
+        var definisionArray: [String] = [bulletPoints[0]+"<br>"]
+        var isFirstLine = true
+        for bulletPoint in bulletPoints {
+            if isFirstLine {
+                isFirstLine = false
+                continue
+            }
+            // TODO: 最初にマッチしたもののみ置換する
+            /*let pattern = "([a-zA-Z0-9\\s\\[\\].〜]+)"
+             let replace = "$1<br>"
+             definisionArray.append(bulletPoint.stringByReplacingOccurrencesOfString(
+             pattern,
+             withString: replace,
+             options: NSStringCompareOptions.RegularExpressionSearch,
+             range: nil))*/
+            definisionArray.append(bulletPoint)
+            definisionArray.append("<br>")
+        }
+        definision = definisionArray.joined(separator: "")
+        
+        // 段落
+        let pattern = "([0-9]+\\s)"
+        let replace = "</div><div id='paragraph'>$1"
+        definision = definision.replacingOccurrences(
+            of: pattern,
+            with: replace,
+            options: NSString.CompareOptions.regularExpression,
+            range: nil)
+        definision = definision + "</p>"
+        
+        body = "<span id='word'>" + word.removeInt() + "</span>"
+            + "<span id='pronunce'>" + pronunce + "</span>"
+            + "<br>"
+            + etymology
+            + definision
+        
+        var css: [String] = []
+        css.append("body {font-size:12px;font-family:sans-serif;}")
+        css.append("#word {font-size:14px;font-weight:bold;}")
+        css.append("#pronunce {font-size:10px;color:#6E6E6E;}")
+        css.append("#paragraph {text-indent:-10px;margin-left:10px;}")
+        
+        let html = "<html>"
+            +    "<head>"
+            +      "<style type=\"text/css\">"
+            +        css.joined(separator: "")
+            +      "</style>"
+            +    "</head>"
+            +    "<body>"
+            +      body
+            +    "</body>"
+            +  "</html>"
+        
+        return html
     }
 }

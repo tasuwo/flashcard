@@ -8,31 +8,35 @@
 
 import Foundation
 import Cocoa
+import WebKit
 
 protocol EditCardViewDelegate {
     func didPressEnter()
     func updateCardText(front: String, back: String)
+    func cancel()
 }
 
 class EditCardView : NSView {
     var definition: String = "" {
         didSet {
-            self.definitionField.stringValue = self.definition
+            self.definitionField.mainFrame.loadHTMLString(CoreServiceDictionary.parseToHTML(self.definition), baseURL: nil)
         }
     }
-    fileprivate var definitionField: NSTextField!
+    fileprivate var definitionField: WebView!
     fileprivate var frontTextField: NSTextField!
     fileprivate var backTextField: NSTextField!
     open var delegate: EditCardViewDelegate!
+    override var acceptsFirstResponder: Bool {
+        return true
+    }
     
     override init(frame: NSRect) {
         super.init(frame: frame)
         
-        definitionField = NSTextField()
+        definitionField = WebView()
         frontTextField = NSTextField()
         backTextField  = NSTextField()
         definitionField.isEditable = false
-        definitionField.focusRingType = .none
         frontTextField.focusRingType = .none
         backTextField.focusRingType = .none
         definitionField.translatesAutoresizingMaskIntoConstraints = false
@@ -50,19 +54,19 @@ class EditCardView : NSView {
             NSLayoutConstraint(item: definitionField, attribute: .bottom,  relatedBy: .equal, toItem: self, attribute: .bottom,  multiplier: 1,   constant: -10),
             NSLayoutConstraint(item: definitionField, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,     multiplier: 1,   constant: 10),
             NSLayoutConstraint(item: definitionField, attribute: .left,    relatedBy: .equal, toItem: self, attribute: .left,    multiplier: 1,   constant: 10),
-            NSLayoutConstraint(item: definitionField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,   multiplier: 0.5, constant: -10),
+            NSLayoutConstraint(item: definitionField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,   multiplier: 0.5, constant: (-10 + -5)),
 
-            NSLayoutConstraint(item: frontTextField, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1,   constant: 10),
-            NSLayoutConstraint(item: frontTextField, attribute: .right,   relatedBy: .equal, toItem: self, attribute: .right,          multiplier: 1,   constant: -10),
-            NSLayoutConstraint(item: frontTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY,        multiplier: 0.5, constant: 0),
-            NSLayoutConstraint(item: frontTextField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,          multiplier: 0.5, constant: -10),
-            NSLayoutConstraint(item: frontTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1,   constant: 120),
+            NSLayoutConstraint(item: frontTextField, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,     multiplier: 1,   constant: 10),
+            NSLayoutConstraint(item: frontTextField, attribute: .right,   relatedBy: .equal, toItem: self, attribute: .right,   multiplier: 1,   constant: -10),
+            NSLayoutConstraint(item: frontTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 0.5, constant: 0),
+            NSLayoutConstraint(item: frontTextField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,   multiplier: 0.5, constant: (-10 + -5)),
+            NSLayoutConstraint(item: frontTextField, attribute: .height,  relatedBy: .equal, toItem: self, attribute: .height,  multiplier: 0.5, constant: (-10 + -5)),
 
-            NSLayoutConstraint(item: backTextField, attribute: .bottom,  relatedBy: .equal, toItem: self, attribute: .bottom,         multiplier: 1,   constant: -10),
-            NSLayoutConstraint(item: backTextField, attribute: .right,   relatedBy: .equal, toItem: self, attribute: .right,          multiplier: 1,   constant: -10),
-            NSLayoutConstraint(item: backTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY,        multiplier: 1.5, constant: 0),
-            NSLayoutConstraint(item: backTextField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,          multiplier: 0.5, constant: -10),
-            NSLayoutConstraint(item: backTextField, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1,   constant: 120)
+            NSLayoutConstraint(item: backTextField, attribute: .bottom,  relatedBy: .equal, toItem: self, attribute: .bottom,  multiplier: 1,   constant: -10),
+            NSLayoutConstraint(item: backTextField, attribute: .right,   relatedBy: .equal, toItem: self, attribute: .right,   multiplier: 1,   constant: -10),
+            NSLayoutConstraint(item: backTextField, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.5, constant: 0),
+            NSLayoutConstraint(item: backTextField, attribute: .width,   relatedBy: .equal, toItem: self, attribute: .width,   multiplier: 0.5, constant: (-10 + -5)),
+            NSLayoutConstraint(item: backTextField, attribute: .height,  relatedBy: .equal, toItem: self, attribute: .height,  multiplier: 0.5, constant: (-10 + -5))
             ])
         
         frontTextField.delegate = self
@@ -71,6 +75,26 @@ class EditCardView : NSView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func draw(_ dirtyRect: NSRect) {
+        NSGraphicsContext.saveGraphicsState()
+        super.draw(dirtyRect)
+        
+        NSColor.clear.set()
+        NSRectFill(dirtyRect)
+        
+        let path = NSBezierPath(roundedRect: self.bounds, xRadius: 5, yRadius: 5)
+        NSColor.windowBackgroundColor.set()
+        path.fill()
+        
+        NSGraphicsContext.restoreGraphicsState()
+    }
+    
+    func setResponder() {
+        self.frontTextField.becomeFirstResponder()
+        self.frontTextField.nextKeyView = self.backTextField
+        self.backTextField.nextKeyView = self.frontTextField
     }
 }
 
@@ -83,6 +107,9 @@ extension EditCardView : NSTextFieldDelegate {
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
             self.delegate?.didPressEnter()
+            return true
+        } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
+            self.delegate?.cancel()
             return true
         }
         return false
