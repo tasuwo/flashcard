@@ -10,7 +10,7 @@ import Cocoa
 
 protocol SearchViewDelegate : class {
     func didChangeText(_ text: String)
-    func didPressEnter()
+    func didPressEnter(with text: String)
     func didMoveUp()
     func didMoveDown()
     func cancel()
@@ -69,7 +69,7 @@ extension SearchView : NSTextFieldDelegate {
     
     func control(_ control: NSControl, textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
         if commandSelector == #selector(NSResponder.insertNewline(_:)) {
-            self.delegate?.didPressEnter()
+            self.delegate?.didPressEnter(with: self.textField.stringValue)
             return true
         } else if commandSelector == #selector(NSResponder.moveUp(_:)) {
             self.delegate?.didMoveUp()

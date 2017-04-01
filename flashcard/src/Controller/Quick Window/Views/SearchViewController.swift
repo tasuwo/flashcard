@@ -95,13 +95,15 @@ extension SearchViewController : SearchViewDelegate {
         self.delegate?.lookup(text)
     }
     
-    func didPressEnter() {
+    func didPressEnter(with text: String) {
         let win = self.view.window
         self.delegate?.transitionTo(.editCard)
 
         let vc = win?.contentViewController as? EditCardViewController
         if let i = self.iSelectedResult, self.resultInfos.canAccess(index: i) {
             vc?.targetDefinition = self.resultInfos[self.iSelectedResult!]
+        } else {
+            vc?.targetDefinition = SearchResultInfo(title: text, body: "No results.")
         }
     }
     
