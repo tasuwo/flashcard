@@ -68,4 +68,8 @@ extension PlayCardViewController : PlayCardViewDelegate {
     func flipToPrevious() {
         self.index -= 1
     }
+    
+    func didPressShuffleButton() {
+        self.shuffleCards()
+    }
 }

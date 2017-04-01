@@ -16,6 +16,7 @@ let upArrowKey = 126
 protocol PlayCardViewDelegate {
     func flipToNext()
     func flipToPrevious()
+    func didPressShuffleButton()
 }
 
 // MARK: -
@@ -104,7 +105,7 @@ class PlayCardView : NSView {
 
 extension PlayCardView {
     func didPressShuffleButton() {
-        Swift.print("shuffle")
+        self.delegate?.didPressShuffleButton()
     }
 }
 
