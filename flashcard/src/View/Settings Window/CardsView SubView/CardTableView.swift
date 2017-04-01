@@ -24,17 +24,14 @@ class CardTableView: NSTableView {
         
         self.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         
-        let idColumn = NSTableColumn(identifier: "id")
         let frontColumn = NSTableColumn(identifier: "front")
         let backColumn = NSTableColumn(identifier: "back")
-        idColumn.isHidden = true
         frontColumn.headerCell.stringValue = "FRONT"
         frontColumn.resizingMask = .autoresizingMask
         frontColumn.sizeToFit()
         backColumn.headerCell.stringValue = "BACK"
         backColumn.resizingMask = .autoresizingMask
         backColumn.sizeToFit()
-        self.addTableColumn(idColumn)
         self.addTableColumn(frontColumn)
         self.addTableColumn(backColumn)
         
