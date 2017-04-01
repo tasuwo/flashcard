@@ -100,7 +100,9 @@ extension SearchViewController : SearchViewDelegate {
         self.delegate?.transitionTo(.editCard)
 
         let vc = win?.contentViewController as? EditCardViewController
-        vc?.targetDefinition = self.resultInfos[self.iSelectedResult!]
+        if let i = self.iSelectedResult, self.resultInfos.canAccess(index: i) {
+            vc?.targetDefinition = self.resultInfos[self.iSelectedResult!]
+        }
     }
     
     func didMoveUp() {
