@@ -53,10 +53,6 @@ class PlayCardViewController: QuickWindowViewController {
         shuffleCards()
     }
     
-    override func viewDidAppear() {
-        shuffleCards()
-    }
-    
     func shuffleCards() {
         // TODO: Select holder
         self.cards = Array(Card.all(in: 0).shuffle())
