@@ -14,6 +14,12 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var index = 0 {
         didSet {
             let view = self.view as? PlayCardView
+            
+            if self.cards.count == 0 {
+                view?.renderCardText(front: "", back: "")
+                return
+            }
+            
             if self.index <= 0 {
                 self.index = 0
                 view?.renderCardText(front: self.cards[self.index].frontText, back: "")
