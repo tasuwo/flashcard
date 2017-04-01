@@ -132,7 +132,7 @@ class CardsView : NSView {
     
     override func viewWillDraw() {
         editCardSpace.layer?.backgroundColor = CGColor(red: 236, green: 236, blue: 236, alpha: 0)
-        cardsListFooter.layer?.backgroundColor = .black
+        cardsListFooter.layer?.backgroundColor = CGColor(red: 203, green: 203, blue: 203, alpha: 0)
     }
 }
 

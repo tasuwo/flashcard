@@ -11,7 +11,7 @@ import Cocoa
 
 class myNSButton: NSButton {
     override func viewWillDraw() {
-        //self.isBordered = false
+        self.isBordered = true
         self.setButtonType(.accelerator)
     }
 }
