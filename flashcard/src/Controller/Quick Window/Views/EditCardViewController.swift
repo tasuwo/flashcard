@@ -19,7 +19,7 @@ class EditCardViewController: QuickWindowViewController {
     var cardText: (String, String) = (front: "", back: "")
 
     override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 600, height: 500)
+        return NSSize(width: 800, height: 450)
     }
 
     override func loadView() {
