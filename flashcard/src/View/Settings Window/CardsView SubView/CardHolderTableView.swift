@@ -40,7 +40,7 @@ class CardHolderTableView: NSTableView {
 
 extension CardHolderTableView: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        var result = tableView.make(withIdentifier: "caedHolderCell", owner: nil) as? NSTextField
+        var result = tableView.make(withIdentifier: "cardHolderCell", owner: nil) as? NSTextField
 
         if result == nil {
             result = NSTextField()

@@ -10,27 +10,32 @@ import Foundation
 import RealmSwift
 
 class CardsListPresenter: NSObject {
-    private(set) var cards: List<Card>?
+    private(set) var cards: Results<Card>?
+    private var refreshToken: NotificationToken?
     
-    func loadCards(in holderId: Int) {
+    func loadCards(in holderId: Int, updated: @escaping (RealmCollectionChange<Results<Card>>)-> Void) {
         cards = Card.all(in: holderId)
+        refreshToken = cards?.addNotificationBlock(updated)
     }
 }
 
 extension CardsListPresenter: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if let c = cards, let colId = tableColumn?.identifier, let v = object as? String {
-            let id = c[row].id
-            switch colId {
-            case "front":
-                Card.update(id, frontText: v, backText: nil)
-                break
-            case "back":
-                Card.update(id, frontText: nil, backText: v)
-                break
-            default:
-                return
+            if c.count > row {
+                let id = c[row].id
+                switch colId {
+                case "front":
+                    Card.update(id, frontText: v, backText: nil)
+                    break
+                case "back":
+                    Card.update(id, frontText: nil, backText: v)
+                    break
+                default:
+                    return
+                }
             }
+            return
         }
     }
 
@@ -40,16 +45,19 @@ extension CardsListPresenter: NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if cards == nil { return nil }
-        let card = cards![row]
-        switch tableColumn!.identifier {
-        case "id":
-            return card.id
-        case "front":
-            return card.frontText
-        case "back":
-            return card.backText
-        default:
-            return nil
+        if cards!.count > row {
+            let card = cards![row]
+            switch tableColumn!.identifier {
+            case "id":
+                return card.id
+            case "front":
+                return card.frontText
+            case "back":
+                return card.backText
+            default:
+                return nil
+            }
         }
+        return nil
     }
 }

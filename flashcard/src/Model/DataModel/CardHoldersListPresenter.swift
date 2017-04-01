@@ -11,9 +11,11 @@ import RealmSwift
 
 class CardHoldersListPresenter: NSObject {
     private(set) var holders: Results<CardHolder>?
+    private var refreshToken: NotificationToken?
     
-    func load() {
+    func load(updated: @escaping (RealmCollectionChange<Results<CardHolder>>)-> Void) {
         holders = CardHolder.all()
+        refreshToken = holders?.addNotificationBlock(updated)
     }
 }
 

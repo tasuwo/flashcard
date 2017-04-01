@@ -41,8 +41,23 @@ class CardTableView: NSTableView {
     }
     
     func loadCards(in holderId: Int) {
-        self.presenter?.loadCards(in: holderId)
-        self.reloadData()
+        self.deselectAll(nil)
+        self.presenter?.loadCards(in: 0, updated: { changes in
+            switch changes {
+            case .initial:
+                self.reloadData()
+                
+            case .update(_, let del, let ins, let upd):
+                self.beginUpdates()
+                self.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                self.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                Swift.print(del)
+                self.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                self.endUpdates()
+                
+            default: break
+            }
+        })
     }
 }
 

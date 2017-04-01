@@ -36,7 +36,21 @@ class CardsView : NSView {
         holdersList.translatesAutoresizingMaskIntoConstraints = true
         holdersList.setupSettings()
         let holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load()
+        holdersPresenter.load(updated:{ changes in
+            switch changes {
+            case .initial:
+                self.holdersList.reloadData()
+                
+            case .update(_, let del, let ins, let upd):
+                self.holdersList.beginUpdates()
+                self.holdersList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                self.holdersList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                self.holdersList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                self.holdersList.endUpdates()
+                
+            default: break
+            }
+        })
         holdersList.dataSource = holdersPresenter
         
         sideBar = NSScrollView()
@@ -133,6 +147,5 @@ extension CardsView {
     }
 
     func didPressAdd() {
-        Swift.print("AA")
     }
 }

@@ -13,7 +13,7 @@ class Card: Object {
     dynamic var id = 0
     dynamic var frontText = ""
     dynamic var backText = ""
-    let cardHolders = LinkingObjects(fromType: CardHolder.self, property: "cards")
+    let holders = LinkingObjects(fromType: CardHolder.self, property: "cards")
     
     override static func primaryKey() -> String? {
         return "id"
@@ -35,9 +35,9 @@ class Card: Object {
 // MARK: - Entity model methods
 
 extension Card {
-    static func all(in holderId: Int) -> List<Card>? {
+    static func all(in holderId: Int) -> Results<Card> {
         let realm = try! Realm()
-        return realm.objects(CardHolder.self).filter("id == \(holderId)").first?.cards
+        return realm.objects(Card.self).filter("ANY holders.id == \(holderId)")
     }
     
     static func get(_ id: Int) -> Card? {
@@ -49,7 +49,6 @@ extension Card {
         let realm = try! Realm()
         try! realm.write {
             holder.cards.append(card)
-            realm.add(card)
             realm.add(holder, update: true)
         }
     }

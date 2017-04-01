@@ -12,6 +12,7 @@
 		2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */; };
 		2C06ABDA1E8F6AD200B6DE70 /* myRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */; };
 		2C06ABDC1E8F925F00B6DE70 /* myNSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */; };
+		2C06ABDE1E8FBA2600B6DE70 /* Array+canAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */; };
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
@@ -68,6 +69,7 @@
 		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = "<group>"; };
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
 		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
+		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */,
 				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
+				2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */,
 				2C06ABD51E8EA48400B6DE70 /* String+removeInt.swift in Sources */,
 				2C4769951E8D3D4400814D28 /* CardsListPresenter.swift in Sources */,
+				2C06ABDE1E8FBA2600B6DE70 /* Array+canAccess.swift in Sources */,
 				A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */,
 				2C47698D1E8A3C0100814D28 /* CardHolderTableView.swift in Sources */,
 				2CA38D611E72421700E850FC /* EditCardViewController.swift in Sources */,
