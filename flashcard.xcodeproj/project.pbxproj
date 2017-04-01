@@ -11,6 +11,7 @@
 		2C06ABD51E8EA48400B6DE70 /* String+removeInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */; };
 		2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */; };
 		2C06ABDA1E8F6AD200B6DE70 /* myRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */; };
+		2C06ABDC1E8F925F00B6DE70 /* myNSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */; };
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
@@ -66,6 +67,7 @@
 		2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+removeInt.swift"; sourceTree = "<group>"; };
 		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = "<group>"; };
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
+		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 		2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsListPresenter.swift; sourceTree = "<group>"; };
 		2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHoldersListPresenter.swift; sourceTree = "<group>"; };
 		2CA38D601E72421700E850FC /* EditCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
-		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditCardView.swift; path = EditCardView.swift; sourceTree = "<group>"; };
+		2CA38D621E72424700E850FC /* EditCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditCardView.swift; sourceTree = "<group>"; };
 		2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewType.swift; sourceTree = "<group>"; };
 		2CA38D6C1E72EE8C00E850FC /* ViewController+defaultSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ViewController+defaultSize.swift"; sourceTree = "<group>"; };
 		2CA38D6F1E72EFBD00E850FC /* QuickWindowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +99,7 @@
 		2CD495941E7138880001B727 /* CoreServiceDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreServiceDictionary.swift; sourceTree = "<group>"; };
 		6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flashcardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EC89399B92D09C818CF547 /* Pods-flashcardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcardTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests.release.xcconfig"; sourceTree = "<group>"; };
-		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchView.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowController.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,8 +150,8 @@
 			children = (
 				2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */,
 				2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */,
+				2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */,
 			);
-			name = Components;
 			path = Components;
 			sourceTree = "<group>";
 		};
@@ -162,7 +164,6 @@
 				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
 			);
-			name = DataModel;
 			path = DataModel;
 			sourceTree = "<group>";
 		};
@@ -172,7 +173,6 @@
 				2C471B611E8204A700FCF0DA /* CardsViewController.swift */,
 				2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */,
 			);
-			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -181,7 +181,6 @@
 			children = (
 				2C4769771E85F00400814D28 /* PlayCardView.swift */,
 			);
-			name = "Play Window";
 			path = "Play Window";
 			sourceTree = "<group>";
 		};
@@ -191,7 +190,6 @@
 				2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */,
 				2C4769731E85EF4100814D28 /* PlayCardWindow.swift */,
 			);
-			name = "Play Window";
 			path = "Play Window";
 			sourceTree = "<group>";
 		};
@@ -205,7 +203,6 @@
 				2C06ABD21E8EA46700B6DE70 /* String+componentsSeparated.swift */,
 				2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */,
 			);
-			name = extensions;
 			path = extensions;
 			sourceTree = "<group>";
 		};
@@ -214,7 +211,6 @@
 			children = (
 				2C47697F1E86AA4D00814D28 /* StatusBarItem.swift */,
 			);
-			name = "Status bar";
 			path = "Status bar";
 			sourceTree = "<group>";
 		};
@@ -223,7 +219,6 @@
 			children = (
 				2C4769821E86AA8D00814D28 /* StatusBarItemController.swift */,
 			);
-			name = "Status bar";
 			path = "Status bar";
 			sourceTree = "<group>";
 		};
@@ -233,7 +228,6 @@
 				2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */,
 				2C47698E1E8A452500814D28 /* CardTableView.swift */,
 			);
-			name = "CardsView SubView";
 			path = "CardsView SubView";
 			sourceTree = "<group>";
 		};
@@ -245,7 +239,6 @@
 				2CA38D6F1E72EFBD00E850FC /* QuickWindowViewController.swift */,
 				2CA38D6A1E72EDA100E850FC /* QuickWindowViewType.swift */,
 			);
-			name = "Quick Window";
 			path = "Quick Window";
 			sourceTree = "<group>";
 		};
@@ -255,7 +248,6 @@
 				2C471B5C1E81F4FA00FCF0DA /* Views */,
 				2CD4958C1E6CE6150001B727 /* SettingsWindowController.swift */,
 			);
-			name = "Settings Window";
 			path = "Settings Window";
 			sourceTree = "<group>";
 		};
@@ -267,7 +259,6 @@
 				2CA38D741E736E7700E850FC /* SearchResultsView.swift */,
 				A0809A8A1E6A286F005F3724 /* SearchView.swift */,
 			);
-			name = "Quick Window";
 			path = "Quick Window";
 			sourceTree = "<group>";
 		};
@@ -278,7 +269,6 @@
 				2C471B5F1E82049500FCF0DA /* CardsView.swift */,
 				2C471B5A1E81503300FCF0DA /* GeneralView.swift */,
 			);
-			name = "Settings Window";
 			path = "Settings Window";
 			sourceTree = "<group>";
 		};
@@ -288,7 +278,6 @@
 				2CA38D601E72421700E850FC /* EditCardViewController.swift */,
 				A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */,
 			);
-			name = Views;
 			path = Views;
 			sourceTree = "<group>";
 		};
@@ -614,6 +603,7 @@
 				2CA38D701E72EFBD00E850FC /* QuickWindowViewController.swift in Sources */,
 				2C47697A1E8696DB00814D28 /* Collection+shuffle.swift in Sources */,
 				2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */,
+				2C06ABDC1E8F925F00B6DE70 /* myNSButton.swift in Sources */,
 				2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */,
 				A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */,
 				2C06ABD31E8EA46700B6DE70 /* String+componentsSeparated.swift in Sources */,
