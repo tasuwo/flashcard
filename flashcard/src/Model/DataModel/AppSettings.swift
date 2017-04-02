@@ -17,6 +17,7 @@ class AppSettings: NSObject, NSCoding {
     init (playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolder: CardHolder? = nil) {
         self.playKeyCombo = playKeyCombo
         self.searchKeyCombo = searchKeyCombo
+        self.defaultHolder = defaultHolder
     }
     
     required convenience init(coder aDecoder: NSCoder) {
