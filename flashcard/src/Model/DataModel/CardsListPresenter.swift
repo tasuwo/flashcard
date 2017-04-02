@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Cocoa
 import RealmSwift
 
 class CardsListPresenter: NSObject {
@@ -34,6 +35,8 @@ extension CardsListPresenter: NSTableViewDataSource {
                 default:
                     return
                 }
+                // Update height
+                tableView.noteHeightOfRows(withIndexesChanged: IndexSet([row]))
             }
             return
         }
@@ -45,6 +48,7 @@ extension CardsListPresenter: NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if cards == nil { return nil }
+        if tableColumn == nil { return nil }
         if cards!.count > row {
             let card = cards![row]
             switch tableColumn!.identifier {

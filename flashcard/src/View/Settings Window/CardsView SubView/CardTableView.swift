@@ -51,7 +51,7 @@ class CardTableView: NSTableView {
                 self.beginUpdates()
                 self.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
                 self.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                Swift.print(del)
+                Swift.print(upd)
                 self.removeRows(at: IndexSet(del), withAnimation: .slideUp)
                 self.endUpdates()
                 
@@ -61,4 +61,25 @@ class CardTableView: NSTableView {
     }
 }
 
-extension CardTableView: NSTableViewDelegate {}
+extension CardTableView: NSTableViewDelegate {
+    func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
+        let cell = NSCell()
+        cell.wraps = true
+        cell.isEditable = true
+        cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
+        if let v = self.dataSource?.tableView?(tableView, objectValueFor: tableColumn, row: row) as? String {
+            cell.stringValue = v
+            return cell
+        }
+        return nil
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        if let p = self.presenter, let c = p.cards, row < c.count {
+            return Card.calcRowHeight(c[row], tableView: tableView)
+        }
+        return tableView.rowHeight
+    }
+}
+
+

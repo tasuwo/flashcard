@@ -82,3 +82,22 @@ extension Card {
         }
     }
 }
+
+extension Card {
+    class func calcRowHeight(_ card: Card, tableView: NSTableView) -> CGFloat {
+        let longerText = card.frontText.calcWidth() > card.backText.calcHeight() ? card.frontText : card.backText
+        let columnWidth = tableView.frame.size.width/2
+        let textWidth = longerText.calcWidth()
+        var nLine: Int = Int(textWidth / columnWidth)
+        if textWidth.truncatingRemainder(dividingBy: columnWidth) > 0 {
+            nLine += 1
+        }
+        
+        if nLine > 1 {
+            // WARNING: +1
+            return CGFloat(nLine + 1) * "sample text".calcHeight()
+        } else {
+            return tableView.rowHeight
+        }
+    }
+}

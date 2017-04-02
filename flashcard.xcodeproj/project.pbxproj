@@ -13,6 +13,7 @@
 		2C06ABDA1E8F6AD200B6DE70 /* myRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */; };
 		2C06ABDC1E8F925F00B6DE70 /* myNSButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */; };
 		2C06ABDE1E8FBA2600B6DE70 /* Array+canAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */; };
+		2C06ABE01E9103B500B6DE70 /* String+calcWidth+calcHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */; };
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
@@ -70,6 +71,7 @@
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
 		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
 		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
+		2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+calcWidth+calcHeight.swift"; sourceTree = "<group>"; };
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
 				2C06ABD21E8EA46700B6DE70 /* String+componentsSeparated.swift */,
 				2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */,
+				2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
 				2C4769801E86AA4D00814D28 /* StatusBarItem.swift in Sources */,
+				2C06ABE01E9103B500B6DE70 /* String+calcWidth+calcHeight.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,
 				2CD4958D1E6CE6150001B727 /* SettingsWindowController.swift in Sources */,
 				2CA38D6D1E72EE8C00E850FC /* ViewController+defaultSize.swift in Sources */,
