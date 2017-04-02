@@ -189,6 +189,17 @@ extension EditCardView : NSTextFieldDelegate {
         } else if commandSelector == #selector(NSResponder.cancelOperation(_:)) {
             self.delegate?.cancel()
             return true
+        } else if commandSelector == #selector(NSResponder.insertTab(_:)) {
+            if let textField = control as? NSTextField {
+                var nextTextField: NSTextField
+                if textField === self.frontTextField {
+                    nextTextField = self.backTextField
+                } else {
+                    nextTextField = self.frontTextField
+                }
+                nextTextField.focusWithoutSelectText(self)
+            }
+            return true
         }
         return false
     }
