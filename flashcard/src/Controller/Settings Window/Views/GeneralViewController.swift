@@ -23,6 +23,9 @@ class GeneralViewController: NSViewController {
             switch changes {
             case .initial:
                 view.defaultHolderTableView.reloadData()
+                if let s = AppSettings.get(), let h = s.defaultHolder, let i = self.holdersPresenter.holders?.index(of: h) {
+                    view.defaultHolderTableView.selectRowIndexes(IndexSet([i]), byExtendingSelection: false)
+                }
                 
             case .update(_, let del, let ins, let upd):
                 view.defaultHolderTableView.beginUpdates()
@@ -30,6 +33,9 @@ class GeneralViewController: NSViewController {
                 view.defaultHolderTableView.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
                 view.defaultHolderTableView.removeRows(at: IndexSet(del), withAnimation: .slideUp)
                 view.defaultHolderTableView.endUpdates()
+                if let s = AppSettings.get(), let h = s.defaultHolder, let i = self.holdersPresenter.holders?.index(of: h) {
+                    view.defaultHolderTableView.selectRowIndexes(IndexSet([i]), byExtendingSelection: false)
+                }
                 
             default: break
             }
@@ -90,5 +96,14 @@ extension GeneralViewController: NSTableViewDelegate {
         }
         
         return result
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let table = notification.object as! NSTableView
+        if let p = self.holdersPresenter, let h = p.holders, !(table.selectedRow < 0), h.count > table.selectedRow {
+            let settings = AppSettings.get() ?? AppSettings()
+            settings.defaultHolder = h[table.selectedRow]
+            settings.save()
+        }
     }
 }
