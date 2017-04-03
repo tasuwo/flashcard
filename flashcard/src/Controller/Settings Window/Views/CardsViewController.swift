@@ -37,7 +37,6 @@ class CardsViewController: NSViewController {
         view.holdersList.delegate = self
         
         cardsPresenter = CardsListPresenter()
-        view.cardsList.dataSource = self.cardsPresenter
         view.cardsList.delegate = self
         
         self.view = view
@@ -88,21 +87,27 @@ extension CardsViewController: NSTableViewDelegate {
         let view = self.view as! CardsView
         let table = notification.object as! NSTableView
         if table === view.holdersList {
-            self.cardsPresenter.loadCards(in: 0, updated: { changes in
-                switch changes {
-                case .initial:
-                    view.cardsList.reloadData()
-                    
-                case .update(_, let del, let ins, let upd):
-                    view.cardsList.beginUpdates()
-                    view.cardsList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                    view.cardsList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                    view.cardsList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                    view.cardsList.endUpdates()
-                    
-                default: break
-                }
-            })
+            if let p = self.holdersPresenter, let h = p.holders, h.count > table.selectedRow, !(table.selectedRow < 0) {
+                view.cardsList.dataSource = self.cardsPresenter
+                self.cardsPresenter.loadCards(in: h[table.selectedRow].id, updated: { changes in
+                    switch changes {
+                    case .initial:
+                        view.cardsList.reloadData()
+                        
+                    case .update(_, let del, let ins, let upd):
+                        view.cardsList.beginUpdates()
+                        view.cardsList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                        view.cardsList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                        view.cardsList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                        view.cardsList.endUpdates()
+                        
+                    default: break
+                    }
+                })
+            } else {
+                view.cardsList.dataSource = nil
+                view.cardsList.reloadData()
+            }
         }
     }
 }
