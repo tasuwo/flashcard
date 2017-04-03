@@ -10,24 +10,19 @@ import Cocoa
 import RealmSwift
 
 protocol CardsViewDelegate {
-    func cardholderSelectionDidChange(_ row: Int)
+    func didPressRemoveButton(selectedRow: Int)
 }
 
 class CardsView : NSView {
-    var sideBar: NSScrollView!
-    var holdersList: CardHolderTableView!
-    var editCardSpace: NSView!
-    var cardListContainer: NSScrollView!
-    var cardsList: CardTableView!
-    var cardsListFooter: NSView!
-    var addCardButton: myNSButton!
-    var removeCardButton: myNSButton!
-    open var delegate: CardsViewDelegate? {
-        didSet {
-            self.cardsList.cardsViewDelegate = self.delegate
-            self.holdersList.cardsViewDelegate = self.delegate
-        }
-    }
+    fileprivate var sideBar: NSScrollView!
+    fileprivate(set) var holdersList: CardHolderTableView!
+    fileprivate var editCardSpace: NSView!
+    fileprivate var cardListContainer: NSScrollView!
+    fileprivate(set) var cardsList: CardTableView!
+    fileprivate var cardsListFooter: NSView!
+    fileprivate var addCardButton: myNSButton!
+    fileprivate var removeCardButton: myNSButton!
+    open var delegate: CardsViewDelegate?
 
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -35,23 +30,6 @@ class CardsView : NSView {
         holdersList = CardHolderTableView()
         holdersList.translatesAutoresizingMaskIntoConstraints = true
         holdersList.setupSettings()
-        let holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load(updated:{ changes in
-            switch changes {
-            case .initial:
-                self.holdersList.reloadData()
-                
-            case .update(_, let del, let ins, let upd):
-                self.holdersList.beginUpdates()
-                self.holdersList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                self.holdersList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                self.holdersList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                self.holdersList.endUpdates()
-                
-            default: break
-            }
-        })
-        holdersList.dataSource = holdersPresenter
         
         sideBar = NSScrollView()
         sideBar.translatesAutoresizingMaskIntoConstraints = false
@@ -80,8 +58,6 @@ class CardsView : NSView {
         cardsList = CardTableView()
         cardsList.translatesAutoresizingMaskIntoConstraints = true
         cardsList.setupSettings()
-        let cardsPresenter = CardsListPresenter()
-        cardsList.presenter = cardsPresenter
         
         cardListContainer = NSScrollView()
         cardListContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -140,14 +116,6 @@ class CardsView : NSView {
 
 extension CardsView {
     func didPressRemove() {
-        let selectedRow = self.cardsList.selectedRow
-        if selectedRow != -1 {
-            if let selectedCard = self.cardsList.presenter?.cards?[selectedRow] {
-                Card.delete(selectedCard)
-            }
-        }
-    }
-
-    func didPressAdd() {
+        self.delegate?.didPressRemoveButton(selectedRow: self.cardsList.selectedRow)
     }
 }

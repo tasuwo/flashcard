@@ -10,31 +10,32 @@ import Cocoa
 import Magnet
 import KeyHolder
 
-protocol GeneralViewDelegate : class {
-    func didChangeHotKey(identifier: String, keyCombo: KeyCombo)
-}
-
 // MARK: -
 class GeneralView : NSView {
-    open var delegate : GeneralViewDelegate?
-    var defaultHolderScrollView: NSScrollView!
-    var defaultHolderTableView: CardHolderTableView!
-    var searchHotKeyLabel: myTextLabel!
-    var playHotKeyLabel: myTextLabel!
-    var defaultHolderLabel: myTextLabel!
+    open var hotkeyDelegate : RecordViewDelegate? {
+        didSet {
+            self.playHotKeyRecordView.delegate = self.hotkeyDelegate
+            self.searchHotKeyRecordView.delegate = self.hotkeyDelegate
+        }
+    }
+    fileprivate var defaultHolderScrollView: NSScrollView!
+    fileprivate(set) var defaultHolderTableView: CardHolderTableView!
+    fileprivate var defaultHolderLabel: myTextLabel!
+    fileprivate var searchHotKeyRecordView: RecordView!
+    fileprivate var searchHotKeyLabel: myTextLabel!
+    fileprivate var playHotKeyRecordView: RecordView!
+    fileprivate var playHotKeyLabel: myTextLabel!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
         
-        let searchHotKeyRecordView = myRecordView(id: "Search")
-        searchHotKeyRecordView.delegate = self
+        searchHotKeyRecordView = myRecordView(id: "Search")
         if let settings = AppSettings.get(), let keycombo = settings.searchKeyCombo {
             searchHotKeyRecordView.keyCombo = keycombo
         }
         self.addSubview(searchHotKeyRecordView)
         
-        let playHotKeyRecordView = myRecordView(id: "Play")
-        playHotKeyRecordView.delegate = self
+        playHotKeyRecordView = myRecordView(id: "Play")
         if let settings = AppSettings.get(), let keycombo = settings.playKeyCombo {
             playHotKeyRecordView.keyCombo = keycombo
         }
@@ -53,23 +54,6 @@ class GeneralView : NSView {
         defaultHolderTableView.setupSettings()
         defaultHolderTableView.rowHeight = 20
         defaultHolderTableView.usesAlternatingRowBackgroundColors = true
-        let holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load(updated:{ changes in
-            switch changes {
-            case .initial:
-                self.defaultHolderTableView.reloadData()
-                
-            case .update(_, let del, let ins, let upd):
-                self.defaultHolderTableView.beginUpdates()
-                self.defaultHolderTableView.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                self.defaultHolderTableView.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                self.defaultHolderTableView.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                self.defaultHolderTableView.endUpdates()
-                
-            default: break
-            }
-        })
-        defaultHolderTableView.dataSource = holdersPresenter
         
         defaultHolderScrollView = NSScrollView()
         defaultHolderScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -118,27 +102,4 @@ class GeneralView : NSView {
     }
 }
 
-extension GeneralView : RecordViewDelegate {
-    func recordViewShouldBeginRecording(_ recordView: RecordView) -> Bool {
-        return true
-    }
-    
-    func recordView(_ recordView: RecordView, canRecordKeyCombo keyCombo: KeyCombo) -> Bool {
-        // You can customize validation
-        return true
-    }
-    
-    func recordViewDidClearShortcut(_ recordView: RecordView) {
-        // TODO: Remove hot key and save it to userdefault
-    }
-    
-    func recordViewDidEndRecording(_ recordView: RecordView) {
-    }
-
-    func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
-        if let id = recordView.identifier {
-            self.delegate?.didChangeHotKey(identifier: id, keyCombo: keyCombo)
-        }
-    }
-}
 
