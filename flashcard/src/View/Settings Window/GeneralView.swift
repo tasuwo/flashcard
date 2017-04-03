@@ -17,8 +17,11 @@ protocol GeneralViewDelegate : class {
 // MARK: -
 class GeneralView : NSView {
     open var delegate : GeneralViewDelegate?
+    var defaultHolderScrollView: NSScrollView!
+    var defaultHolderTableView: CardHolderTableView!
     var searchHotKeyLabel: myTextLabel!
     var playHotKeyLabel: myTextLabel!
+    var defaultHolderLabel: myTextLabel!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -45,6 +48,38 @@ class GeneralView : NSView {
         playHotKeyLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(playHotKeyLabel)
         
+        defaultHolderTableView = CardHolderTableView()
+        defaultHolderTableView.translatesAutoresizingMaskIntoConstraints = false
+        defaultHolderTableView.setupSettings()
+        defaultHolderTableView.rowHeight = 20
+        defaultHolderTableView.usesAlternatingRowBackgroundColors = true
+        let holdersPresenter = CardHoldersListPresenter()
+        holdersPresenter.load(updated:{ changes in
+            switch changes {
+            case .initial:
+                self.defaultHolderTableView.reloadData()
+                
+            case .update(_, let del, let ins, let upd):
+                self.defaultHolderTableView.beginUpdates()
+                self.defaultHolderTableView.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                self.defaultHolderTableView.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                self.defaultHolderTableView.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                self.defaultHolderTableView.endUpdates()
+                
+            default: break
+            }
+        })
+        defaultHolderTableView.dataSource = holdersPresenter
+        
+        defaultHolderScrollView = NSScrollView()
+        defaultHolderScrollView.translatesAutoresizingMaskIntoConstraints = false
+        defaultHolderScrollView.documentView = defaultHolderTableView
+        self.addSubview(defaultHolderScrollView)
+        
+        defaultHolderLabel = myTextLabel(with: "Default Card Holder:")
+        defaultHolderLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(defaultHolderLabel)
+        
         self.addConstraints([
             NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 50),
             NSLayoutConstraint(item: searchHotKeyRecordView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 150),
@@ -65,6 +100,18 @@ class GeneralView : NSView {
             NSLayoutConstraint(item: playHotKeyLabel, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: (150 + 40 + 50 + 10)),
             NSLayoutConstraint(item: playHotKeyLabel, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 200),
             NSLayoutConstraint(item: playHotKeyLabel, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
+            ])
+        self.addConstraints([
+            NSLayoutConstraint(item: defaultHolderScrollView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX,        multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: defaultHolderScrollView, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 330),
+            NSLayoutConstraint(item: defaultHolderScrollView, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 400),
+            NSLayoutConstraint(item: defaultHolderScrollView, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 80),
+        ])
+        self.addConstraints([
+            NSLayoutConstraint(item: defaultHolderLabel, attribute: .right,   relatedBy: .equal, toItem: defaultHolderTableView, attribute: .left, multiplier: 1, constant: -10),
+            NSLayoutConstraint(item: defaultHolderLabel, attribute: .top,     relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 340),
+            NSLayoutConstraint(item: defaultHolderLabel, attribute: .width,   relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 200),
+            NSLayoutConstraint(item: defaultHolderLabel, attribute: .height,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 50),
         ])
     }
     
