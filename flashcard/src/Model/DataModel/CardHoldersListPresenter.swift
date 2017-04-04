@@ -20,6 +20,18 @@ class CardHoldersListPresenter: NSObject {
 }
 
 extension CardHoldersListPresenter: NSTableViewDataSource {
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+        if let h = holders, let v = object as? String {
+            if h.count > row {
+                let id = h[row].id
+                CardHolder.update(id, name: v)
+                // Update height
+                tableView.noteHeightOfRows(withIndexesChanged: IndexSet([row]))
+            }
+            return
+        }
+    }
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         return self.holders?.count ?? 0
     }

@@ -47,4 +47,14 @@ extension CardHolder {
             }
         }
     }
+    
+    static func update(_ id: Int, name: String) {
+        let realm = try! Realm()
+        if let holder = CardHolder.get(id) {
+            try! realm.write {
+                holder.name = name
+                realm.create(CardHolder.self, value: holder, update: true)
+            }
+        }
+    }
 }

@@ -67,6 +67,16 @@ extension CardsViewController: NSTableViewDelegate {
                 return cell
             }
             return nil
+        } else if tableView == view.holdersList {
+            let cell = NSCell()
+            cell.wraps = true
+            cell.isEditable = true
+            cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
+            if let v = self.holdersPresenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
+                cell.stringValue = v
+                return cell
+            }
+            return nil
         }
         
         return nil
