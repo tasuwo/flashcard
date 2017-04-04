@@ -62,6 +62,9 @@ extension CardsViewController : CardsViewDelegate {
     }
     
     func didPressRemoveCardHolder(selectedRow: Int) {
+        let view = self.view as! CardsView
+        view.holdersList.deselectAll(self)
+
         if selectedRow != -1 {
             if let selectedCardHolder = self.holdersPresenter.holders?[selectedRow] {
                 CardHolder.delete(selectedCardHolder)

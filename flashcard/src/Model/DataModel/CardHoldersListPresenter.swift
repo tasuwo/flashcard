@@ -38,7 +38,8 @@ extension CardHoldersListPresenter: NSTableViewDataSource {
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if holders == nil { return nil }
-        if let cid = tableColumn?.identifier {
+
+        if let cid = tableColumn?.identifier, let h = holders, h.count > row {
             let holder = holders![row]
             switch cid {
             case "id":
