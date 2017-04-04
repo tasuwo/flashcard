@@ -50,14 +50,15 @@ extension EditCardViewController: EditCardViewDelegate {
     
     func didPressCommandEnter() {
         let card = Card(id: Card.lastId()+1, frontText: self.cardText.0, backText: self.cardText.1)
-        // Regist card to default card holder
-        // TODO: Select target card holder
-        if let holder = CardHolder.get(0) {
-            Card.add(card, to: holder)
+        if let s = AppSettings.get(), let hi = s.defaultHolderId, let h = CardHolder.get(hi) {
+            Card.add(card, to: h)
+        } else if let h = CardHolder.get(0) {
+            // Save card to default holder
+            Card.add(card, to: h)
         } else {
-            
+            // TODO: Show error message to user
         }
-        
+
         // Transition
         self.view.removeAllConstraints()
         self.delegate?.transitionTo(.search)
