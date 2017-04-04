@@ -12,29 +12,29 @@ import Magnet
 class AppSettings: NSObject, NSCoding {
     var searchKeyCombo: KeyCombo?
     var playKeyCombo: KeyCombo?
-    var defaultHolder: CardHolder?
+    var defaultHolderId: Int?
 
-    init (playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolder: CardHolder? = nil) {
+    init (playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int? = nil) {
         self.playKeyCombo = playKeyCombo
         self.searchKeyCombo = searchKeyCombo
-        self.defaultHolder = defaultHolder
+        self.defaultHolderId = defaultHolderId
     }
     
     required convenience init(coder aDecoder: NSCoder) {
         let playkeycombo = aDecoder.decodeObject(forKey: "playKeyCombo") as! KeyCombo?
         let searchkeycombo = aDecoder.decodeObject(forKey: "searchKeyCombo") as! KeyCombo?
-        let defaultHolder = aDecoder.decodeObject(forKey: "defaultHolder") as! CardHolder?
+        let defaultHolderId = aDecoder.decodeObject(forKey: "defaultHolderId") as! Int?
         self.init(
             playKeyCombo: playkeycombo,
             searchKeyCombo: searchkeycombo,
-            defaultHolder: defaultHolder
+            defaultHolderId: defaultHolderId
         )
     }
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.playKeyCombo, forKey: "playKeyCombo")
         aCoder.encode(self.searchKeyCombo, forKey: "searchKeyCombo")
-        aCoder.encode(self.defaultHolder, forKey: "defaultHolder")
+        aCoder.encode(self.defaultHolderId, forKey: "defaultHolderId")
     }
 }
 
