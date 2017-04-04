@@ -1,8 +1,16 @@
-# Roadmap
+# FlashCard
 
-## 使い勝手を悪くしているもの
+## これはなに
 
-## なくてもとりあえず良いけどあったらいいなと思うもの
+自分用に作ってみた単語帳アプリ．
+macOS App をつくる練習用．
+[tasuwo/FlashCardApp: A simple flash-card app for macOS](https://github.com/tasuwo/FlashCardApp) を作り直したもの．
+
+## TODO
+
+### 使い勝手を悪くしているもの
+
+### なくてもとりあえず良いけどあったらいいなと思うもの
 
 - カードホルダーの追加/編集/削除が行える
   - Edit Card View にカードホルダーの追加ボタンを追加
