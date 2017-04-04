@@ -18,9 +18,15 @@ class CardHolder: Object {
         return "id"
     }
     
-    static func lastId(_ realm: Realm) -> Int {
+    static func lastId() -> Int {
         let realm = try! Realm()
         return realm.objects(CardHolder.self).last?.id ?? -1
+    }
+    
+    convenience init (name: String) {
+        self.init()
+        self.id = CardHolder.lastId() + 1
+        self.name = name
     }
 }
 
@@ -55,6 +61,16 @@ extension CardHolder {
                 holder.name = name
                 realm.create(CardHolder.self, value: holder, update: true)
             }
+        }
+    }
+    
+    static func delete(_ holder: CardHolder) {
+        let realm = try! Realm()
+        try! realm.write {
+            for c in holder.cards {
+                realm.delete(c)
+            }
+            realm.delete(holder)
         }
     }
 }

@@ -10,7 +10,10 @@ import Cocoa
 import RealmSwift
 
 protocol CardsViewDelegate {
-    func didPressRemoveButton(selectedRow: Int)
+    func didPressAddCardHolder()
+    func didPressRemoveCardHolder(selectedRow: Int)
+    func didPressAddCard()
+    func didPressRemoveCard(selectedRow: Int)
 }
 
 class CardsView : NSView {
@@ -38,12 +41,12 @@ class CardsView : NSView {
         sideBarFooter.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(sideBarFooter)
         
-        addHolderButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAddHolder))
+        addHolderButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAddCardHolder))
         addHolderButton.translatesAutoresizingMaskIntoConstraints = false
         addHolderButton.sendAction(on: .keyDown)
         sideBarFooter.addSubview(addHolderButton)
         
-        removeHolderButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemoveHolder))
+        removeHolderButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemoveCardHolder))
         removeHolderButton.translatesAutoresizingMaskIntoConstraints = false
         removeHolderButton.sendAction(on: .keyDown)
         sideBarFooter.addSubview(removeHolderButton)
@@ -148,13 +151,19 @@ class CardsView : NSView {
 }
 
 extension CardsView {
-    func didPressAddCard() {}
+    func didPressAddCard() {
+        self.delegate?.didPressAddCard()
+    }
 
     func didPressRemoveCard() {
-        self.delegate?.didPressRemoveButton(selectedRow: self.cardsList.selectedRow)
+        self.delegate?.didPressRemoveCard(selectedRow: self.cardsList.selectedRow)
     }
     
-    func didPressAddHolder() {}
+    func didPressAddCardHolder() {
+        self.delegate?.didPressAddCardHolder()
+    }
     
-    func didPressRemoveHolder() {}
+    func didPressRemoveCardHolder() {
+        self.delegate?.didPressRemoveCardHolder(selectedRow: self.holdersList.selectedRow)
+    }
 }

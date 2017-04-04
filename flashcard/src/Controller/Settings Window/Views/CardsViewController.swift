@@ -44,10 +44,27 @@ class CardsViewController: NSViewController {
 }
 
 extension CardsViewController : CardsViewDelegate {
-    func didPressRemoveButton(selectedRow: Int) {
+    func didPressAddCard() {}
+    
+    func didPressRemoveCard(selectedRow: Int) {
         if selectedRow != -1 {
             if let selectedCard = self.cardsPresenter.cards?[selectedRow] {
                 Card.delete(selectedCard)
+            }
+        }
+    }
+    
+    func didPressAddCardHolder() {
+        let holder = CardHolder(name: "")
+        CardHolder.add(holder)
+        
+        // TODO: Focus holder's cell and edit, save the name
+    }
+    
+    func didPressRemoveCardHolder(selectedRow: Int) {
+        if selectedRow != -1 {
+            if let selectedCardHolder = self.holdersPresenter.holders?[selectedRow] {
+                CardHolder.delete(selectedCardHolder)
             }
         }
     }
