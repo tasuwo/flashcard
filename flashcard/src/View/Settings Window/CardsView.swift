@@ -16,6 +16,9 @@ protocol CardsViewDelegate {
 class CardsView : NSView {
     fileprivate var sideBar: NSScrollView!
     fileprivate(set) var holdersList: CardHolderTableView!
+    fileprivate var sideBarFooter: NSView!
+    fileprivate var addHolderButton: myNSButton!
+    fileprivate var removeHolderButton: myNSButton!
     fileprivate var editCardSpace: NSView!
     fileprivate var cardListContainer: NSScrollView!
     fileprivate(set) var cardsList: CardTableView!
@@ -30,6 +33,32 @@ class CardsView : NSView {
         holdersList = CardHolderTableView()
         holdersList.translatesAutoresizingMaskIntoConstraints = true
         holdersList.setupSettings()
+        
+        sideBarFooter = NSView()
+        sideBarFooter.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(sideBarFooter)
+        
+        addHolderButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAddHolder))
+        addHolderButton.translatesAutoresizingMaskIntoConstraints = false
+        addHolderButton.sendAction(on: .keyDown)
+        sideBarFooter.addSubview(addHolderButton)
+        
+        removeHolderButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemoveHolder))
+        removeHolderButton.translatesAutoresizingMaskIntoConstraints = false
+        removeHolderButton.sendAction(on: .keyDown)
+        sideBarFooter.addSubview(removeHolderButton)
+        
+        sideBarFooter.addConstraints([
+            NSLayoutConstraint(item: addHolderButton, attribute: .bottom,  relatedBy: .equal, toItem: sideBarFooter, attribute: .bottom,         multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: addHolderButton, attribute: .left,    relatedBy: .equal, toItem: sideBarFooter, attribute: .left,           multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: addHolderButton, attribute: .width,   relatedBy: .equal, toItem: nil,           attribute: .notAnAttribute, multiplier: 1, constant: 25),
+            NSLayoutConstraint(item: addHolderButton, attribute: .height,  relatedBy: .equal, toItem: sideBarFooter, attribute: .height,         multiplier: 1, constant: 0),
+            
+            NSLayoutConstraint(item: removeHolderButton, attribute: .bottom,  relatedBy: .equal, toItem: sideBarFooter, attribute: .bottom,         multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: removeHolderButton, attribute: .left,    relatedBy: .equal, toItem: sideBarFooter, attribute: .left,           multiplier: 1, constant: 25),
+            NSLayoutConstraint(item: removeHolderButton, attribute: .width,   relatedBy: .equal, toItem: nil,           attribute: .notAnAttribute, multiplier: 1, constant: 25),
+            NSLayoutConstraint(item: removeHolderButton, attribute: .height,  relatedBy: .equal, toItem: sideBarFooter, attribute: .height,         multiplier: 1, constant: 0),
+        ])
         
         sideBar = NSScrollView()
         sideBar.translatesAutoresizingMaskIntoConstraints = false
@@ -47,7 +76,12 @@ class CardsView : NSView {
             NSLayoutConstraint(item: sideBar, attribute: .top,    relatedBy: .equal, toItem: self, attribute: .top,            multiplier: 1, constant: 0),
             NSLayoutConstraint(item: sideBar, attribute: .left,   relatedBy: .equal, toItem: self, attribute: .left,           multiplier: 1, constant: 0),
             NSLayoutConstraint(item: sideBar, attribute: .width,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 250),
-            NSLayoutConstraint(item: sideBar, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height,         multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: sideBar, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height,         multiplier: 1, constant: -25),
+            
+            NSLayoutConstraint(item: sideBarFooter, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom,         multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: sideBarFooter, attribute: .left,   relatedBy: .equal, toItem: self, attribute: .left,           multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: sideBarFooter, attribute: .width,  relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 250),
+            NSLayoutConstraint(item: sideBarFooter, attribute: .height, relatedBy: .equal, toItem: nil,  attribute: .notAnAttribute, multiplier: 1, constant: 25),
             
             NSLayoutConstraint(item: editCardSpace, attribute: .top,    relatedBy: .equal, toItem: self, attribute: .top,    multiplier: 1, constant: 0),
             NSLayoutConstraint(item: editCardSpace, attribute: .left,   relatedBy: .equal, toItem: self, attribute: .left,   multiplier: 1, constant: 250),
@@ -79,26 +113,25 @@ class CardsView : NSView {
             NSLayoutConstraint(item: cardsListFooter, attribute: .width,   relatedBy: .equal, toItem: editCardSpace, attribute: .width,  multiplier: 1, constant: 0),
             NSLayoutConstraint(item: cardsListFooter, attribute: .height,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute,   multiplier: 1, constant: 25),
         ])
-        /*
-        addCardButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAdd))
+
+        addCardButton = myNSButton(title: "+", target: self, action: #selector(CardsView.didPressAddCard))
         addCardButton.translatesAutoresizingMaskIntoConstraints = false
         addCardButton.sendAction(on: .keyDown)
         cardsListFooter.addSubview(addCardButton)
-         */
-        removeCardButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemove))
+
+        removeCardButton = myNSButton(title: "-", target: self, action: #selector(CardsView.didPressRemoveCard))
         removeCardButton.translatesAutoresizingMaskIntoConstraints = false
         removeCardButton.sendAction(on: .keyDown)
         cardsListFooter.addSubview(removeCardButton)
         
         cardsListFooter.addConstraints([
-            /*
             NSLayoutConstraint(item: addCardButton, attribute: .bottom,  relatedBy: .equal, toItem: cardsListFooter, attribute: .bottom,         multiplier: 1, constant: 0),
             NSLayoutConstraint(item: addCardButton, attribute: .left,    relatedBy: .equal, toItem: cardsListFooter, attribute: .left,           multiplier: 1, constant: 0),
             NSLayoutConstraint(item: addCardButton, attribute: .width,   relatedBy: .equal, toItem: nil,             attribute: .notAnAttribute, multiplier: 1, constant: 25),
             NSLayoutConstraint(item: addCardButton, attribute: .height,  relatedBy: .equal, toItem: cardsListFooter, attribute: .height,         multiplier: 1, constant: 0),
-             */
+
             NSLayoutConstraint(item: removeCardButton, attribute: .bottom,  relatedBy: .equal, toItem: cardsListFooter, attribute: .bottom,         multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: removeCardButton, attribute: .left,    relatedBy: .equal, toItem: cardsListFooter, attribute: .left,           multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: removeCardButton, attribute: .left,    relatedBy: .equal, toItem: cardsListFooter, attribute: .left,           multiplier: 1, constant: 25),
             NSLayoutConstraint(item: removeCardButton, attribute: .width,   relatedBy: .equal, toItem: nil,             attribute: .notAnAttribute, multiplier: 1, constant: 25),
             NSLayoutConstraint(item: removeCardButton, attribute: .height,  relatedBy: .equal, toItem: cardsListFooter, attribute: .height,         multiplier: 1, constant: 0),
         ])
@@ -115,7 +148,13 @@ class CardsView : NSView {
 }
 
 extension CardsView {
-    func didPressRemove() {
+    func didPressAddCard() {}
+
+    func didPressRemoveCard() {
         self.delegate?.didPressRemoveButton(selectedRow: self.cardsList.selectedRow)
     }
+    
+    func didPressAddHolder() {}
+    
+    func didPressRemoveHolder() {}
 }
