@@ -55,10 +55,8 @@ extension CardsViewController : CardsViewDelegate {
     }
     
     func didPressAddCardHolder() {
-        let holder = CardHolder(name: "")
+        let holder = CardHolder(name: "Untitled")
         CardHolder.add(holder)
-        
-        // TODO: Focus holder's cell and edit, save the name
     }
     
     func didPressRemoveCardHolder(selectedRow: Int) {
