@@ -15,8 +15,13 @@ class CardsListPresenter: NSObject {
     private var refreshToken: NotificationToken?
     
     func loadCards(in holderId: Int, updated: @escaping (RealmCollectionChange<Results<Card>>)-> Void) {
+        refreshToken?.stop()
         cards = Card.all(in: holderId)
         refreshToken = cards?.addNotificationBlock(updated)
+    }
+    
+    deinit {
+        refreshToken = nil
     }
 }
 
