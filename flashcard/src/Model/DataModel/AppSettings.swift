@@ -12,9 +12,23 @@ import Magnet
 class AppSettings: NSObject, NSCoding {
     var searchKeyCombo: KeyCombo?
     var playKeyCombo: KeyCombo?
-    var defaultHolderId: Int?
+    private var _defaultHolderId: Int = 0
+    var defaultHolderId: Int? {
+        set {
+            self._defaultHolderId = newValue ?? 0
+        }
+        get {
+            if let _ = CardHolder.get(self._defaultHolderId) {}
+            else {
+                return 0
+            }
+            
+            return self._defaultHolderId
+        }
+    }
 
     init (playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int? = nil) {
+        super.init()
         self.playKeyCombo = playKeyCombo
         self.searchKeyCombo = searchKeyCombo
         self.defaultHolderId = defaultHolderId
