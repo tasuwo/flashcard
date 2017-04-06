@@ -60,6 +60,7 @@ extension CardsViewController : CardsViewDelegate {
     }
     
     func didPressRemoveCardHolder(selectedRow: Int) {
+        if selectedRow == 0 { return }
         let view = self.view as! CardsView
         view.holdersList.deselectAll(self)
 
