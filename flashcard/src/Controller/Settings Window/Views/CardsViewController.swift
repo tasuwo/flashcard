@@ -134,6 +134,7 @@ extension CardsViewController: NSTableViewDelegate {
                 })
             } else {
                 view.cardsList.dataSource = nil
+                self.cardsPresenter.releaseNotificationBlock()
                 view.cardsList.reloadData()
             }
         }

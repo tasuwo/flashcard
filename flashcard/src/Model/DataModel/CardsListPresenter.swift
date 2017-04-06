@@ -20,6 +20,11 @@ class CardsListPresenter: NSObject {
         refreshToken = cards?.addNotificationBlock(updated)
     }
     
+    func releaseNotificationBlock() {
+        refreshToken?.stop()
+        refreshToken = nil
+    }
+    
     deinit {
         refreshToken = nil
     }
