@@ -70,11 +70,21 @@ extension PlayCardViewController : PlayCardViewDelegate {
     }
     
     func flipToRight() {
-        Swift.print("right")
+        if self.cards.canAccess(index: (self.index - 1)) {
+            let c = self.cards[self.index - 1]
+            let now = NSDate()
+            let s = Score(isCorrect: true, date: now)
+            Score.add(s, to: c)
+        }
     }
     
     func flipToLeft() {
-        Swift.print("left")
+        if self.cards.canAccess(index: self.index - 1) {
+            let c = self.cards[self.index - 1]
+            let now = NSDate()
+            let s = Score(isCorrect: false, date: now)
+            Score.add(s, to: c)
+        }
     }
     
     func didPressShuffleButton() {

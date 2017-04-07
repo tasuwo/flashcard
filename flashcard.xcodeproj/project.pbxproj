@@ -72,7 +72,7 @@
 		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = "<group>"; };
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
 		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
-		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
+		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+canAccess.swift"; path = "../DataModel/Array+canAccess.swift"; sourceTree = "<group>"; };
 		2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+calcWidth+calcHeight.swift"; sourceTree = "<group>"; };
 		2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+focusWithoutSelectText.swift"; sourceTree = "<group>"; };
 		2C3AA4671E97CEE200988ACC /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -171,7 +171,6 @@
 				2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */,
 				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
-				2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */,
 				2C3AA4671E97CEE200988ACC /* Score.swift */,
 			);
 			path = DataModel;
@@ -206,6 +205,7 @@
 		2C47697D1E86A28400814D28 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */,
 				2C4769791E8696DB00814D28 /* Collection+shuffle.swift */,
 				2C47697B1E86971500814D28 /* MutableCollection+shuffleInPlace.swift */,
 				2C471B581E813D0300FCF0DA /* NSRange+contain.swift */,

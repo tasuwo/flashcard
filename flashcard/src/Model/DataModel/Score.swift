@@ -12,7 +12,7 @@ import RealmSwift
 class Score: Object {
     dynamic var id = 0
     dynamic var isCorrect: Bool = true
-    dynamic var date: Date = Date(timeIntervalSince1970: TimeInterval(exactly: 0)!)
+    dynamic var date: NSDate = NSDate()
     let cards = LinkingObjects(fromType: Card.self, property: "scores")
     
     override static func primaryKey() -> String? {
@@ -21,12 +21,12 @@ class Score: Object {
     
     static func lastId() -> Int {
         let realm = try! Realm()
-        return realm.objects(Card.self).last?.id ?? -1
+        return realm.objects(Score.self).last?.id ?? -1
     }
     
-    convenience init (id: Int, isCorrect: Bool, date: Date) {
+    convenience init (isCorrect: Bool, date: NSDate) {
         self.init()
-        self.id = id
+        self.id = Score.lastId() + 1
         self.isCorrect = isCorrect
         self.date = date
     }
