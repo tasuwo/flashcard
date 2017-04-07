@@ -9,32 +9,28 @@
 import Cocoa
 import RealmSwift
 
+enum CardFace {
+    case back, front
+}
+
 class PlayCardViewController: QuickWindowViewController {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
             let view = self.view as? PlayCardView
             
-            if self.cards.count == 0 {
-                view?.renderCardText(front: "", back: "")
-                return
+            if self.cards.count - 1 < self.index {
+                self.index -= 1
             }
             
-            if self.index <= 0 {
+            if self.index < 0 {
                 self.index = 0
-                view?.renderCardText(front: self.cards[self.index].frontText, back: "")
-                return
             }
-            
-            if self.index >= self.cards.count {
-                self.index = self.cards.count
-                view?.renderCardText(front: "", back: self.cards[self.index - 1].backText)
-                return
-            }
-            
-            view?.renderCardText(front: self.cards[self.index].frontText, back: self.cards[self.index - 1].backText)
+
+            view?.renderCardText(text: self.cards[self.index].frontText)
         }
     }
+    fileprivate var face: CardFace = .front
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 400, height: 300)
@@ -61,30 +57,37 @@ class PlayCardViewController: QuickWindowViewController {
 }
 
 extension PlayCardViewController : PlayCardViewDelegate {
-    func flipToDown() {
+    func flip() {
+        let view = self.view as? PlayCardView
+        let card = self.cards[self.index]
+        switch self.face {
+        case .front:
+            view?.renderCardText(text: card.backText)
+            self.face = .back
+            break
+        case .back:
+            view?.renderCardText(text: card.frontText)
+            self.face = .front
+            break
+        }
+    }
+    
+    func corrected() {
+        let c = self.cards[self.index]
+        let now = NSDate()
+        let s = Score(isCorrect: true, date: now)
+        Score.add(s, to: c)
+
         self.index += 1
     }
     
-    func flipToUp() {
-        self.index -= 1
-    }
-    
-    func flipToRight() {
-        if self.cards.canAccess(index: (self.index - 1)) {
-            let c = self.cards[self.index - 1]
-            let now = NSDate()
-            let s = Score(isCorrect: true, date: now)
-            Score.add(s, to: c)
-        }
-    }
-    
-    func flipToLeft() {
-        if self.cards.canAccess(index: self.index - 1) {
-            let c = self.cards[self.index - 1]
-            let now = NSDate()
-            let s = Score(isCorrect: false, date: now)
-            Score.add(s, to: c)
-        }
+    func failed() {
+        let c = self.cards[self.index]
+        let now = NSDate()
+        let s = Score(isCorrect: false, date: now)
+        Score.add(s, to: c)
+
+        self.index += 1
     }
     
     func didPressShuffleButton() {

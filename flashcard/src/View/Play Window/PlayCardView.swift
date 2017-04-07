@@ -15,18 +15,16 @@ let upArrowKey = 126
 
 protocol PlayCardViewDelegate {
     func didPressShuffleButton()
-    func flipToLeft()
-    func flipToRight()
-    func flipToUp()
-    func flipToDown()
+    func flip()
+    func corrected()
+    func failed()
 }
 
 // MARK: -
 class PlayCardView : NSView {
     open var delegate : PlayCardViewDelegate?
     var menuView: NSView!
-    var backText: NSTextField!
-    var frontText: NSTextField!
+    var cardText: NSTextField!
     
     override init(frame: NSRect) {
         super.init(frame: frame)
@@ -68,26 +66,16 @@ class PlayCardView : NSView {
             NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: -30),
         ])
         
-        backText = NSTextField()
-        backText.isEditable = false
-        backText.translatesAutoresizingMaskIntoConstraints = false
-        textView.addSubview(backText)
-        
-        frontText = NSTextField()
-        frontText.isEditable = false
-        frontText.translatesAutoresizingMaskIntoConstraints = false
-        textView.addSubview(frontText)
+        cardText = NSTextField()
+        cardText.isEditable = false
+        cardText.translatesAutoresizingMaskIntoConstraints = false
+        textView.addSubview(cardText)
         
         textView.addConstraints([
-            NSLayoutConstraint(item: backText, attribute: .centerX, relatedBy: .equal, toItem: textView, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: backText, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1, constant: 10),
-            NSLayoutConstraint(item: backText, attribute: .width, relatedBy: .equal, toItem: textView, attribute: .width, multiplier: 1, constant: -20),
-            NSLayoutConstraint(item: backText, attribute: .height, relatedBy: .equal, toItem: textView,  attribute: .height, multiplier: 0.5, constant: -15),
-
-            NSLayoutConstraint(item: frontText, attribute: .centerX, relatedBy: .equal, toItem: textView, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: frontText, attribute: .bottom, relatedBy: .equal, toItem: textView, attribute: .bottom, multiplier: 1, constant: -10),
-            NSLayoutConstraint(item: frontText, attribute: .width, relatedBy: .equal, toItem: textView, attribute: .width, multiplier: 1, constant: -20),
-            NSLayoutConstraint(item: frontText, attribute: .height, relatedBy: .equal, toItem: textView,  attribute: .height, multiplier: 0.5, constant: -15),
+            NSLayoutConstraint(item: cardText, attribute: .centerX, relatedBy: .equal, toItem: textView, attribute: .centerX, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: cardText, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1, constant: 10),
+            NSLayoutConstraint(item: cardText, attribute: .width, relatedBy: .equal, toItem: textView, attribute: .width, multiplier: 1, constant: -20),
+            NSLayoutConstraint(item: cardText, attribute: .height, relatedBy: .equal, toItem: textView,  attribute: .height, multiplier: 1, constant: -20),
         ])
     }
     
@@ -95,9 +83,8 @@ class PlayCardView : NSView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func renderCardText(front: String, back: String) {
-        self.frontText.stringValue = front
-        self.backText.stringValue = back
+    func renderCardText(text: String) {
+        self.cardText.stringValue = text
     }
     
     override func viewWillDraw() {
@@ -128,15 +115,13 @@ extension PlayCardView {
         let character = Int(event.keyCode)
         switch character {
         case leftArrowKey:
-            self.delegate?.flipToLeft()
-        case upArrowKey:
-            self.delegate?.flipToUp()
-            break
+            self.delegate?.flip()
         case rightArrowKey:
-            self.delegate?.flipToRight()
+            self.delegate?.flip()
+        case upArrowKey:
+            self.delegate?.corrected()
         case downArrowKey:
-            self.delegate?.flipToDown()
-            break
+            self.delegate?.failed()
         default:
             super.keyUp(with: event)
         }
