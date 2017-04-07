@@ -8,6 +8,7 @@
 
 import Cocoa
 import RealmSwift
+import SpriteKit
 
 enum CardFace {
     case back, front
@@ -17,7 +18,7 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
-            let view = self.view as? PlayCardView
+            let view = self.scene as? PlayCardView
             
             if self.cards.count - 1 < self.index {
                 self.index -= 1
@@ -31,6 +32,8 @@ class PlayCardViewController: QuickWindowViewController {
         }
     }
     fileprivate var face: CardFace = .front
+    fileprivate var viewInitiated: Bool = false
+    fileprivate var scene: SKScene? = nil
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 400, height: 300)
@@ -41,12 +44,30 @@ class PlayCardViewController: QuickWindowViewController {
     }
     
     override func loadView() {
-        let size = PlayCardViewController.getDefaultSize()
-        let view = PlayCardView(frame: NSMakeRect(0, 0, size.width, size.height))
-        view.delegate = self
-        self.view = view
+        self.view = SKView()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override func viewWillLayout() {
+        super.viewWillLayout()
         
-        shuffleCards()
+        if (!viewInitiated) {
+            let size = PlayCardViewController.getDefaultSize()
+            let scene = PlayCardView(size: CGSize(width: size.width, height: size.height))
+            scene.delegateToController = self
+            self.scene = scene
+            
+            self.view = scene.baseView
+            let skView = self.view as! SKView
+            skView.presentScene(self.scene)
+            
+            shuffleCards()
+            
+            self.viewInitiated = true
+        }
     }
     
     func shuffleCards() {
@@ -58,7 +79,7 @@ class PlayCardViewController: QuickWindowViewController {
 
 extension PlayCardViewController : PlayCardViewDelegate {
     func flip() {
-        let view = self.view as? PlayCardView
+        let view = self.scene as? PlayCardView
         let card = self.cards[self.index]
         switch self.face {
         case .front:

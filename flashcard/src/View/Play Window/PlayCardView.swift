@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import SpriteKit
 
 let leftArrowKey = 123
 let rightArrowKey = 124
@@ -21,19 +22,23 @@ protocol PlayCardViewDelegate {
 }
 
 // MARK: -
-class PlayCardView : NSView {
-    open var delegate : PlayCardViewDelegate?
+class PlayCardView : SKScene {
+    open var delegateToController : PlayCardViewDelegate?
+    var baseView: SKView!
     var menuView: NSView!
     var cardText: NSTextField!
     
-    override init(frame: NSRect) {
-        super.init(frame: frame)
+    override init(size: CGSize) {
+        super.init(size: size)
+        
+        self.baseView = SKView(frame: NSMakeRect(0, 0, size.width, size.height))
+        self.baseView.wantsLayer = true
         
         menuView = NSView()
         menuView.translatesAutoresizingMaskIntoConstraints = false
         menuView.wantsLayer = true
-        self.addSubview(menuView)
-        
+        self.baseView.addSubview(menuView)
+
         let shuffleButton = myNSButton(title: "shuffle", target: self, action: #selector(PlayCardView.didPressShuffleButton))
         shuffleButton.sendAction(on: .keyDown)
         shuffleButton.translatesAutoresizingMaskIntoConstraints = false
@@ -49,21 +54,21 @@ class PlayCardView : NSView {
         let textView = NSView()
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.wantsLayer = true
-        self.addSubview(textView)
+        self.baseView.addSubview(textView)
         
-        self.addConstraints([
-            NSLayoutConstraint(item: self, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.width),
-            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.height),
+        self.baseView.addConstraints([
+            NSLayoutConstraint(item: self.baseView, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.width),
+            NSLayoutConstraint(item: self.baseView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.height),
             
-            NSLayoutConstraint(item: menuView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: menuView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: menuView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .top, relatedBy: .equal, toItem: self.baseView, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .left, relatedBy: .equal, toItem: self.baseView, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .width, relatedBy: .equal, toItem: self.baseView, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: menuView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30),
 
-            NSLayoutConstraint(item: textView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 30),
-            NSLayoutConstraint(item: textView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: textView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: -30),
+            NSLayoutConstraint(item: textView, attribute: .top, relatedBy: .equal, toItem: self.baseView, attribute: .top, multiplier: 1, constant: 30),
+            NSLayoutConstraint(item: textView, attribute: .left, relatedBy: .equal, toItem: self.baseView, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: textView, attribute: .width, relatedBy: .equal, toItem: self.baseView, attribute: .width, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: self.baseView, attribute: .height, multiplier: 1, constant: -30),
         ])
         
         cardText = NSTextField()
@@ -86,15 +91,11 @@ class PlayCardView : NSView {
     func renderCardText(text: String) {
         self.cardText.stringValue = text
     }
-    
-    override func viewWillDraw() {
-        menuView.layer?.backgroundColor = CGColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
-    }
 }
 
 extension PlayCardView {
     func didPressShuffleButton() {
-        self.delegate?.didPressShuffleButton()
+        self.delegateToController?.didPressShuffleButton()
     }
 }
 
@@ -115,13 +116,13 @@ extension PlayCardView {
         let character = Int(event.keyCode)
         switch character {
         case leftArrowKey:
-            self.delegate?.flip()
+            self.delegateToController?.flip()
         case rightArrowKey:
-            self.delegate?.flip()
+            self.delegateToController?.flip()
         case upArrowKey:
-            self.delegate?.corrected()
+            self.delegateToController?.corrected()
         case downArrowKey:
-            self.delegate?.failed()
+            self.delegateToController?.failed()
         default:
             super.keyUp(with: event)
         }
