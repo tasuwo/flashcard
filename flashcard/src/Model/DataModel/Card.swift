@@ -13,6 +13,7 @@ class Card: Object {
     dynamic var id = 0
     dynamic var frontText = ""
     dynamic var backText = ""
+    let scores = List<Score>()
     let holders = LinkingObjects(fromType: CardHolder.self, property: "cards")
     
     override static func primaryKey() -> String? {

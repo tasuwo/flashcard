@@ -15,6 +15,7 @@
 		2C06ABDE1E8FBA2600B6DE70 /* Array+canAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */; };
 		2C06ABE01E9103B500B6DE70 /* String+calcWidth+calcHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */; };
 		2C06ABE21E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */; };
+		2C3AA4681E97CEE200988ACC /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C3AA4671E97CEE200988ACC /* Score.swift */; };
 		2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B541E7BAA6A00FCF0DA /* Card.swift */; };
 		2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */; };
 		2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C471B581E813D0300FCF0DA /* NSRange+contain.swift */; };
@@ -74,6 +75,7 @@
 		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
 		2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+calcWidth+calcHeight.swift"; sourceTree = "<group>"; };
 		2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+focusWithoutSelectText.swift"; sourceTree = "<group>"; };
+		2C3AA4671E97CEE200988ACC /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		2C471B541E7BAA6A00FCF0DA /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolder.swift; sourceTree = "<group>"; };
 		2C471B581E813D0300FCF0DA /* NSRange+contain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSRange+contain.swift"; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
 				2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */,
+				2C3AA4671E97CEE200988ACC /* Score.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				2CA38D6B1E72EDA100E850FC /* QuickWindowViewType.swift in Sources */,
 				A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */,
 				2C06ABE21E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift in Sources */,
+				2C3AA4681E97CEE200988ACC /* Score.swift in Sources */,
 				2C4769971E8D3EFD00814D28 /* CardHoldersListPresenter.swift in Sources */,
 				2C4769761E85EF9B00814D28 /* PlayCardViewController.swift in Sources */,
 				2C4769741E85EF4100814D28 /* PlayCardWindow.swift in Sources */,
