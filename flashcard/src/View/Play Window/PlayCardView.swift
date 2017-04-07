@@ -14,9 +14,11 @@ let downArrowKey = 125
 let upArrowKey = 126
 
 protocol PlayCardViewDelegate {
-    func flipToNext()
-    func flipToPrevious()
     func didPressShuffleButton()
+    func flipToLeft()
+    func flipToRight()
+    func flipToUp()
+    func flipToDown()
 }
 
 // MARK: -
@@ -125,11 +127,15 @@ extension PlayCardView {
     override func keyUp(with event: NSEvent) {
         let character = Int(event.keyCode)
         switch character {
-        case leftArrowKey, upArrowKey:
-            self.delegate?.flipToPrevious()
+        case leftArrowKey:
+            self.delegate?.flipToLeft()
+        case upArrowKey:
+            self.delegate?.flipToUp()
             break
-        case rightArrowKey, downArrowKey:
-            self.delegate?.flipToNext()
+        case rightArrowKey:
+            self.delegate?.flipToRight()
+        case downArrowKey:
+            self.delegate?.flipToDown()
             break
         default:
             super.keyUp(with: event)

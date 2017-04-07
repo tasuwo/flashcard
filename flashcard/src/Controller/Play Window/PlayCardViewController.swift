@@ -61,12 +61,20 @@ class PlayCardViewController: QuickWindowViewController {
 }
 
 extension PlayCardViewController : PlayCardViewDelegate {
-    func flipToNext() {
+    func flipToDown() {
         self.index += 1
     }
     
-    func flipToPrevious() {
+    func flipToUp() {
         self.index -= 1
+    }
+    
+    func flipToRight() {
+        Swift.print("right")
+    }
+    
+    func flipToLeft() {
+        Swift.print("left")
     }
     
     func didPressShuffleButton() {
