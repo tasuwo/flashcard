@@ -19,7 +19,8 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var index = 0 {
         didSet {
             if self.cards.count - 1 < self.index {
-                
+                scene?.showFinishEffect()
+                self.index -= 1
                 return
             }
             

@@ -54,6 +54,15 @@ class PlayCardScene: SKScene {
         }
     }
     
+    func showFinishEffect() {
+        self.removeAllChildren()
+        let l = SKLabelNode(text: "FINISH!!")
+        l.fontSize = 70
+        l.position = CGPoint(x: self.size.width/2, y: self.size.height/2 - 20)
+        l.fontColor = .black
+        self.addChild(l)
+    }
+    
     func flipCard() {
         self.card?.flip()
     }
