@@ -22,26 +22,18 @@ protocol PlayCardViewDelegate {
 }
 
 // MARK: -
-class PlayCardView : SKScene {
+class PlayCardView : SKView {
     open var delegateToController : PlayCardViewDelegate?
-    var baseView: SKView!
     var menuView: NSView!
-    var textView: NSView!
     var cardText: NSTextField!
-    var card: CardNode? = nil
-    var correctedSign: SKLabelNode?
-    var failedSign: SKLabelNode?
     
-    override init(size: CGSize) {
-        super.init(size: size)
-        
-        self.baseView = SKView(frame: NSMakeRect(0, 0, size.width, size.height))
-        self.baseView.wantsLayer = true
+    override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
         
         menuView = NSView()
         menuView.translatesAutoresizingMaskIntoConstraints = false
         menuView.wantsLayer = true
-        self.baseView.addSubview(menuView)
+        self.addSubview(menuView)
 
         let shuffleButton = myNSButton(title: "shuffle", target: self, action: #selector(PlayCardView.didPressShuffleButton))
         shuffleButton.sendAction(on: .keyDown)
@@ -55,73 +47,19 @@ class PlayCardView : SKScene {
             NSLayoutConstraint(item: shuffleButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 70),
         ])
         
-        self.textView = NSView()
-        self.textView.translatesAutoresizingMaskIntoConstraints = false
-        self.textView.wantsLayer = true
-        self.baseView.addSubview(textView)
-        
-        self.baseView.addConstraints([
-            NSLayoutConstraint(item: self.baseView, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.width),
-            NSLayoutConstraint(item: self.baseView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.height),
+        self.addConstraints([
+            NSLayoutConstraint(item: self, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frameRect.width),
+            NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frameRect.height),
             
-            NSLayoutConstraint(item: menuView, attribute: .top, relatedBy: .equal, toItem: self.baseView, attribute: .top, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: menuView, attribute: .left, relatedBy: .equal, toItem: self.baseView, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: menuView, attribute: .width, relatedBy: .equal, toItem: self.baseView, attribute: .width, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: menuView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: menuView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30),
-
-            NSLayoutConstraint(item: textView, attribute: .top, relatedBy: .equal, toItem: self.baseView, attribute: .top, multiplier: 1, constant: 30),
-            NSLayoutConstraint(item: textView, attribute: .left, relatedBy: .equal, toItem: self.baseView, attribute: .left, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: textView, attribute: .width, relatedBy: .equal, toItem: self.baseView, attribute: .width, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: self.baseView, attribute: .height, multiplier: 1, constant: -30),
         ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func renderCardText(frontText: String, backText: String) {
-        self.removeAllChildren()
-
-        self.card = CardNode(texture: nil, color: .white, size: self.baseView.frame.size)
-        self.card?.setTexts(front: frontText, back: backText)
-        self.card?.position = CGPoint(x: self.baseView.frame.width/2, y: 10)
-        self.card?.size = CGSize(width: self.baseView.frame.width - 20, height: self.baseView.frame.height - 40)
-        self.addChild(card!)
-        
-        self.correctedSign = SKLabelNode(text: "☺️")
-        self.correctedSign?.fontSize = 70
-        self.correctedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2 - 40)
-        self.correctedSign?.isHidden = true
-        self.addChild(self.correctedSign!)
-
-        self.failedSign = SKLabelNode(text: "😭")
-        self.failedSign?.fontSize = 70
-        self.failedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2 - 40)
-        self.failedSign?.isHidden = true
-        self.addChild(self.failedSign!)
-    }
-    
-    func runEffect(isCorrected: Bool, callback: @escaping () -> Void) {
-        let xWiggleIn = SKAction.scaleX(to: 1.0, duration: 0.05)
-        let xWiggleOut = SKAction.scaleX(to: 1.2, duration: 0.05)
-        let yWiggleIn = SKAction.scaleY(to: 1.0, duration: 0.05)
-        let yWiggleOut = SKAction.scaleY(to: 1.2, duration: 0.05)
-        let wiggleIn = SKAction.sequence([xWiggleIn, yWiggleIn])
-        let wiggleOut = SKAction.sequence([xWiggleOut, yWiggleOut])
-        let wiggle = SKAction.sequence([wiggleOut, wiggleIn, SKAction.wait(forDuration: 0.5)])
-        
-        if isCorrected {
-            self.correctedSign?.isHidden = false
-            self.correctedSign?.run(SKAction.repeat(wiggle, count: 1), completion: callback)
-        } else {
-            self.failedSign?.isHidden = false
-            self.failedSign?.run(SKAction.repeat(wiggle, count: 1), completion: callback)
-        }
-    }
-    
-    func flipCard() {
-        self.card?.flip()
     }
 }
 

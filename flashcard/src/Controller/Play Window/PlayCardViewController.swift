@@ -18,22 +18,21 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
-            let view = self.scene
-            
             if self.cards.count - 1 < self.index {
-                self.index -= 1
+                
+                return
             }
             
             if self.index < 0 {
                 self.index = 0
             }
-
-            view?.renderCardText(frontText: self.cards[self.index].frontText, backText: self.cards[self.index].backText)
+            
+            scene?.renderCardText(frontText: self.cards[self.index].frontText, backText: self.cards[self.index].backText)
         }
     }
     fileprivate var face: CardFace = .front
     fileprivate var viewInitiated: Bool = false
-    fileprivate var scene: PlayCardView? = nil
+    fileprivate var scene: PlayCardScene? = nil
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 400, height: 300)
@@ -56,12 +55,14 @@ class PlayCardViewController: QuickWindowViewController {
         
         if (!viewInitiated) {
             let size = PlayCardViewController.getDefaultSize()
-            let scene = PlayCardView(size: CGSize(width: size.width, height: size.height))
-            scene.delegateToController = self
+            let scene = PlayCardScene(size: CGSize(width: size.width, height: size.height))
+            scene.backgroundColor = NSColor(cgColor: CGColor(red: 220/255, green: 220/255, blue: 220/255, alpha: 1))!
             self.scene = scene
             
-            self.view = scene.baseView
-            let skView = self.view as! SKView
+            let skView = PlayCardView(frame: NSMakeRect(0, 0, size.width, size.height))
+            skView.delegateToController = self
+            
+            self.view = skView
             skView.presentScene(self.scene)
             
             shuffleCards()
@@ -79,14 +80,13 @@ class PlayCardViewController: QuickWindowViewController {
 
 extension PlayCardViewController : PlayCardViewDelegate {
     func flip() {
-        let view = self.scene
         switch self.face {
         case .front:
-            view?.flipCard()
+            self.scene?.flipCard()
             self.face = .back
             break
         case .back:
-            view?.flipCard()
+            self.scene?.flipCard()
             self.face = .front
             break
         }
