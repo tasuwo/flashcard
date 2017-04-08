@@ -28,7 +28,7 @@ class PlayCardViewController: QuickWindowViewController {
                 self.index = 0
             }
 
-            view?.renderCardText(text: self.cards[self.index].frontText)
+            view?.renderCardText(frontText: self.cards[self.index].frontText, backText: self.cards[self.index].backText)
         }
     }
     fileprivate var face: CardFace = .front
@@ -80,14 +80,13 @@ class PlayCardViewController: QuickWindowViewController {
 extension PlayCardViewController : PlayCardViewDelegate {
     func flip() {
         let view = self.scene as? PlayCardView
-        let card = self.cards[self.index]
         switch self.face {
         case .front:
-            view?.renderCardText(text: card.backText)
+            view?.flipCard()
             self.face = .back
             break
         case .back:
-            view?.renderCardText(text: card.frontText)
+            view?.flipCard()
             self.face = .front
             break
         }

@@ -26,7 +26,9 @@ class PlayCardView : SKScene {
     open var delegateToController : PlayCardViewDelegate?
     var baseView: SKView!
     var menuView: NSView!
+    var textView: NSView!
     var cardText: NSTextField!
+    var card: CardNode? = nil
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -51,9 +53,9 @@ class PlayCardView : SKScene {
             NSLayoutConstraint(item: shuffleButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 70),
         ])
         
-        let textView = NSView()
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.wantsLayer = true
+        self.textView = NSView()
+        self.textView.translatesAutoresizingMaskIntoConstraints = false
+        self.textView.wantsLayer = true
         self.baseView.addSubview(textView)
         
         self.baseView.addConstraints([
@@ -70,26 +72,28 @@ class PlayCardView : SKScene {
             NSLayoutConstraint(item: textView, attribute: .width, relatedBy: .equal, toItem: self.baseView, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: textView, attribute: .height, relatedBy: .equal, toItem: self.baseView, attribute: .height, multiplier: 1, constant: -30),
         ])
-        
-        cardText = NSTextField()
-        cardText.isEditable = false
-        cardText.translatesAutoresizingMaskIntoConstraints = false
-        textView.addSubview(cardText)
-        
-        textView.addConstraints([
-            NSLayoutConstraint(item: cardText, attribute: .centerX, relatedBy: .equal, toItem: textView, attribute: .centerX, multiplier: 1, constant: 0),
-            NSLayoutConstraint(item: cardText, attribute: .top, relatedBy: .equal, toItem: textView, attribute: .top, multiplier: 1, constant: 10),
-            NSLayoutConstraint(item: cardText, attribute: .width, relatedBy: .equal, toItem: textView, attribute: .width, multiplier: 1, constant: -20),
-            NSLayoutConstraint(item: cardText, attribute: .height, relatedBy: .equal, toItem: textView,  attribute: .height, multiplier: 1, constant: -20),
-        ])
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func renderCardText(text: String) {
-        self.cardText.stringValue = text
+    override func didMove(to view: SKView) {
+        self.baseView.layer!.backgroundColor = .white
+    }
+    
+    func renderCardText(frontText: String, backText: String) {
+        self.card = CardNode(texture: nil, color: .white, size: self.baseView.frame.size)
+        self.card?.setTexts(front: frontText, back: backText)
+        self.card?.position = CGPoint(x: self.baseView.frame.width/2, y: 10)
+        self.card?.size = CGSize(width: self.baseView.frame.width - 20, height: self.baseView.frame.height - 40)
+
+        self.removeAllChildren()
+        self.addChild(card!)
+    }
+    
+    func flipCard() {
+        self.card?.flip()
     }
 }
 
