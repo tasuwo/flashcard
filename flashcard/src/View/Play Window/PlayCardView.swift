@@ -29,6 +29,8 @@ class PlayCardView : SKScene {
     var textView: NSView!
     var cardText: NSTextField!
     var card: CardNode? = nil
+    var correctedSign: SKSpriteNode?
+    var failedSign: SKSpriteNode?
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -78,10 +80,6 @@ class PlayCardView : SKScene {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMove(to view: SKView) {
-        self.baseView.layer!.backgroundColor = .white
-    }
-    
     func renderCardText(frontText: String, backText: String) {
         self.card = CardNode(texture: nil, color: .white, size: self.baseView.frame.size)
         self.card?.setTexts(front: frontText, back: backText)
@@ -90,6 +88,35 @@ class PlayCardView : SKScene {
 
         self.removeAllChildren()
         self.addChild(card!)
+        
+        self.correctedSign = SKSpriteNode(texture: nil, color: .red, size: CGSize(width: 100, height: 100))
+        self.correctedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2)
+        self.correctedSign?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.failedSign = SKSpriteNode(texture: nil, color: .blue, size: CGSize(width: 100, height: 100))
+        self.failedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2)
+        self.failedSign?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.correctedSign?.isHidden = true
+        self.failedSign?.isHidden = true
+        self.addChild(self.correctedSign!)
+        self.addChild(self.failedSign!)
+    }
+    
+    func runEffect(isCorrected: Bool, callback: @escaping () -> Void) {
+        let xWiggleIn = SKAction.scaleX(to: 1.0, duration: 0.05)
+        let xWiggleOut = SKAction.scaleX(to: 1.2, duration: 0.05)
+        let yWiggleIn = SKAction.scaleY(to: 1.0, duration: 0.05)
+        let yWiggleOut = SKAction.scaleY(to: 1.2, duration: 0.05)
+        let wiggleIn = SKAction.sequence([xWiggleIn, yWiggleIn])
+        let wiggleOut = SKAction.sequence([xWiggleOut, yWiggleOut])
+        let wiggle = SKAction.sequence([wiggleOut, wiggleIn, SKAction.wait(forDuration: 0.5)])
+        
+        if isCorrected {
+            self.correctedSign?.isHidden = false
+            self.correctedSign?.run(SKAction.repeat(wiggle, count: 1), completion: callback)
+        } else {
+            self.failedSign?.isHidden = false
+            self.failedSign?.run(SKAction.repeat(wiggle, count: 1), completion: callback)
+        }
     }
     
     func flipCard() {

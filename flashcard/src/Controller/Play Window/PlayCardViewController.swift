@@ -18,7 +18,7 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
-            let view = self.scene as? PlayCardView
+            let view = self.scene
             
             if self.cards.count - 1 < self.index {
                 self.index -= 1
@@ -33,7 +33,7 @@ class PlayCardViewController: QuickWindowViewController {
     }
     fileprivate var face: CardFace = .front
     fileprivate var viewInitiated: Bool = false
-    fileprivate var scene: SKScene? = nil
+    fileprivate var scene: PlayCardView? = nil
     
     override class func getDefaultSize() -> NSSize {
         return NSSize(width: 400, height: 300)
@@ -79,7 +79,7 @@ class PlayCardViewController: QuickWindowViewController {
 
 extension PlayCardViewController : PlayCardViewDelegate {
     func flip() {
-        let view = self.scene as? PlayCardView
+        let view = self.scene
         switch self.face {
         case .front:
             view?.flipCard()
@@ -97,8 +97,10 @@ extension PlayCardViewController : PlayCardViewDelegate {
         let now = NSDate()
         let s = Score(isCorrect: true, date: now)
         Score.add(s, to: c)
-
-        self.index += 1
+        
+        self.scene?.runEffect(isCorrected: true, callback: {
+            self.index += 1
+        })
     }
     
     func failed() {
@@ -106,8 +108,10 @@ extension PlayCardViewController : PlayCardViewDelegate {
         let now = NSDate()
         let s = Score(isCorrect: false, date: now)
         Score.add(s, to: c)
-
-        self.index += 1
+        
+        self.scene?.runEffect(isCorrected: false, callback: {
+            self.index += 1
+        })
     }
     
     func didPressShuffleButton() {
