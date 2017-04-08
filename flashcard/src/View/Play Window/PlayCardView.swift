@@ -29,8 +29,8 @@ class PlayCardView : SKScene {
     var textView: NSView!
     var cardText: NSTextField!
     var card: CardNode? = nil
-    var correctedSign: SKSpriteNode?
-    var failedSign: SKSpriteNode?
+    var correctedSign: SKLabelNode?
+    var failedSign: SKLabelNode?
     
     override init(size: CGSize) {
         super.init(size: size)
@@ -81,23 +81,24 @@ class PlayCardView : SKScene {
     }
     
     func renderCardText(frontText: String, backText: String) {
+        self.removeAllChildren()
+
         self.card = CardNode(texture: nil, color: .white, size: self.baseView.frame.size)
         self.card?.setTexts(front: frontText, back: backText)
         self.card?.position = CGPoint(x: self.baseView.frame.width/2, y: 10)
         self.card?.size = CGSize(width: self.baseView.frame.width - 20, height: self.baseView.frame.height - 40)
-
-        self.removeAllChildren()
         self.addChild(card!)
         
-        self.correctedSign = SKSpriteNode(texture: nil, color: .red, size: CGSize(width: 100, height: 100))
-        self.correctedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2)
-        self.correctedSign?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.failedSign = SKSpriteNode(texture: nil, color: .blue, size: CGSize(width: 100, height: 100))
-        self.failedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2)
-        self.failedSign?.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.correctedSign = SKLabelNode(text: "☺️")
+        self.correctedSign?.fontSize = 70
+        self.correctedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2 - 40)
         self.correctedSign?.isHidden = true
-        self.failedSign?.isHidden = true
         self.addChild(self.correctedSign!)
+
+        self.failedSign = SKLabelNode(text: "😭")
+        self.failedSign?.fontSize = 70
+        self.failedSign?.position = CGPoint(x: self.baseView.frame.width/2, y: self.baseView.frame.height/2 - 40)
+        self.failedSign?.isHidden = true
         self.addChild(self.failedSign!)
     }
     
