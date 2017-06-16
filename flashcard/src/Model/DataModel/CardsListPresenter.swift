@@ -13,18 +13,18 @@ import RealmSwift
 class CardsListPresenter: NSObject {
     private(set) var cards: Results<Card>?
     private var refreshToken: NotificationToken?
-    
-    func loadCards(in holderId: Int, updated: @escaping (RealmCollectionChange<Results<Card>>)-> Void) {
+
+    func loadCards(in holderId: Int, updated: @escaping (RealmCollectionChange<Results<Card>>) -> Void) {
         refreshToken?.stop()
         cards = Card.all(in: holderId)
         refreshToken = cards?.addNotificationBlock(updated)
     }
-    
+
     func releaseNotificationBlock() {
         refreshToken?.stop()
         refreshToken = nil
     }
-    
+
     deinit {
         refreshToken = nil
     }
@@ -52,11 +52,11 @@ extension CardsListPresenter: NSTableViewDataSource {
         }
     }
 
-    func numberOfRows(in tableView: NSTableView) -> Int {
+    func numberOfRows(in _: NSTableView) -> Int {
         return self.cards?.count ?? 0
     }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if cards == nil { return nil }
         if tableColumn == nil { return nil }
         if cards!.count > row {

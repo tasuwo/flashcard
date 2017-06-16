@@ -14,17 +14,17 @@ class Score: Object {
     dynamic var isCorrect: Bool = true
     dynamic var date: NSDate = NSDate()
     let cards = LinkingObjects(fromType: Card.self, property: "scores")
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }
-    
+
     static func lastId() -> Int {
         let realm = try! Realm()
         return realm.objects(Score.self).last?.id ?? -1
     }
-    
-    convenience init (isCorrect: Bool, date: NSDate) {
+
+    convenience init(isCorrect: Bool, date: NSDate) {
         self.init()
         self.id = Score.lastId() + 1
         self.isCorrect = isCorrect

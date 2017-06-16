@@ -22,18 +22,18 @@ class AppSettings: NSObject, NSCoding {
             else {
                 return 0
             }
-            
+
             return self._defaultHolderId
         }
     }
 
-    init (playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int? = nil) {
+    init(playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int? = nil) {
         super.init()
         self.playKeyCombo = playKeyCombo
         self.searchKeyCombo = searchKeyCombo
         self.defaultHolderId = defaultHolderId
     }
-    
+
     required convenience init(coder aDecoder: NSCoder) {
         let playkeycombo = aDecoder.decodeObject(forKey: "playKeyCombo") as! KeyCombo?
         let searchkeycombo = aDecoder.decodeObject(forKey: "searchKeyCombo") as! KeyCombo?
@@ -44,7 +44,7 @@ class AppSettings: NSObject, NSCoding {
             defaultHolderId: defaultHolderId
         )
     }
-    
+
     func encode(with aCoder: NSCoder) {
         aCoder.encode(self.playKeyCombo, forKey: "playKeyCombo")
         aCoder.encode(self.searchKeyCombo, forKey: "searchKeyCombo")
@@ -72,10 +72,10 @@ extension AppSettings {
         UserDefaults.standard.set(encodedData, forKey: "AppSettings")
         UserDefaults.standard.synchronize()
     }
-    
+
     class func get() -> AppSettings? {
         if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
-           let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+            let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
             return settings
         }
         return nil

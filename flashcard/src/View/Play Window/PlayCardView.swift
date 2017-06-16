@@ -22,14 +22,14 @@ protocol PlayCardViewDelegate {
 }
 
 // MARK: -
-class PlayCardView : SKView {
-    open var delegateToController : PlayCardViewDelegate?
+class PlayCardView: SKView {
+    open var delegateToController: PlayCardViewDelegate?
     var menuView: NSView!
     var cardText: NSTextField!
-    
+
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
-        
+
         menuView = NSView()
         menuView.translatesAutoresizingMaskIntoConstraints = false
         menuView.wantsLayer = true
@@ -39,26 +39,26 @@ class PlayCardView : SKView {
         shuffleButton.sendAction(on: .keyDown)
         shuffleButton.translatesAutoresizingMaskIntoConstraints = false
         menuView.addSubview(shuffleButton)
-        
+
         menuView.addConstraints([
             NSLayoutConstraint(item: shuffleButton, attribute: .centerY, relatedBy: .equal, toItem: menuView, attribute: .centerY, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: shuffleButton, attribute: .right, relatedBy: .equal, toItem: menuView, attribute: .right, multiplier: 1, constant: -10),
             NSLayoutConstraint(item: shuffleButton, attribute: .height, relatedBy: .equal, toItem: menuView, attribute: .height, multiplier: 1, constant: -6),
             NSLayoutConstraint(item: shuffleButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 70),
         ])
-        
+
         self.addConstraints([
-            NSLayoutConstraint(item: self, attribute: .width,  relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frameRect.width),
+            NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frameRect.width),
             NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frameRect.height),
-            
+
             NSLayoutConstraint(item: menuView, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: menuView, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: menuView, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 1, constant: 0),
             NSLayoutConstraint(item: menuView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30),
         ])
     }
-    
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
@@ -70,7 +70,7 @@ extension PlayCardView {
 }
 
 extension PlayCardView {
-    override var acceptsFirstResponder: Bool { get { return true } }
+    override var acceptsFirstResponder: Bool { return true }
 
     override func keyDown(with event: NSEvent) {
         let character = Int(event.keyCode)
@@ -81,7 +81,7 @@ extension PlayCardView {
             super.keyDown(with: event)
         }
     }
-    
+
     override func keyUp(with event: NSEvent) {
         let character = Int(event.keyCode)
         switch character {

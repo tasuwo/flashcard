@@ -12,20 +12,20 @@ import RealmSwift
 class CardHoldersListPresenter: NSObject {
     private(set) var holders: Results<CardHolder>?
     private var refreshToken: NotificationToken?
-    
-    func load(updated: @escaping (RealmCollectionChange<Results<CardHolder>>)-> Void) {
+
+    func load(updated: @escaping (RealmCollectionChange<Results<CardHolder>>) -> Void) {
         refreshToken?.stop()
         holders = CardHolder.all()
         refreshToken = holders?.addNotificationBlock(updated)
     }
-    
+
     deinit {
         refreshToken = nil
     }
 }
 
 extension CardHoldersListPresenter: NSTableViewDataSource {
-    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
+    func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for _: NSTableColumn?, row: Int) {
         if let h = holders, let v = object as? String {
             if h.count > row {
                 let id = h[row].id
@@ -37,11 +37,11 @@ extension CardHoldersListPresenter: NSTableViewDataSource {
         }
     }
 
-    func numberOfRows(in tableView: NSTableView) -> Int {
+    func numberOfRows(in _: NSTableView) -> Int {
         return self.holders?.count ?? 0
     }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+
+    func tableView(_: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
         if holders == nil { return nil }
 
         if let cid = tableColumn?.identifier, let h = holders, h.count > row {

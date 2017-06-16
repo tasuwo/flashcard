@@ -8,6 +8,6 @@
 
 import Cocoa
 
-class QuickWindowViewController : NSViewController {
-    open var delegate : DelegateToQuickWindow?
+class QuickWindowViewController: NSViewController {
+    open var delegate: DelegateToQuickWindow?
 }

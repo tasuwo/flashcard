@@ -13,17 +13,17 @@ class CardHolder: Object {
     dynamic var id = 0
     dynamic var name = ""
     let cards = List<Card>()
-    
+
     override static func primaryKey() -> String? {
         return "id"
     }
-    
+
     static func lastId() -> Int {
         let realm = try! Realm()
         return realm.objects(CardHolder.self).last?.id ?? -1
     }
-    
-    convenience init (name: String) {
+
+    convenience init(name: String) {
         self.init()
         self.id = CardHolder.lastId() + 1
         self.name = name
@@ -42,7 +42,7 @@ extension CardHolder {
         let realm = try! Realm()
         return realm.objects(CardHolder.self).filter("id == \(id)").first
     }
-    
+
     static func add(_ holder: CardHolder) {
         let realm = try! Realm()
         try! realm.write {
@@ -53,7 +53,7 @@ extension CardHolder {
             }
         }
     }
-    
+
     static func update(_ id: Int, name: String) {
         let realm = try! Realm()
         if let holder = CardHolder.get(id) {
@@ -63,7 +63,7 @@ extension CardHolder {
             }
         }
     }
-    
+
     static func delete(_ holder: CardHolder) {
         let realm = try! Realm()
         try! realm.write {

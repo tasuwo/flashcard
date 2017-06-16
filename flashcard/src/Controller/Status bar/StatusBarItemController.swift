@@ -10,10 +10,9 @@ import Cocoa
 
 class StatusBarController: NSObject {
     var view: StatusBarItem!
-    
+
     override init() {
         super.init()
         self.view = StatusBarItem()
     }
 }
-

@@ -12,9 +12,9 @@ class CardTableView: NSTableView {
     func setupSettings() {
         self.focusRingType = .none
         self.rowHeight = 30
-        
+
         self.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
-        
+
         let frontColumn = NSTableColumn(identifier: "front")
         let backColumn = NSTableColumn(identifier: "back")
         frontColumn.headerCell.stringValue = "FRONT"
@@ -25,11 +25,9 @@ class CardTableView: NSTableView {
         backColumn.sizeToFit()
         self.addTableColumn(frontColumn)
         self.addTableColumn(backColumn)
-        
+
         self.usesAlternatingRowBackgroundColors = true
-        
+
         self.sizeLastColumnToFit()
     }
 }
-
-

@@ -11,7 +11,7 @@ import Cocoa
 enum QuickWindowViewType {
     case search
     case editCard
-    
+
     func isType(of view: NSView) -> Bool {
         switch self {
         case .search:
@@ -20,7 +20,7 @@ enum QuickWindowViewType {
             return (view is EditCardView)
         }
     }
-    
+
     func type() -> NSView.Type {
         switch self {
         case .search:
@@ -29,7 +29,7 @@ enum QuickWindowViewType {
             return EditCardView.self
         }
     }
-    
+
     func viewControllerType() -> QuickWindowViewController.Type {
         switch self {
         case .search:

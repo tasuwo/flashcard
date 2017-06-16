@@ -11,16 +11,16 @@ import Cocoa
 class StatusBarItem: NSObject {
     let WIDTH: CGFloat = 24.4
     let statusItem: NSStatusItem
-    
+
     override init() {
         self.statusItem = NSStatusBar.system().statusItem(withLength: WIDTH)
-        
+
         if let button = statusItem.button {
             let image = NSImage(named: "StatusBarIcon")
             image?.isTemplate = true
             button.image = NSImage(named: "StatusBarIcon")
         }
-        
+
         let menu = NSMenu()
         menu.addItem(NSMenuItem(title: "Preferences", action: #selector(AppDelegate.didSelectPreferences), keyEquivalent: ","))
         menu.addItem(NSMenuItem(title: "Play", action: #selector(AppDelegate.togglePlayWindow), keyEquivalent: "p"))

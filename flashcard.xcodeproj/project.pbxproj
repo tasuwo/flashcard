@@ -410,6 +410,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0DCC2E51E66DA1C0071A00E /* Build configuration list for PBXNativeTarget "flashcard" */;
 			buildPhases = (
+				2C342A3C1EF4A02100DFC085 /* Swift Fromat */,
 				6A6C762DD2A3A0613DC4AB40 /* [CP] Check Pods Manifest.lock */,
 				A0DCC2C71E66DA1C0071A00E /* Sources */,
 				A0DCC2C81E66DA1C0071A00E /* Frameworks */,
@@ -506,6 +507,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		2C342A3C1EF4A02100DFC085 /* Swift Fromat */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Swift Fromat";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/SwiftFormat/CommandLineTool/swiftformat\" \"--disable\" \"redundantSelf\" \"${SRCROOT}/flashcard/src\"";
+		};
 		3940238AD8EE38B9B9D8FED2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -8,12 +8,11 @@
 
 import Cocoa
 
-
-class PlayCardWindowController : NSWindowController {
+class PlayCardWindowController: NSWindowController {
 
     override init(window: NSWindow?) {
         super.init(window: window)
-        
+
         let vc = PlayCardViewController()
         self.window!.contentViewController = vc
         self.window?.hasShadow = true
@@ -22,11 +21,11 @@ class PlayCardWindowController : NSWindowController {
         self.window?.delegate = self
         self.window?.styleMask.insert(.fullSizeContentView)
     }
-    
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.titleVisibility = .hidden
@@ -34,26 +33,22 @@ class PlayCardWindowController : NSWindowController {
 }
 
 // MARK: - NSWindowDelegate
-extension PlayCardWindowController : NSWindowDelegate {
-    func windowDidMiniaturize(_ notification: Notification) {
+extension PlayCardWindowController: NSWindowDelegate {
+    func windowDidMiniaturize(_: Notification) {
         print("Window minimized")
     }
-    
-    func windowWillClose(_ notification: Notification) {
+
+    func windowWillClose(_: Notification) {
         print("Window closing")
     }
-    
-    func windowDidResignKey(_ notification: Notification) {
+
+    func windowDidResignKey(_: Notification) {
         self.window?.orderOut(self)
     }
 }
 
 class KeyDetectableBorderlessWindow: NSWindow {
-    override var canBecomeMain: Bool {
-        get { return true }
-    }
-    
-    override var canBecomeKey: Bool {
-        get { return true }
-    }
+    override var canBecomeMain: Bool { return true }
+
+    override var canBecomeKey: Bool { return true }
 }

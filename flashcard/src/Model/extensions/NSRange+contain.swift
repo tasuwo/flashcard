@@ -10,6 +10,6 @@ import Foundation
 
 extension NSRange {
     func contain(_ i: Int) -> Bool {
-        return (i >= self.location && i <= self.location+self.length-1)
+        return (i >= self.location && i <= self.location + self.length - 1)
     }
 }

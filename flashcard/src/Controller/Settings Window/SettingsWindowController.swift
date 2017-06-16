@@ -14,16 +14,16 @@ struct TabInfo {
     let viewController: NSViewController.Type
 }
 
-class SettingsWindowController : NSWindowController {
+class SettingsWindowController: NSWindowController {
     static let winSize = NSSize(width: 800, height: 600)
 
-    var toolbar : NSToolbar!
+    var toolbar: NSToolbar!
     var toolbarTabsArray = [
         TabInfo(title: "General", icon: "NSPreferencesGeneral", viewController: GeneralViewController.self),
-        TabInfo(title: "Cards",   icon: "NSAdvanced",           viewController: CardsViewController.self)
+        TabInfo(title: "Cards", icon: "NSAdvanced", viewController: CardsViewController.self),
     ]
-    var toolbarTabsIdentifierArray:[String] = []
-    
+    var toolbarTabsIdentifierArray: [String] = []
+
     override init(window: NSWindow?) {
         super.init(window: window)
 
@@ -35,40 +35,40 @@ class SettingsWindowController : NSWindowController {
         toolbar.allowsUserCustomization = true
         toolbar.delegate = self
         self.window!.toolbar = toolbar
-        
+
         // View Controller
         let controller = GeneralViewController()
         self.window!.contentViewController = controller
     }
-    
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
 
 // MARK: - NSToolbarDelegate
-extension SettingsWindowController : NSToolbarDelegate {
-    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        if let info = (self.toolbarTabsArray.filter() { $0.viewController.className() == itemIdentifier }).first {
+extension SettingsWindowController: NSToolbarDelegate {
+    func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
+        if let info = (self.toolbarTabsArray.filter { $0.viewController.className() == itemIdentifier }).first {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.label = info.title
             toolbarItem.image = NSImage(named: info.icon)
             toolbarItem.target = self
             toolbarItem.action = #selector(SettingsWindowController.viewSelected(_:))
-            
+
             return toolbarItem
         }
         return nil
     }
 
-    func toolbarWillAddItem(_ notification: Notification) {
+    func toolbarWillAddItem(_: Notification) {
         print("toolbarWillAddItem")
     }
 
-    func toolbarDidRemoveItem(_ notification: Notification) {
+    func toolbarDidRemoveItem(_: Notification) {
         print("toolbarDidRemoveItem")
     }
-    
+
     func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
         return self.toolbarDefaultItemIdentifiers(toolbar)
     }
@@ -77,7 +77,7 @@ extension SettingsWindowController : NSToolbarDelegate {
         return self.toolbarDefaultItemIdentifiers(toolbar)
     }
 
-    func toolbarDefaultItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
+    func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [String] {
         return self.toolbarTabsIdentifierArray
     }
 }
@@ -87,11 +87,11 @@ extension SettingsWindowController {
     func viewSelected(_ sender: NSToolbarItem) {
         self.loadViewWithIdentifier(sender.itemIdentifier)
     }
-    
+
     func loadViewWithIdentifier(_ id: String) {
         if self.contentViewController!.className == id { return }
-        
-        if let info = (self.toolbarTabsArray.filter() { $0.viewController.className() == id }).first {
+
+        if let info = (self.toolbarTabsArray.filter { $0.viewController.className() == id }).first {
             let newViewController = info.viewController.init()
             self.window!.contentViewController = newViewController
         }

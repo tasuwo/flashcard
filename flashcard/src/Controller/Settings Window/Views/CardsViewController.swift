@@ -11,41 +11,41 @@ import Cocoa
 class CardsViewController: NSViewController {
     var holdersPresenter: CardHoldersListPresenter!
     var cardsPresenter: CardsListPresenter!
-    
+
     override func loadView() {
         let winSize = SettingsWindowController.winSize
-        let view = CardsView(frame: NSMakeRect(0,0,winSize.width, winSize.height))
+        let view = CardsView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
         view.delegate = self
-        
+
         holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load(updated:{ changes in
+        holdersPresenter.load(updated: { changes in
             switch changes {
             case .initial:
                 view.holdersList.reloadData()
-                
-            case .update(_, let del, let ins, let upd):
+
+            case let .update(_, del, ins, upd):
                 view.holdersList.beginUpdates()
                 view.holdersList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
                 view.holdersList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
                 view.holdersList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
                 view.holdersList.endUpdates()
-                
+
             default: break
             }
         })
         view.holdersList.dataSource = self.holdersPresenter
         view.holdersList.delegate = self
-        
+
         cardsPresenter = CardsListPresenter()
         view.cardsList.delegate = self
-        
+
         self.view = view
     }
 }
 
-extension CardsViewController : CardsViewDelegate {
+extension CardsViewController: CardsViewDelegate {
     func didPressAddCard() {}
-    
+
     func didPressRemoveCard(selectedRow: Int) {
         if selectedRow != -1 {
             if let selectedCard = self.cardsPresenter.cards?[selectedRow] {
@@ -53,12 +53,12 @@ extension CardsViewController : CardsViewDelegate {
             }
         }
     }
-    
+
     func didPressAddCardHolder() {
         let holder = CardHolder(name: "Untitled")
         CardHolder.add(holder)
     }
-    
+
     func didPressRemoveCardHolder(selectedRow: Int) {
         if selectedRow == 0 { return }
         let view = self.view as! CardsView
@@ -97,10 +97,10 @@ extension CardsViewController: NSTableViewDelegate {
             }
             return nil
         }
-        
+
         return nil
     }
-    
+
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         let view = self.view as! CardsView
         if tableView === view.cardsList {
@@ -108,7 +108,7 @@ extension CardsViewController: NSTableViewDelegate {
                 return Card.calcRowHeight(c[row], tableView: tableView)
             }
         }
-        
+
         return tableView.rowHeight
     }
 
@@ -122,14 +122,14 @@ extension CardsViewController: NSTableViewDelegate {
                     switch changes {
                     case .initial:
                         view.cardsList.reloadData()
-                        
-                    case .update(_, let del, let ins, let upd):
+
+                    case let .update(_, del, ins, upd):
                         view.cardsList.beginUpdates()
                         view.cardsList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
                         view.cardsList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
                         view.cardsList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
                         view.cardsList.endUpdates()
-                        
+
                     default: break
                     }
                 })

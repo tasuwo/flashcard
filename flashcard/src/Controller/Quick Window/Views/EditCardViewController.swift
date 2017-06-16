@@ -9,13 +9,14 @@
 import Cocoa
 
 class EditCardViewController: QuickWindowViewController {
-    var targetDefinition: SearchResultInfo? = nil {
+    var targetDefinition: SearchResultInfo? {
         didSet {
             let view = self.view as? EditCardView
             view?.definition = self.targetDefinition!.body
             view?.targetWord = self.targetDefinition!.title
         }
     }
+
     var cardText: (String, String) = (front: "", back: "")
 
     override class func getDefaultSize() -> NSSize {
@@ -29,10 +30,10 @@ class EditCardViewController: QuickWindowViewController {
 
         self.view = view
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
-        
+
         let view = self.view as! EditCardView
         view.setResponder()
     }
@@ -42,14 +43,14 @@ extension EditCardViewController: EditCardViewDelegate {
     func updateCardText(front: String, back: String) {
         self.cardText = (front: front, back: back)
     }
-    
+
     func cancel() {
         self.view.removeAllConstraints()
         self.delegate?.transitionTo(.search)
     }
-    
+
     func didPressCommandEnter() {
-        let card = Card(id: Card.lastId()+1, frontText: self.cardText.0, backText: self.cardText.1)
+        let card = Card(id: Card.lastId() + 1, frontText: self.cardText.0, backText: self.cardText.1)
         if let s = AppSettings.get(), let hi = s.defaultHolderId, let h = CardHolder.get(hi) {
             Card.add(card, to: h)
         } else if let h = CardHolder.get(0) {

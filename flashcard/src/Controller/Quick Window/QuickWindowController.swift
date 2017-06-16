@@ -15,7 +15,7 @@ protocol DelegateToQuickWindow {
     func cancel()
 }
 
-class QuickWindowController : NSWindowController {
+class QuickWindowController: NSWindowController {
     let dic = CoreServiceDictionary()
 
     override init(window: NSWindow?) {
@@ -26,11 +26,11 @@ class QuickWindowController : NSWindowController {
         self.window!.contentViewController = searchVC
 
         window!.delegate = self
-        
+
         self.window!.hasShadow = true
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -40,14 +40,14 @@ class QuickWindowController : NSWindowController {
 }
 
 // MARK: - NSWindowDelegate
-extension QuickWindowController : NSWindowDelegate {
-    func windowDidResignKey(_ notification: Notification) {
+extension QuickWindowController: NSWindowDelegate {
+    func windowDidResignKey(_: Notification) {
         self.window?.orderOut(self)
     }
 }
 
 // MARK: - DElegateToSearchWindow
-extension QuickWindowController : DelegateToQuickWindow {
+extension QuickWindowController: DelegateToQuickWindow {
     func transitionTo(_ T: QuickWindowViewType) {
         if T.isType(of: self.contentViewController!.view) { return }
 
@@ -60,7 +60,7 @@ extension QuickWindowController : DelegateToQuickWindow {
     func lookup(_ word: String) {
         // TODO: Dictionary search
         let results = dic.lookUp(word)
-        
+
         if let v = self.contentViewController as? SearchViewController {
             if results.count > 0 {
                 v.displayResult(results)
@@ -69,16 +69,16 @@ extension QuickWindowController : DelegateToQuickWindow {
             }
         }
     }
-    
+
     func resize(_ size: NSSize, animate: Bool) {
         // TODO: Coordiante window's origin position
         let origin = (
-            x: self.window!.frame.origin.x + self.window!.frame.width/2 - size.width/2,
+            x: self.window!.frame.origin.x + self.window!.frame.width / 2 - size.width / 2,
             y: self.window!.frame.origin.y + self.window!.frame.height - size.height
         )
         self.window?.setFrame(NSMakeRect(origin.x, origin.y, size.width, size.height), display: true, animate: animate)
     }
-    
+
     func cancel() {
         self.window?.orderOut(self)
     }

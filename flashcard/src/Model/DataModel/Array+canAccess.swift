@@ -10,6 +10,6 @@ import Foundation
 
 extension Array {
     func canAccess(index: Int) -> Bool {
-        return self.count-1 >= index && index >= 0
+        return self.count - 1 >= index && index >= 0
     }
 }

@@ -7,18 +7,21 @@ PODS:
   - Realm/Headers (2.5.0)
   - RealmSwift (2.5.0):
     - Realm (= 2.5.0)
+  - SwiftFormat/CLI (0.28.6)
 
 DEPENDENCIES:
   - KeyHolder
   - Magnet
   - RealmSwift
+  - SwiftFormat/CLI
 
 SPEC CHECKSUMS:
   KeyHolder: 2389c8c9f911d56c413b1b288efa072e7a992c81
   Magnet: b30d2807dd0d8a349ce4e6574ecefa38012d02ca
   Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
   RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  SwiftFormat: 9acb099fdbb44d4ca83e031361b1e3c701cd25ed
 
-PODFILE CHECKSUM: 6dfa7a7a5266be425ce47c4ad5d34bbceb5dd3e7
+PODFILE CHECKSUM: 139d222d031aed9f2a99fff07dc35f183d0c2c73
 
 COCOAPODS: 1.2.0

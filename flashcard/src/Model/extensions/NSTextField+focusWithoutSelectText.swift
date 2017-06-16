@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 extension NSTextField {
-    func focusWithoutSelectText(_ sender: Any?) {
+    func focusWithoutSelectText(_: Any?) {
         self.selectText(self)
         self.currentEditor()?.selectedRange = NSMakeRange(self.stringValue.characters.count, 0)
     }

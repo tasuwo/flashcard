@@ -15,15 +15,15 @@ struct SearchResultInfo {
 
 protocol SearchResultsViewDelegate {}
 
-class SearchResultsView : NSView {
-    open var delegate : SearchResultsViewDelegate?
-    var resultViews : [SearchResultView]?
-    
+class SearchResultsView: NSView {
+    open var delegate: SearchResultsViewDelegate?
+    var resultViews: [SearchResultView]?
+
     override init(frame: NSRect) {
         super.init(frame: frame)
     }
-    
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

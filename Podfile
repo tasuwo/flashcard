@@ -9,6 +9,7 @@ target 'flashcard' do
   pod 'RealmSwift'
   pod 'Magnet'
   pod 'KeyHolder'
+  pod 'SwiftFormat/CLI'
 
   target 'flashcardTests' do
     inherit! :search_paths

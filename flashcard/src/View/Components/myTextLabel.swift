@@ -9,7 +9,7 @@
 import Foundation
 import Cocoa
 
-class myTextLabel : NSTextField {
+class myTextLabel: NSTextField {
     convenience init(with text: String) {
         self.init()
         self.stringValue = text

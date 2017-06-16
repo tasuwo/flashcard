@@ -13,7 +13,7 @@ extension String {
     func calcWidth() -> CGFloat {
         return NSAttributedString(string: self, attributes: [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize())]).size().width
     }
-    
+
     func calcHeight() -> CGFloat {
         return NSAttributedString(string: self, attributes: [NSFontAttributeName: NSFont.systemFont(ofSize: NSFont.systemFontSize())]).size().height
     }
