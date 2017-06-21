@@ -8,7 +8,15 @@
 
 import Cocoa
 
-class EditCardViewController: QuickWindowViewController {
+extension ViewSizeProvider where Self: EditCardViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 800, height: 450)
+    }
+}
+
+class EditCardViewController: NSViewController, ViewSizeProvider {
+    open var delegate: DelegateToQuickWindow?
+
     var targetDefinition: SearchResultInfo? {
         didSet {
             let view = self.view as? EditCardView
@@ -19,12 +27,8 @@ class EditCardViewController: QuickWindowViewController {
 
     var cardText: (String, String) = (front: "", back: "")
 
-    override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 800, height: 450)
-    }
-
     override func loadView() {
-        let size = EditCardViewController.getDefaultSize()
+        let size = EditCardViewController.size()
         let view = EditCardView(frame: NSMakeRect(0, 0, size.width, size.height))
         view.delegate = self
 
@@ -46,7 +50,9 @@ extension EditCardViewController: EditCardViewDelegate {
 
     func cancel() {
         self.view.removeAllConstraints()
-        self.delegate?.transitionTo(.search)
+        let vc = SearchViewController()
+        vc.delegate = self.delegate
+        self.delegate?.transitionTo(vc, size: SearchViewController.size())
     }
 
     func didPressCommandEnter() {
@@ -62,6 +68,8 @@ extension EditCardViewController: EditCardViewDelegate {
 
         // Transition
         self.view.removeAllConstraints()
-        self.delegate?.transitionTo(.search)
+        let vc = SearchViewController()
+        vc.delegate = self.delegate
+        self.delegate?.transitionTo(vc, size: SearchViewController.size())
     }
 }

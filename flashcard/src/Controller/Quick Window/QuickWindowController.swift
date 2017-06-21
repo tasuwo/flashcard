@@ -11,11 +11,30 @@ import Cocoa
 protocol DelegateToQuickWindow {
     func lookup(_ word: String)
     func resize(_ size: NSSize, animate: Bool)
-    func transitionTo(_ view: QuickWindowViewType)
+    func transitionTo(_ newViewController: NSViewController, size: NSSize)
     func cancel()
 }
 
-class QuickWindowController: NSWindowController {
+extension WindowSizeCalculator where Self: QuickWindowController {
+    static func calcRect(screenSize: NSSize) -> NSRect {
+        return NSMakeRect(
+            screenSize.width / 2 - defaultSize().width / 2,
+            screenSize.height * 2 / 3,
+            defaultSize().width,
+            defaultSize().height
+        )
+    }
+
+    static func defaultSize() -> NSSize {
+        return NSSize(width: 800, height: 60)
+    }
+
+    static func defaultRect() -> NSRect {
+        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
+    }
+}
+
+class QuickWindowController: NSWindowController, WindowSizeCalculator {
     let dic = CoreServiceDictionary()
 
     override init(window: NSWindow?) {
@@ -48,13 +67,9 @@ extension QuickWindowController: NSWindowDelegate {
 
 // MARK: - DElegateToSearchWindow
 extension QuickWindowController: DelegateToQuickWindow {
-    func transitionTo(_ T: QuickWindowViewType) {
-        if T.isType(of: self.contentViewController!.view) { return }
-
-        let newVC = T.viewControllerType().init()
-        newVC.delegate = self
-        self.resize(T.viewControllerType().getDefaultSize(), animate: false)
-        self.contentViewController = newVC
+    func transitionTo(_ newViewController: NSViewController, size: NSSize) {
+        self.resize(size, animate: false)
+        self.contentViewController = newViewController
     }
 
     func lookup(_ word: String) {

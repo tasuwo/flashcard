@@ -14,7 +14,7 @@ class GeneralViewController: NSViewController {
     var holdersPresenter: CardHoldersListPresenter!
 
     override func loadView() {
-        let winSize = SettingsWindowController.winSize
+        let winSize = SettingsWindowController.defaultSize()
         let view = GeneralView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
         view.hotkeyDelegate = self
 

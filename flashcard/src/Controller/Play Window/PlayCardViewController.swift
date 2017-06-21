@@ -14,7 +14,13 @@ enum CardFace {
     case back, front
 }
 
-class PlayCardViewController: QuickWindowViewController {
+extension ViewSizeProvider where Self: PlayCardViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 400, height: 300)
+    }
+}
+
+class PlayCardViewController: NSViewController, ViewSizeProvider {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
@@ -36,10 +42,6 @@ class PlayCardViewController: QuickWindowViewController {
     fileprivate var viewInitiated: Bool = false
     fileprivate var scene: PlayCardScene?
 
-    override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 400, height: 300)
-    }
-
     class func getResultViewHeight() -> CGFloat {
         return CGFloat(50)
     }
@@ -56,7 +58,7 @@ class PlayCardViewController: QuickWindowViewController {
         super.viewWillLayout()
 
         if !viewInitiated {
-            let size = PlayCardViewController.getDefaultSize()
+            let size = PlayCardViewController.size()
             let scene = PlayCardScene(size: CGSize(width: size.width, height: size.height))
             scene.backgroundColor = NSColor(cgColor: CGColor(red: 220 / 255, green: 220 / 255, blue: 220 / 255, alpha: 1))!
             self.scene = scene

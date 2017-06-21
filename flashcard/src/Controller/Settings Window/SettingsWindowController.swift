@@ -14,9 +14,26 @@ struct TabInfo {
     let viewController: NSViewController.Type
 }
 
-class SettingsWindowController: NSWindowController {
-    static let winSize = NSSize(width: 800, height: 600)
+extension WindowSizeCalculator where Self: SettingsWindowController {
+    static func calcRect(screenSize: NSSize) -> NSRect {
+        return NSMakeRect(
+            screenSize.width / 2 - defaultSize().width / 2,
+            screenSize.height / 2 - defaultSize().height / 2,
+            defaultSize().width,
+            defaultSize().height
+        )
+    }
 
+    static func defaultSize() -> NSSize {
+        return NSSize(width: 800, height: 600)
+    }
+
+    static func defaultRect() -> NSRect {
+        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
+    }
+}
+
+class SettingsWindowController: NSWindowController, WindowSizeCalculator {
     var toolbar: NSToolbar!
     var toolbarTabsArray = [
         TabInfo(title: "General", icon: "NSPreferencesGeneral", viewController: GeneralViewController.self),

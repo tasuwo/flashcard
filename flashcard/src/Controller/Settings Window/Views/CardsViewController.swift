@@ -13,7 +13,7 @@ class CardsViewController: NSViewController {
     var cardsPresenter: CardsListPresenter!
 
     override func loadView() {
-        let winSize = SettingsWindowController.winSize
+        let winSize = SettingsWindowController.defaultSize()
         let view = CardsView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
         view.delegate = self
 

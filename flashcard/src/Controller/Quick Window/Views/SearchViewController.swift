@@ -8,23 +8,26 @@
 
 import Cocoa
 
-class SearchViewController: QuickWindowViewController {
+extension ViewSizeProvider where Self: SearchViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 800, height: 60)
+    }
+}
+
+class SearchViewController: NSViewController, ViewSizeProvider {
+    open var delegate: DelegateToQuickWindow?
     var resultsView: SearchResultsView!
     var resultViews: [SearchResultView] = []
     var resultInfos: [SearchResultInfo] = []
     var iSelectedResult: Int?
     var shownResultsRange: NSRange?
 
-    override class func getDefaultSize() -> NSSize {
-        return NSSize(width: 800, height: 60)
-    }
-
     class func getResultViewHeight() -> CGFloat {
         return CGFloat(50)
     }
 
     override func loadView() {
-        let size = SearchViewController.getDefaultSize()
+        let size = SearchViewController.size()
         let view = SearchView(frame: NSMakeRect(0, 0, size.width, size.height))
         view.delegate = self
 
@@ -50,7 +53,7 @@ extension SearchViewController {
         let resultsHeight = rvHeight * nDisplay + margin
         self.resultsView.frame.size = NSMakeSize(800, resultsHeight)
         // Resize window
-        let winHeight = resultsHeight + SearchViewController.getDefaultSize().height
+        let winHeight = resultsHeight + SearchViewController.size().height
         self.delegate?.resize(NSMakeSize(800, winHeight), animate: false)
 
         // Create views
@@ -86,7 +89,7 @@ extension SearchViewController {
         self.resultInfos = []
         self.iSelectedResult = nil
 
-        self.delegate?.resize(SearchViewController.getDefaultSize(), animate: false)
+        self.delegate?.resize(SearchViewController.size(), animate: false)
     }
 }
 
@@ -97,7 +100,9 @@ extension SearchViewController: SearchViewDelegate {
 
     func didPressEnter(with text: String) {
         let win = self.view.window
-        self.delegate?.transitionTo(.editCard)
+        let nextVC = EditCardViewController()
+        nextVC.delegate = self.delegate
+        self.delegate?.transitionTo(nextVC, size: EditCardViewController.size())
 
         let vc = win?.contentViewController as? EditCardViewController
         if let i = self.iSelectedResult, self.resultInfos.canAccess(index: i) {
