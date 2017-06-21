@@ -73,7 +73,7 @@
 		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = "<group>"; };
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
 		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
-		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+canAccess.swift"; path = "../DataModel/Array+canAccess.swift"; sourceTree = "<group>"; };
+		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+canAccess.swift"; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
 		2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+calcWidth+calcHeight.swift"; sourceTree = "<group>"; };
 		2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+focusWithoutSelectText.swift"; sourceTree = "<group>"; };
 		2C3AA4671E97CEE200988ACC /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -158,9 +158,9 @@
 		2C06ABD61E8F695F00B6DE70 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */,
 				2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */,
 				2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */,
-				2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -185,15 +185,15 @@
 				2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */,
 			);
 			name = "View Controllers";
-			path = Views;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		2C4769711E85EABE00814D28 /* Play Window */ = {
 			isa = PBXGroup;
 			children = (
+				2C9A0D401E985F19007225E7 /* CardNode.swift */,
 				2C9A0D421E9886E2007225E7 /* PlayCardScene.swift */,
 				2C4769771E85F00400814D28 /* PlayCardView.swift */,
-				2C9A0D401E985F19007225E7 /* CardNode.swift */,
 			);
 			path = "Play Window";
 			sourceTree = "<group>";
@@ -214,11 +214,11 @@
 				2C4769791E8696DB00814D28 /* Collection+shuffle.swift */,
 				2C47697B1E86971500814D28 /* MutableCollection+shuffleInPlace.swift */,
 				2C471B581E813D0300FCF0DA /* NSRange+contain.swift */,
+				2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */,
 				2CBD97731E7B9F19007031BD /* NSView+removeAllConstraints.swift */,
+				2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */,
 				2C06ABD21E8EA46700B6DE70 /* String+componentsSeparated.swift */,
 				2C06ABD41E8EA48400B6DE70 /* String+removeInt.swift */,
-				2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */,
-				2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -254,6 +254,7 @@
 				2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */,
 			);
 			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		2CA38D661E72ECCE00E850FC /* Quick Window */ = {
@@ -302,7 +303,7 @@
 				A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */,
 			);
 			name = "View Controllers";
-			path = Views;
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		5CB008E08E3D981C336D99A9 /* Pods */ = {
@@ -362,12 +363,12 @@
 		A0923E031E683F5F003642FD /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */,
-				2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */,
 				2C4769721E85EAC900814D28 /* Play Window */,
 				2CA38D661E72ECCE00E850FC /* Quick Window */,
 				2CA38D671E72ECE700E850FC /* Settings Window */,
 				2C4769811E86AA7F00814D28 /* Status bar */,
+				2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */,
+				2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
