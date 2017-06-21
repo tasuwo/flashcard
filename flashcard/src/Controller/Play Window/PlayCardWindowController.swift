@@ -8,26 +8,7 @@
 
 import Cocoa
 
-extension WindowSizeCalculator where Self: PlayCardWindowController {
-    static func calcRect(screenSize: NSSize) -> NSRect {
-        return NSMakeRect(
-            screenSize.width / 2 - defaultSize().width / 2,
-            screenSize.height / 2 - defaultSize().height / 2,
-            defaultSize().width,
-            defaultSize().height
-        )
-    }
-
-    static func defaultSize() -> NSSize {
-        return NSSize(width: 400, height: 300)
-    }
-
-    static func defaultRect() -> NSRect {
-        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
-    }
-}
-
-class PlayCardWindowController: NSWindowController, WindowSizeCalculator {
+class PlayCardWindowController: NSWindowController {
     override init(window: NSWindow?) {
         super.init(window: window)
 
@@ -47,6 +28,26 @@ class PlayCardWindowController: NSWindowController, WindowSizeCalculator {
     override func windowDidLoad() {
         super.windowDidLoad()
         self.window?.titleVisibility = .hidden
+    }
+}
+
+// MARK: - WindowSizeCalculator
+extension PlayCardWindowController: WindowSizeCalculator {
+    static func calcRect(screenSize: NSSize) -> NSRect {
+        return NSMakeRect(
+            screenSize.width / 2 - defaultSize().width / 2,
+            screenSize.height / 2 - defaultSize().height / 2,
+            defaultSize().width,
+            defaultSize().height
+        )
+    }
+
+    static func defaultSize() -> NSSize {
+        return NSSize(width: 400, height: 300)
+    }
+
+    static func defaultRect() -> NSRect {
+        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
     }
 }
 

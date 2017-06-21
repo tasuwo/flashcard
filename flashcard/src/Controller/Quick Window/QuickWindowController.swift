@@ -15,26 +15,7 @@ protocol DelegateToQuickWindow {
     func cancel()
 }
 
-extension WindowSizeCalculator where Self: QuickWindowController {
-    static func calcRect(screenSize: NSSize) -> NSRect {
-        return NSMakeRect(
-            screenSize.width / 2 - defaultSize().width / 2,
-            screenSize.height * 2 / 3,
-            defaultSize().width,
-            defaultSize().height
-        )
-    }
-
-    static func defaultSize() -> NSSize {
-        return NSSize(width: 800, height: 60)
-    }
-
-    static func defaultRect() -> NSRect {
-        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
-    }
-}
-
-class QuickWindowController: NSWindowController, WindowSizeCalculator {
+class QuickWindowController: NSWindowController {
     let dic = CoreServiceDictionary()
 
     override init(window: NSWindow?) {
@@ -55,6 +36,26 @@ class QuickWindowController: NSWindowController, WindowSizeCalculator {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+}
+
+// MARK: - WindowSizeCalculator
+extension QuickWindowController: WindowSizeCalculator {
+    static func calcRect(screenSize: NSSize) -> NSRect {
+        return NSMakeRect(
+            screenSize.width / 2 - defaultSize().width / 2,
+            screenSize.height * 2 / 3,
+            defaultSize().width,
+            defaultSize().height
+        )
+    }
+
+    static func defaultSize() -> NSSize {
+        return NSSize(width: 800, height: 60)
+    }
+
+    static func defaultRect() -> NSRect {
+        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
     }
 }
 
