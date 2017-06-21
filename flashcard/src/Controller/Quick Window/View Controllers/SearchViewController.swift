@@ -8,13 +8,7 @@
 
 import Cocoa
 
-extension ViewSizeProvider where Self: SearchViewController {
-    static func size() -> NSSize {
-        return NSSize(width: 800, height: 60)
-    }
-}
-
-class SearchViewController: NSViewController, ViewSizeProvider {
+class SearchViewController: NSViewController {
     open var delegate: DelegateToQuickWindow?
     var resultsView: SearchResultsView!
     var resultViews: [SearchResultView] = []
@@ -37,6 +31,8 @@ class SearchViewController: NSViewController, ViewSizeProvider {
         self.view.addSubview(resultsView)
     }
 }
+
+extension SearchViewController: ViewSizeProvider {}
 
 extension SearchViewController {
     func displayResult(_ results: [SearchResultInfo]) {

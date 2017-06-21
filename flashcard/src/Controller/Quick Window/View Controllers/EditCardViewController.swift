@@ -8,13 +8,7 @@
 
 import Cocoa
 
-extension ViewSizeProvider where Self: EditCardViewController {
-    static func size() -> NSSize {
-        return NSSize(width: 800, height: 450)
-    }
-}
-
-class EditCardViewController: NSViewController, ViewSizeProvider {
+class EditCardViewController: NSViewController {
     open var delegate: DelegateToQuickWindow?
 
     var targetDefinition: SearchResultInfo? {
@@ -42,6 +36,8 @@ class EditCardViewController: NSViewController, ViewSizeProvider {
         view.setResponder()
     }
 }
+
+extension EditCardViewController: ViewSizeProvider {}
 
 extension EditCardViewController: EditCardViewDelegate {
     func updateCardText(front: String, back: String) {

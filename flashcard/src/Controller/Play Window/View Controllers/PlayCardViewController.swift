@@ -14,13 +14,7 @@ enum CardFace {
     case back, front
 }
 
-extension ViewSizeProvider where Self: PlayCardViewController {
-    static func size() -> NSSize {
-        return NSSize(width: 400, height: 300)
-    }
-}
-
-class PlayCardViewController: NSViewController, ViewSizeProvider {
+class PlayCardViewController: NSViewController {
     fileprivate var cards: [Card] = []
     fileprivate var index = 0 {
         didSet {
@@ -81,6 +75,8 @@ class PlayCardViewController: NSViewController, ViewSizeProvider {
         self.index = 0
     }
 }
+
+extension PlayCardViewController: ViewSizeProvider {}
 
 extension PlayCardViewController: PlayCardViewDelegate {
     func flip() {

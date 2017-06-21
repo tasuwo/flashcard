@@ -50,6 +50,8 @@
 		A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0809A8A1E6A286F005F3724 /* SearchView.swift */; };
 		A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5B1E68DBF700D4F083 /* main.swift */; };
 		A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */; };
+		A0CA5D4E1EFB309D004DA8AD /* NSKeyDetectableWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */; };
+		A0CA5D511EFB33B9004DA8AD /* SettingsWindowToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D501EFB33B9004DA8AD /* SettingsWindowToolbar.swift */; };
 		A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */; };
 		A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */; };
 		A0DCC2D31E66DA1C0071A00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DCC2D21E66DA1C0071A00E /* Assets.xcassets */; };
@@ -73,7 +75,7 @@
 		2C06ABD71E8F697200B6DE70 /* myTextLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myTextLabel.swift; sourceTree = "<group>"; };
 		2C06ABD91E8F6AD200B6DE70 /* myRecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myRecordView.swift; sourceTree = "<group>"; };
 		2C06ABDB1E8F925F00B6DE70 /* myNSButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = myNSButton.swift; sourceTree = "<group>"; };
-		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Array+canAccess.swift"; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
+		2C06ABDD1E8FBA2600B6DE70 /* Array+canAccess.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+canAccess.swift"; sourceTree = "<group>"; };
 		2C06ABDF1E9103B500B6DE70 /* String+calcWidth+calcHeight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+calcWidth+calcHeight.swift"; sourceTree = "<group>"; };
 		2C06ABE11E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+focusWithoutSelectText.swift"; sourceTree = "<group>"; };
 		2C3AA4671E97CEE200988ACC /* Score.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -94,8 +96,8 @@
 		2C4769841E87427200814D28 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolderTableView.swift; sourceTree = "<group>"; };
 		2C47698E1E8A452500814D28 /* CardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableView.swift; sourceTree = "<group>"; };
-		2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardsListPresenter.swift; sourceTree = "<group>"; };
-		2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHoldersListPresenter.swift; sourceTree = "<group>"; };
+		2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardsListPresenter.swift; path = DataModel/CardsListPresenter.swift; sourceTree = "<group>"; };
+		2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHoldersListPresenter.swift; path = DataModel/CardHoldersListPresenter.swift; sourceTree = "<group>"; };
 		2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSizeProvider.swift; sourceTree = "<group>"; };
 		2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeCalculator.swift; sourceTree = "<group>"; };
 		2C9A0D401E985F19007225E7 /* CardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
@@ -112,6 +114,8 @@
 		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowController.swift; sourceTree = "<group>"; };
+		A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSKeyDetectableWindow.swift; sourceTree = "<group>"; };
+		A0CA5D501EFB33B9004DA8AD /* SettingsWindowToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowToolbar.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -171,8 +175,6 @@
 				2C4769841E87427200814D28 /* AppSettings.swift */,
 				2C471B541E7BAA6A00FCF0DA /* Card.swift */,
 				2C471B561E7BAA8F00FCF0DA /* CardHolder.swift */,
-				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
-				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
 				2C3AA4671E97CEE200988ACC /* Score.swift */,
 			);
 			path = DataModel;
@@ -184,7 +186,6 @@
 				2C471B611E8204A700FCF0DA /* CardsViewController.swift */,
 				2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */,
 			);
-			name = "View Controllers";
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
@@ -253,7 +254,6 @@
 			children = (
 				2C4769751E85EF9B00814D28 /* PlayCardViewController.swift */,
 			);
-			name = "View Controllers";
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
@@ -271,6 +271,7 @@
 			children = (
 				2C471B5C1E81F4FA00FCF0DA /* View Controllers */,
 				2CD4958C1E6CE6150001B727 /* SettingsWindowController.swift */,
+				A0CA5D501EFB33B9004DA8AD /* SettingsWindowToolbar.swift */,
 			);
 			path = "Settings Window";
 			sourceTree = "<group>";
@@ -302,7 +303,6 @@
 				2CA38D601E72421700E850FC /* EditCardViewController.swift */,
 				A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */,
 			);
-			name = "View Controllers";
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
@@ -341,6 +341,7 @@
 		A0923E011E683F54003642FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A0CA5D4F1EFB3268004DA8AD /* TableView Presenter */,
 				2C471B531E7BAA5A00FCF0DA /* DataModel */,
 				2C47697D1E86A28400814D28 /* extensions */,
 				2CD495941E7138880001B727 /* CoreServiceDictionary.swift */,
@@ -369,8 +370,18 @@
 				2C4769811E86AA7F00814D28 /* Status bar */,
 				2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */,
 				2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */,
+				A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A0CA5D4F1EFB3268004DA8AD /* TableView Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */,
+				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
+			);
+			name = "TableView Presenter";
 			sourceTree = "<group>";
 		};
 		A0DCC2C21E66DA1C0071A00E = {
@@ -629,6 +640,7 @@
 				2C471B5B1E81503300FCF0DA /* GeneralView.swift in Sources */,
 				2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */,
 				2C47D9E51EFAB38800EAFE8B /* ViewSizeProvider.swift in Sources */,
+				A0CA5D4E1EFB309D004DA8AD /* NSKeyDetectableWindow.swift in Sources */,
 				2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */,
 				2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */,
 				2C06ABD51E8EA48400B6DE70 /* String+removeInt.swift in Sources */,
@@ -657,6 +669,7 @@
 				2C471B591E813D0300FCF0DA /* NSRange+contain.swift in Sources */,
 				2C9A0D431E9886E2007225E7 /* PlayCardScene.swift in Sources */,
 				2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */,
+				A0CA5D511EFB33B9004DA8AD /* SettingsWindowToolbar.swift in Sources */,
 				2C4769801E86AA4D00814D28 /* StatusBarItem.swift in Sources */,
 				2C06ABE01E9103B500B6DE70 /* String+calcWidth+calcHeight.swift in Sources */,
 				A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */,

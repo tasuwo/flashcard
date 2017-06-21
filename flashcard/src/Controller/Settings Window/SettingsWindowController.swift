@@ -8,33 +8,15 @@
 
 import Cocoa
 
-struct TabInfo {
-    let title: String
-    let icon: String
-    let viewController: NSViewController.Type
-}
-
 class SettingsWindowController: NSWindowController {
-    var toolbar: NSToolbar!
-    var toolbarTabsArray = [
-        TabInfo(title: "General", icon: "NSPreferencesGeneral", viewController: GeneralViewController.self),
-        TabInfo(title: "Cards", icon: "NSAdvanced", viewController: CardsViewController.self),
-    ]
-    var toolbarTabsIdentifierArray: [String] = []
+    var toolbar: SettingsWindowToolbar!
 
     override init(window: NSWindow?) {
         super.init(window: window)
 
-        // Toolbar
-        for item in self.toolbarTabsArray {
-            toolbarTabsIdentifierArray.append(item.viewController.className())
-        }
-        toolbar = NSToolbar(identifier: "id")
-        toolbar.allowsUserCustomization = true
-        toolbar.delegate = self
+        toolbar = SettingsWindowToolbar(identifier: "id")
         self.window!.toolbar = toolbar
 
-        // View Controller
         let controller = GeneralViewController()
         self.window!.contentViewController = controller
     }
@@ -45,60 +27,7 @@ class SettingsWindowController: NSWindowController {
 }
 
 // MARK: - WindowSizeCalculator
-extension SettingsWindowController: WindowSizeCalculator {
-    static func calcRect(screenSize: NSSize) -> NSRect {
-        return NSMakeRect(
-            screenSize.width / 2 - defaultSize().width / 2,
-            screenSize.height / 2 - defaultSize().height / 2,
-            defaultSize().width,
-            defaultSize().height
-        )
-    }
-
-    static func defaultSize() -> NSSize {
-        return NSSize(width: 800, height: 600)
-    }
-
-    static func defaultRect() -> NSRect {
-        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
-    }
-}
-
-// MARK: - NSToolbarDelegate
-extension SettingsWindowController: NSToolbarDelegate {
-    func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
-        if let info = (self.toolbarTabsArray.filter { $0.viewController.className() == itemIdentifier }).first {
-            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
-            toolbarItem.label = info.title
-            toolbarItem.image = NSImage(named: info.icon)
-            toolbarItem.target = self
-            toolbarItem.action = #selector(SettingsWindowController.viewSelected(_:))
-
-            return toolbarItem
-        }
-        return nil
-    }
-
-    func toolbarWillAddItem(_: Notification) {
-        print("toolbarWillAddItem")
-    }
-
-    func toolbarDidRemoveItem(_: Notification) {
-        print("toolbarDidRemoveItem")
-    }
-
-    func toolbarAllowedItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
-        return self.toolbarDefaultItemIdentifiers(toolbar)
-    }
-
-    func toolbarSelectableItemIdentifiers(_ toolbar: NSToolbar) -> [String] {
-        return self.toolbarDefaultItemIdentifiers(toolbar)
-    }
-
-    func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [String] {
-        return self.toolbarTabsIdentifierArray
-    }
-}
+extension SettingsWindowController: WindowSizeCalculator {}
 
 // MARK: - View Transition
 extension SettingsWindowController {
@@ -109,8 +38,8 @@ extension SettingsWindowController {
     func loadViewWithIdentifier(_ id: String) {
         if self.contentViewController!.className == id { return }
 
-        if let info = (self.toolbarTabsArray.filter { $0.viewController.className() == id }).first {
-            let newViewController = info.viewController.init()
+        if let type = self.toolbar.getViewControllerTypeBy(id) {
+            let newViewController = type.init()
             self.window!.contentViewController = newViewController
         }
     }

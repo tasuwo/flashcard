@@ -11,3 +11,21 @@ import Foundation
 protocol ViewSizeProvider {
     static func size() -> NSSize
 }
+
+extension ViewSizeProvider where Self: PlayCardViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 400, height: 300)
+    }
+}
+
+extension ViewSizeProvider where Self: EditCardViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 800, height: 450)
+    }
+}
+
+extension ViewSizeProvider where Self: SearchViewController {
+    static func size() -> NSSize {
+        return NSSize(width: 800, height: 60)
+    }
+}

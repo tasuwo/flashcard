@@ -47,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             defer: false)
         )
         self.settingsWC.window?.collectionBehavior = [.fullScreenAuxiliary, .fullScreenPrimary]
-        self.playWC = PlayCardWindowController(window: KeyDetectableBorderlessWindow(
+        self.playWC = PlayCardWindowController(window: NSKeyDetectableWindow(
             contentRect: playWinRect,
             styleMask: [.titled, .closable],
             backing: .buffered,

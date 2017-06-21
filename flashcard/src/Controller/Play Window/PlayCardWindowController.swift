@@ -32,24 +32,7 @@ class PlayCardWindowController: NSWindowController {
 }
 
 // MARK: - WindowSizeCalculator
-extension PlayCardWindowController: WindowSizeCalculator {
-    static func calcRect(screenSize: NSSize) -> NSRect {
-        return NSMakeRect(
-            screenSize.width / 2 - defaultSize().width / 2,
-            screenSize.height / 2 - defaultSize().height / 2,
-            defaultSize().width,
-            defaultSize().height
-        )
-    }
-
-    static func defaultSize() -> NSSize {
-        return NSSize(width: 400, height: 300)
-    }
-
-    static func defaultRect() -> NSRect {
-        return NSRect(x: 0, y: 0, width: defaultSize().width, height: defaultSize().height)
-    }
-}
+extension PlayCardWindowController: WindowSizeCalculator {}
 
 // MARK: - NSWindowDelegate
 extension PlayCardWindowController: NSWindowDelegate {
@@ -64,10 +47,4 @@ extension PlayCardWindowController: NSWindowDelegate {
     func windowDidResignKey(_: Notification) {
         self.window?.orderOut(self)
     }
-}
-
-class KeyDetectableBorderlessWindow: NSWindow {
-    override var canBecomeMain: Bool { return true }
-
-    override var canBecomeKey: Bool { return true }
 }
