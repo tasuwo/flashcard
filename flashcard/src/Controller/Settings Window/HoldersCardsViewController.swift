@@ -19,6 +19,7 @@ class HoldersCardsViewController: NSViewController {
 
         holdersVC = HoldersViewController(view: view.holdersView)
         cardsVC = CardsViewController(view: view.cardsView)
+        holdersVC.delegate = cardsVC
 
         self.view = view
     }

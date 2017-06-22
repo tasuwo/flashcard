@@ -8,19 +8,6 @@
 
 import Cocoa
 
-class CardHolderCell: NSCell {
-    override init() {
-        super.init()
-        self.wraps = true
-        self.isEditable = true
-        self.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
-    }
-
-    required init(coder _: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 class CardsViewController: NSObject {
     var view: CardsView
     var presenter: CardsListPresenter
@@ -48,7 +35,10 @@ extension CardsViewController: CardsViewDelegate {
 extension CardsViewController: NSTableViewDelegate {
     // WARNING: MUST NOT implement `table​View(_:​view​For:​row:​)` because if it was implemented, this method would be ignored.
     func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        let cell = CardHolderCell()
+        let cell = NSCell()
+        cell.wraps = true
+        cell.isEditable = true
+        cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
         if let v = self.presenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
             cell.stringValue = v
             return cell
@@ -63,5 +53,32 @@ extension CardsViewController: NSTableViewDelegate {
         }
 
         return tableView.rowHeight
+    }
+}
+
+extension CardsViewController: HolderSelectDelegate {
+    func didSelectHolder(holderId: Int?) {
+        if let id = holderId {
+            view.cardsList.dataSource = presenter
+            self.presenter.loadCards(in: id, updated: { changes in
+                switch changes {
+                case .initial:
+                    self.view.cardsList.reloadData()
+
+                case let .update(_, del, ins, upd):
+                    self.view.cardsList.beginUpdates()
+                    self.view.cardsList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                    self.view.cardsList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                    self.view.cardsList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                    self.view.cardsList.endUpdates()
+
+                default: break
+                }
+            })
+        } else {
+            view.cardsList.dataSource = nil
+            self.presenter.releaseNotificationBlock()
+            view.cardsList.reloadData()
+        }
     }
 }
