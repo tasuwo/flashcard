@@ -15,6 +15,7 @@ class SettingsWindowController: NSWindowController {
         super.init(window: window)
 
         toolbar = SettingsWindowToolbar(identifier: "id")
+        toolbar.delegate = self
         self.window!.toolbar = toolbar
 
         let controller = GeneralViewController()
@@ -42,5 +43,41 @@ extension SettingsWindowController {
             let newViewController = type.init()
             self.window!.contentViewController = newViewController
         }
+    }
+}
+
+// MARK: - NSToolbarDelegate
+extension SettingsWindowController: NSToolbarDelegate {
+    func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
+        if let info = (self.toolbar.toolbarTabsArray.filter { $0.viewController.className() == itemIdentifier }).first {
+            let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
+            toolbarItem.label = info.title
+            toolbarItem.image = NSImage(named: info.icon)
+            toolbarItem.target = self
+            toolbarItem.action = #selector(SettingsWindowController.viewSelected(_:))
+
+            return toolbarItem
+        }
+        return nil
+    }
+
+    func toolbarWillAddItem(_: Notification) {
+        print("toolbarWillAddItem")
+    }
+
+    func toolbarDidRemoveItem(_: Notification) {
+        print("toolbarDidRemoveItem")
+    }
+
+    func toolbarAllowedItemIdentifiers(_: NSToolbar) -> [String] {
+        return self.toolbar.toolbarTabsIdentifierArray
+    }
+
+    func toolbarSelectableItemIdentifiers(_: NSToolbar) -> [String] {
+        return self.toolbar.toolbarTabsIdentifierArray
+    }
+
+    func toolbarDefaultItemIdentifiers(_: NSToolbar) -> [String] {
+        return self.toolbar.toolbarTabsIdentifierArray
     }
 }

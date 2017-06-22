@@ -52,6 +52,10 @@
 		A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */; };
 		A0CA5D4E1EFB309D004DA8AD /* NSKeyDetectableWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */; };
 		A0CA5D511EFB33B9004DA8AD /* SettingsWindowToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D501EFB33B9004DA8AD /* SettingsWindowToolbar.swift */; };
+		A0CA5D531EFB3D19004DA8AD /* HoldersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D521EFB3D19004DA8AD /* HoldersViewController.swift */; };
+		A0CA5D551EFB4096004DA8AD /* HoldersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D541EFB4096004DA8AD /* HoldersView.swift */; };
+		A0CA5D571EFB40D5004DA8AD /* HoldersCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */; };
+		A0CA5D5A1EFB45A9004DA8AD /* HoldersCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */; };
 		A0DCC2CF1E66DA1C0071A00E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */; };
 		A0DCC2D11E66DA1C0071A00E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */; };
 		A0DCC2D31E66DA1C0071A00E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DCC2D21E66DA1C0071A00E /* Assets.xcassets */; };
@@ -116,6 +120,10 @@
 		A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowController.swift; sourceTree = "<group>"; };
 		A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSKeyDetectableWindow.swift; sourceTree = "<group>"; };
 		A0CA5D501EFB33B9004DA8AD /* SettingsWindowToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowToolbar.swift; sourceTree = "<group>"; };
+		A0CA5D521EFB3D19004DA8AD /* HoldersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersViewController.swift; sourceTree = "<group>"; };
+		A0CA5D541EFB4096004DA8AD /* HoldersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersView.swift; sourceTree = "<group>"; };
+		A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersCardsView.swift; sourceTree = "<group>"; };
+		A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoldersCardsViewController.swift; path = ../HoldersCardsViewController.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -183,7 +191,8 @@
 		2C471B5C1E81F4FA00FCF0DA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				2C471B611E8204A700FCF0DA /* CardsViewController.swift */,
+				A0CA5D5B1EFB45B3004DA8AD /* HoldersCards Delegate */,
+				A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */,
 				2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */,
 			);
 			path = "View Controllers";
@@ -240,12 +249,13 @@
 			path = "Status bar";
 			sourceTree = "<group>";
 		};
-		2C4769901E8C584500814D28 /* CardsView SubView */ = {
+		2C4769901E8C584500814D28 /* CardsView SubViews */ = {
 			isa = PBXGroup;
 			children = (
 				2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */,
 				2C47698E1E8A452500814D28 /* CardTableView.swift */,
 			);
+			name = "CardsView SubViews";
 			path = "CardsView SubView";
 			sourceTree = "<group>";
 		};
@@ -290,8 +300,8 @@
 		2CA38D691E72ED0B00E850FC /* Settings Window */ = {
 			isa = PBXGroup;
 			children = (
-				2C4769901E8C584500814D28 /* CardsView SubView */,
-				2C471B5F1E82049500FCF0DA /* CardsView.swift */,
+				A0CA5D581EFB40D8004DA8AD /* HoldersCardsView SubViews */,
+				A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */,
 				2C471B5A1E81503300FCF0DA /* GeneralView.swift */,
 			);
 			path = "Settings Window";
@@ -382,6 +392,25 @@
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
 			);
 			name = "TableView Presenter";
+			sourceTree = "<group>";
+		};
+		A0CA5D581EFB40D8004DA8AD /* HoldersCardsView SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				2C4769901E8C584500814D28 /* CardsView SubViews */,
+				2C471B5F1E82049500FCF0DA /* CardsView.swift */,
+				A0CA5D541EFB4096004DA8AD /* HoldersView.swift */,
+			);
+			name = "HoldersCardsView SubViews";
+			sourceTree = "<group>";
+		};
+		A0CA5D5B1EFB45B3004DA8AD /* HoldersCards Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				2C471B611E8204A700FCF0DA /* CardsViewController.swift */,
+				A0CA5D521EFB3D19004DA8AD /* HoldersViewController.swift */,
+			);
+			name = "HoldersCards Delegate";
 			sourceTree = "<group>";
 		};
 		A0DCC2C21E66DA1C0071A00E = {
@@ -641,6 +670,7 @@
 				2CBD97741E7B9F19007031BD /* NSView+removeAllConstraints.swift in Sources */,
 				2C47D9E51EFAB38800EAFE8B /* ViewSizeProvider.swift in Sources */,
 				A0CA5D4E1EFB309D004DA8AD /* NSKeyDetectableWindow.swift in Sources */,
+				A0CA5D531EFB3D19004DA8AD /* HoldersViewController.swift in Sources */,
 				2C471B551E7BAA6A00FCF0DA /* Card.swift in Sources */,
 				2C4769781E85F00400814D28 /* PlayCardView.swift in Sources */,
 				2C06ABD51E8EA48400B6DE70 /* String+removeInt.swift in Sources */,
@@ -660,7 +690,9 @@
 				2C47697A1E8696DB00814D28 /* Collection+shuffle.swift in Sources */,
 				2C06ABD81E8F697200B6DE70 /* myTextLabel.swift in Sources */,
 				2C06ABDC1E8F925F00B6DE70 /* myNSButton.swift in Sources */,
+				A0CA5D5A1EFB45A9004DA8AD /* HoldersCardsViewController.swift in Sources */,
 				2C471B571E7BAA8F00FCF0DA /* CardHolder.swift in Sources */,
+				A0CA5D571EFB40D5004DA8AD /* HoldersCardsView.swift in Sources */,
 				A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */,
 				2C06ABD31E8EA46700B6DE70 /* String+componentsSeparated.swift in Sources */,
 				2C471B601E82049500FCF0DA /* CardsView.swift in Sources */,
@@ -676,6 +708,7 @@
 				2CD4958D1E6CE6150001B727 /* SettingsWindowController.swift in Sources */,
 				2C47697C1E86971500814D28 /* MutableCollection+shuffleInPlace.swift in Sources */,
 				2C471B5E1E81F50C00FCF0DA /* GeneralViewController.swift in Sources */,
+				A0CA5D551EFB4096004DA8AD /* HoldersView.swift in Sources */,
 				A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */,
 				2C06ABE21E910CAC00B6DE70 /* NSTextField+focusWithoutSelectText.swift in Sources */,
 				2C3AA4681E97CEE200988ACC /* Score.swift in Sources */,

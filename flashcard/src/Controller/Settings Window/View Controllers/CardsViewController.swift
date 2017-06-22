@@ -8,38 +8,29 @@
 
 import Cocoa
 
-class CardsViewController: NSViewController {
-    var holdersPresenter: CardHoldersListPresenter!
-    var cardsPresenter: CardsListPresenter!
+class CardHolderCell: NSCell {
+    override init() {
+        super.init()
+        self.wraps = true
+        self.isEditable = true
+        self.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
+    }
 
-    override func loadView() {
-        let winSize = SettingsWindowController.defaultSize()
-        let view = CardsView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
-        view.delegate = self
+    required init(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
 
-        holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load(updated: { changes in
-            switch changes {
-            case .initial:
-                view.holdersList.reloadData()
+class CardsViewController: NSObject {
+    var view: CardsView
+    var presenter: CardsListPresenter
 
-            case let .update(_, del, ins, upd):
-                view.holdersList.beginUpdates()
-                view.holdersList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                view.holdersList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                view.holdersList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                view.holdersList.endUpdates()
-
-            default: break
-            }
-        })
-        view.holdersList.dataSource = self.holdersPresenter
-        view.holdersList.delegate = self
-
-        cardsPresenter = CardsListPresenter()
-        view.cardsList.delegate = self
-
+    init(view: CardsView) {
         self.view = view
+        self.presenter = CardsListPresenter()
+        super.init()
+        view.cardsList.dataSource = presenter
+        view.cardsList.delegate = self
     }
 }
 
@@ -47,97 +38,30 @@ extension CardsViewController: CardsViewDelegate {
     func didPressAddCard() {}
 
     func didPressRemoveCard(selectedRow: Int) {
-        if selectedRow != -1 {
-            if let selectedCard = self.cardsPresenter.cards?[selectedRow] {
-                Card.delete(selectedCard)
-            }
-        }
-    }
-
-    func didPressAddCardHolder() {
-        let holder = CardHolder(name: "Untitled")
-        CardHolder.add(holder)
-    }
-
-    func didPressRemoveCardHolder(selectedRow: Int) {
-        if selectedRow == 0 { return }
-        let view = self.view as! CardsView
-        view.holdersList.deselectAll(self)
-
-        if selectedRow != -1 {
-            if let selectedCardHolder = self.holdersPresenter.holders?[selectedRow] {
-                CardHolder.delete(selectedCardHolder)
-            }
+        if selectedRow == -1 { return }
+        if let selectedCard = self.presenter.cards?[selectedRow] {
+            Card.delete(selectedCard)
         }
     }
 }
 
 extension CardsViewController: NSTableViewDelegate {
-    // WARNING: MUST NOT implement `table​View(_:​view​For:​row:​)` because if it was implemented, this method would ignored.
+    // WARNING: MUST NOT implement `table​View(_:​view​For:​row:​)` because if it was implemented, this method would be ignored.
     func tableView(_ tableView: NSTableView, dataCellFor tableColumn: NSTableColumn?, row: Int) -> NSCell? {
-        let view = self.view as! CardsView
-        if tableView === view.cardsList {
-            let cell = NSCell()
-            cell.wraps = true
-            cell.isEditable = true
-            cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
-            if let v = self.cardsPresenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
-                cell.stringValue = v
-                return cell
-            }
-            return nil
-        } else if tableView == view.holdersList {
-            let cell = NSCell()
-            cell.wraps = true
-            cell.isEditable = true
-            cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
-            if let v = self.holdersPresenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
-                cell.stringValue = v
-                return cell
-            }
-            return nil
+        let cell = CardHolderCell()
+        if let v = self.presenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
+            cell.stringValue = v
+            return cell
         }
 
         return nil
     }
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        let view = self.view as! CardsView
-        if tableView === view.cardsList {
-            if let p = self.cardsPresenter, let c = p.cards, row < c.count {
-                return Card.calcRowHeight(c[row], tableView: tableView)
-            }
+        if let c = presenter.cards, row < c.count {
+            return Card.calcRowHeight(c[row], tableView: tableView)
         }
 
         return tableView.rowHeight
-    }
-
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        let view = self.view as! CardsView
-        let table = notification.object as! NSTableView
-        if table === view.holdersList {
-            if let p = self.holdersPresenter, let h = p.holders, h.count > table.selectedRow, !(table.selectedRow < 0) {
-                view.cardsList.dataSource = self.cardsPresenter
-                self.cardsPresenter.loadCards(in: h[table.selectedRow].id, updated: { changes in
-                    switch changes {
-                    case .initial:
-                        view.cardsList.reloadData()
-
-                    case let .update(_, del, ins, upd):
-                        view.cardsList.beginUpdates()
-                        view.cardsList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                        view.cardsList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                        view.cardsList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                        view.cardsList.endUpdates()
-
-                    default: break
-                    }
-                })
-            } else {
-                view.cardsList.dataSource = nil
-                self.cardsPresenter.releaseNotificationBlock()
-                view.cardsList.reloadData()
-            }
-        }
     }
 }
