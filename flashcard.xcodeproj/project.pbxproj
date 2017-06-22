@@ -100,8 +100,8 @@
 		2C4769841E87427200814D28 /* AppSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		2C47698C1E8A3C0100814D28 /* CardHolderTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardHolderTableView.swift; sourceTree = "<group>"; };
 		2C47698E1E8A452500814D28 /* CardTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTableView.swift; sourceTree = "<group>"; };
-		2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardsListPresenter.swift; path = DataModel/CardsListPresenter.swift; sourceTree = "<group>"; };
-		2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHoldersListPresenter.swift; path = DataModel/CardHoldersListPresenter.swift; sourceTree = "<group>"; };
+		2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardsListPresenter.swift; path = CardsListPresenter.swift; sourceTree = "<group>"; };
+		2C4769961E8D3EFD00814D28 /* CardHoldersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardHoldersListPresenter.swift; path = CardHoldersListPresenter.swift; sourceTree = "<group>"; };
 		2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSizeProvider.swift; sourceTree = "<group>"; };
 		2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeCalculator.swift; sourceTree = "<group>"; };
 		2C9A0D401E985F19007225E7 /* CardNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardNode.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 		A0CA5D521EFB3D19004DA8AD /* HoldersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersViewController.swift; sourceTree = "<group>"; };
 		A0CA5D541EFB4096004DA8AD /* HoldersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersView.swift; sourceTree = "<group>"; };
 		A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoldersCardsView.swift; sourceTree = "<group>"; };
-		A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoldersCardsViewController.swift; path = ../HoldersCardsViewController.swift; sourceTree = "<group>"; };
+		A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoldersCardsViewController.swift; path = HoldersCardsViewController.swift; sourceTree = "<group>"; };
 		A0DCC2CB1E66DA1C0071A00E /* flashcard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = flashcard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DCC2CE1E66DA1C0071A00E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0DCC2D01E66DA1C0071A00E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -192,8 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				A0CA5D5B1EFB45B3004DA8AD /* HoldersCards Delegate */,
-				A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */,
 				2C471B5D1E81F50C00FCF0DA /* GeneralViewController.swift */,
+				A0CA5D591EFB45A9004DA8AD /* HoldersCardsViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -256,7 +256,7 @@
 				2C47698E1E8A452500814D28 /* CardTableView.swift */,
 			);
 			name = "CardsView SubViews";
-			path = "CardsView SubView";
+			path = "CardsView SubViews";
 			sourceTree = "<group>";
 		};
 		2C47D9E61EFAB58200EAFE8B /* View Controllers */ = {
@@ -301,8 +301,8 @@
 			isa = PBXGroup;
 			children = (
 				A0CA5D581EFB40D8004DA8AD /* HoldersCardsView SubViews */,
-				A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */,
 				2C471B5A1E81503300FCF0DA /* GeneralView.swift */,
+				A0CA5D561EFB40D5004DA8AD /* HoldersCardsView.swift */,
 			);
 			path = "Settings Window";
 			sourceTree = "<group>";
@@ -351,8 +351,8 @@
 		A0923E011E683F54003642FD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A0CA5D4F1EFB3268004DA8AD /* TableView Presenter */,
 				2C471B531E7BAA5A00FCF0DA /* DataModel */,
+				A0CA5D4F1EFB3268004DA8AD /* TableView Presenter */,
 				2C47697D1E86A28400814D28 /* extensions */,
 				2CD495941E7138880001B727 /* CoreServiceDictionary.swift */,
 			);
@@ -378,9 +378,9 @@
 				2CA38D661E72ECCE00E850FC /* Quick Window */,
 				2CA38D671E72ECE700E850FC /* Settings Window */,
 				2C4769811E86AA7F00814D28 /* Status bar */,
+				A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */,
 				2C47D9E41EFAB38800EAFE8B /* ViewSizeProvider.swift */,
 				2C914D3C1EFAA6B300EFE936 /* WindowSizeCalculator.swift */,
-				A0CA5D4D1EFB309D004DA8AD /* NSKeyDetectableWindow.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -392,6 +392,7 @@
 				2C4769941E8D3D4400814D28 /* CardsListPresenter.swift */,
 			);
 			name = "TableView Presenter";
+			path = "TableView Presenter";
 			sourceTree = "<group>";
 		};
 		A0CA5D581EFB40D8004DA8AD /* HoldersCardsView SubViews */ = {
@@ -402,6 +403,7 @@
 				A0CA5D541EFB4096004DA8AD /* HoldersView.swift */,
 			);
 			name = "HoldersCardsView SubViews";
+			path = "HoldersCardsView SubViews";
 			sourceTree = "<group>";
 		};
 		A0CA5D5B1EFB45B3004DA8AD /* HoldersCards Delegate */ = {
@@ -411,6 +413,7 @@
 				A0CA5D521EFB3D19004DA8AD /* HoldersViewController.swift */,
 			);
 			name = "HoldersCards Delegate";
+			path = "HoldersCards Delegate";
 			sourceTree = "<group>";
 		};
 		A0DCC2C21E66DA1C0071A00E = {
