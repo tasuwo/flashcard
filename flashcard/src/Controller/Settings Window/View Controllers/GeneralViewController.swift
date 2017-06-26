@@ -68,7 +68,7 @@ extension GeneralViewController: RecordViewDelegate {
             default:
                 break
             }
-            settings.setHotKey()
+            settings.apply()
             settings.save()
         }
     }
@@ -87,7 +87,7 @@ extension GeneralViewController: RecordViewDelegate {
             default:
                 break
             }
-            settings.setHotKey()
+            settings.apply()
             settings.save()
         }
     }

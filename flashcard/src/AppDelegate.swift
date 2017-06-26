@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         // Load App Setttings
         if let settings = AppSettings.get() {
-            settings.setHotKey()
+            settings.apply()
         }
     }
 }

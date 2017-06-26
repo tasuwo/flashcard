@@ -53,7 +53,7 @@ class AppSettings: NSObject, NSCoding {
 }
 
 extension AppSettings {
-    func setHotKey() {
+    func apply() {
         let appDelegate = NSApplication.shared().delegate as! AppDelegate
         HotKeyCenter.shared.unregisterHotKey(with: "Search")
         HotKeyCenter.shared.unregisterHotKey(with: "Play")
