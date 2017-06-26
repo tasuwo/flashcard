@@ -48,6 +48,7 @@
 		2CD495951E7138880001B727 /* CoreServiceDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CD495941E7138880001B727 /* CoreServiceDictionary.swift */; };
 		4D021997B161451396FD843C /* Pods_flashcardTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */; };
 		A028BE0E1EFC7FC800D3C5A9 /* SettingsWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A028BE0D1EFC7FC800D3C5A9 /* SettingsWindowControllerTests.swift */; };
+		A029FDB81F01C7790043B2D0 /* flashcardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A029FDB71F01C7790043B2D0 /* flashcardUITests.swift */; };
 		A0809A8B1E6A286F005F3724 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0809A8A1E6A286F005F3724 /* SearchView.swift */; };
 		A0B2ED5C1E68DBF700D4F083 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED5B1E68DBF700D4F083 /* main.swift */; };
 		A0B2ED611E68EE5400D4F083 /* QuickWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */; };
@@ -65,6 +66,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A029FDBA1F01C7790043B2D0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A0DCC2C31E66DA1C0071A00E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A0DCC2CA1E66DA1C0071A00E;
+			remoteInfo = flashcard;
+		};
 		A0DCC2DD1E66DA1C0071A00E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A0DCC2C31E66DA1C0071A00E /* Project object */;
@@ -117,6 +125,9 @@
 		6F332D18B9A6EDA446C56CC1 /* Pods_flashcardTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_flashcardTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		96EC89399B92D09C818CF547 /* Pods-flashcardTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-flashcardTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-flashcardTests/Pods-flashcardTests.release.xcconfig"; sourceTree = "<group>"; };
 		A028BE0D1EFC7FC800D3C5A9 /* SettingsWindowControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsWindowControllerTests.swift; sourceTree = "<group>"; };
+		A029FDB51F01C7790043B2D0 /* flashcardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = flashcardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A029FDB71F01C7790043B2D0 /* flashcardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flashcardUITests.swift; sourceTree = "<group>"; };
+		A029FDB91F01C7790043B2D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0809A8A1E6A286F005F3724 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		A0B2ED5B1E68DBF700D4F083 /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		A0B2ED601E68EE5400D4F083 /* QuickWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuickWindowController.swift; sourceTree = "<group>"; };
@@ -141,6 +152,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A029FDB21F01C7790043B2D0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A0DCC2C81E66DA1C0071A00E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,6 +362,15 @@
 			name = "Settings Window";
 			sourceTree = "<group>";
 		};
+		A029FDB61F01C7790043B2D0 /* flashcardUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A029FDB71F01C7790043B2D0 /* flashcardUITests.swift */,
+				A029FDB91F01C7790043B2D0 /* Info.plist */,
+			);
+			path = flashcardUITests;
+			sourceTree = "<group>";
+		};
 		A0923DFF1E683F3F003642FD /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -437,6 +464,7 @@
 				5CB008E08E3D981C336D99A9 /* Pods */,
 				A0DCC2CC1E66DA1C0071A00E /* Products */,
 				A0DCC2CD1E66DA1C0071A00E /* flashcard */,
+				A029FDB61F01C7790043B2D0 /* flashcardUITests */,
 				A0DCC2DF1E66DA1C0071A00E /* flashcardTests */,
 			);
 			sourceTree = "<group>";
@@ -446,6 +474,7 @@
 			children = (
 				A0DCC2CB1E66DA1C0071A00E /* flashcard.app */,
 				A0DCC2DC1E66DA1C0071A00E /* flashcardTests.xctest */,
+				A029FDB51F01C7790043B2D0 /* flashcardUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,6 +501,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A029FDB41F01C7790043B2D0 /* flashcardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A029FDBE1F01C7790043B2D0 /* Build configuration list for PBXNativeTarget "flashcardUITests" */;
+			buildPhases = (
+				A029FDB11F01C7790043B2D0 /* Sources */,
+				A029FDB21F01C7790043B2D0 /* Frameworks */,
+				A029FDB31F01C7790043B2D0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A029FDBB1F01C7790043B2D0 /* PBXTargetDependency */,
+			);
+			name = flashcardUITests;
+			productName = flashcardUITests;
+			productReference = A029FDB51F01C7790043B2D0 /* flashcardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		A0DCC2CA1E66DA1C0071A00E /* flashcard */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A0DCC2E51E66DA1C0071A00E /* Build configuration list for PBXNativeTarget "flashcard" */;
@@ -520,10 +567,15 @@
 		A0DCC2C31E66DA1C0071A00E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0800;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "tasuku tozawa";
 				TargetAttributes = {
+					A029FDB41F01C7790043B2D0 = {
+						CreatedOnToolsVersion = 8.3.3;
+						ProvisioningStyle = Automatic;
+						TestTargetID = A0DCC2CA1E66DA1C0071A00E;
+					};
 					A0DCC2CA1E66DA1C0071A00E = {
 						CreatedOnToolsVersion = 8.0;
 						ProvisioningStyle = Automatic;
@@ -550,11 +602,19 @@
 			targets = (
 				A0DCC2CA1E66DA1C0071A00E /* flashcard */,
 				A0DCC2DB1E66DA1C0071A00E /* flashcardTests */,
+				A029FDB41F01C7790043B2D0 /* flashcardUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A029FDB31F01C7790043B2D0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A0DCC2C91E66DA1C0071A00E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -680,6 +740,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A029FDB11F01C7790043B2D0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A029FDB81F01C7790043B2D0 /* flashcardUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A0DCC2C71E66DA1C0071A00E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -749,6 +817,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A029FDBB1F01C7790043B2D0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A0DCC2CA1E66DA1C0071A00E /* flashcard */;
+			targetProxy = A029FDBA1F01C7790043B2D0 /* PBXContainerItemProxy */;
+		};
 		A0DCC2DE1E66DA1C0071A00E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A0DCC2CA1E66DA1C0071A00E /* flashcard */;
@@ -757,6 +830,34 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A029FDBC1F01C7790043B2D0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = flashcardUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.flashcardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = flashcard;
+			};
+			name = Debug;
+		};
+		A029FDBD1F01C7790043B2D0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = flashcardUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.flashcardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = flashcard;
+			};
+			name = Release;
+		};
 		A0DCC2E31E66DA1C0071A00E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -912,6 +1013,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A029FDBE1F01C7790043B2D0 /* Build configuration list for PBXNativeTarget "flashcardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A029FDBC1F01C7790043B2D0 /* Debug */,
+				A029FDBD1F01C7790043B2D0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A0DCC2C61E66DA1C0071A00E /* Build configuration list for PBXProject "flashcard" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
