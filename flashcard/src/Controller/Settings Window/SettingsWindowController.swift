@@ -32,14 +32,10 @@ extension SettingsWindowController: WindowSizeCalculator {}
 
 // MARK: - View Transition
 extension SettingsWindowController {
-    func viewSelected(_ sender: NSToolbarItem) {
-        self.loadViewWithIdentifier(sender.itemIdentifier)
-    }
+    func didSelectToolbarItem(_ sender: NSToolbarItem) {
+        if self.contentViewController!.className == sender.itemIdentifier { return }
 
-    func loadViewWithIdentifier(_ id: String) {
-        if self.contentViewController!.className == id { return }
-
-        if let type = self.toolbar.getViewControllerTypeBy(id) {
+        if let type = self.toolbar.getViewControllerTypeBy(sender.itemIdentifier) {
             let newViewController = type.init()
             self.window!.contentViewController = newViewController
         }
@@ -54,7 +50,7 @@ extension SettingsWindowController: NSToolbarDelegate {
             toolbarItem.label = info.title
             toolbarItem.image = NSImage(named: info.icon)
             toolbarItem.target = self
-            toolbarItem.action = #selector(SettingsWindowController.viewSelected(_:))
+            toolbarItem.action = #selector(SettingsWindowController.didSelectToolbarItem(_:))
 
             return toolbarItem
         }
