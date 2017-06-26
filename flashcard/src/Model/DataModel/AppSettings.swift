@@ -55,13 +55,14 @@ class AppSettings: NSObject, NSCoding {
 extension AppSettings {
     func setHotKey() {
         let appDelegate = NSApplication.shared().delegate as! AppDelegate
+        HotKeyCenter.shared.unregisterHotKey(with: "Search")
+        HotKeyCenter.shared.unregisterHotKey(with: "Play")
+
         if let k = searchKeyCombo {
-            HotKeyCenter.shared.unregisterHotKey(with: "Search")
             let hotKey = HotKey(identifier: "Search", keyCombo: k, target: appDelegate, action: #selector(appDelegate.toggleQuickWindow))
             hotKey.register()
         }
         if let k = playKeyCombo {
-            HotKeyCenter.shared.unregisterHotKey(with: "Play")
             let hotKey = HotKey(identifier: "Play", keyCombo: k, target: appDelegate, action: #selector(appDelegate.togglePlayWindow))
             hotKey.register()
         }

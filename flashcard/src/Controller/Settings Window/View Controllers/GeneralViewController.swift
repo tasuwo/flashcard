@@ -57,8 +57,20 @@ extension GeneralViewController: RecordViewDelegate {
         return true
     }
 
-    func recordViewDidClearShortcut(_: RecordView) {
-        // TODO: Remove hot key and save it to userdefault
+    func recordViewDidClearShortcut(_ recordView: RecordView) {
+        if let id = recordView.identifier,
+            let settings = AppSettings.get() {
+            switch id {
+            case "Play":
+                settings.playKeyCombo = nil
+            case "Search":
+                settings.searchKeyCombo = nil
+            default:
+                break
+            }
+            settings.setHotKey()
+            settings.save()
+        }
     }
 
     func recordViewDidEndRecording(_: RecordView) {
