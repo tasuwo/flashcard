@@ -36,7 +36,7 @@ class SettingsWindowControllerTests: XCTestCase {
         let infos = self.toolbar.toolbarTabsArray
         
         for info in infos {
-            let id = info.viewController.className()
+            let id = info.id
             let item = NSToolbarItem(itemIdentifier: id)
             
             self.vc.didSelectToolbarItem(item)

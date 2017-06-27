@@ -45,7 +45,7 @@ extension SettingsWindowController {
 // MARK: - NSToolbarDelegate
 extension SettingsWindowController: NSToolbarDelegate {
     func toolbar(_: NSToolbar, itemForItemIdentifier itemIdentifier: String, willBeInsertedIntoToolbar _: Bool) -> NSToolbarItem? {
-        if let info = (self.toolbar.toolbarTabsArray.filter { $0.viewController.className() == itemIdentifier }).first {
+        if let info = (self.toolbar.toolbarTabsArray.filter { $0.id == itemIdentifier }).first {
             let toolbarItem = NSToolbarItem(itemIdentifier: itemIdentifier)
             toolbarItem.label = info.title
             toolbarItem.image = NSImage(named: info.icon)

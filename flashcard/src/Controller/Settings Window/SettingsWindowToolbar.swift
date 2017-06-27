@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 
 struct TabInfo {
+    let id: String
     let title: String
     let icon: String
     let viewController: NSViewController.Type
@@ -17,8 +18,8 @@ struct TabInfo {
 
 class SettingsWindowToolbar: NSToolbar {
     var toolbarTabsArray = [
-        TabInfo(title: "General", icon: "NSPreferencesGeneral", viewController: GeneralViewController.self),
-        TabInfo(title: "Cards", icon: "NSAdvanced", viewController: HoldersCardsViewController.self),
+        TabInfo(id: GeneralViewController.className(), title: "General", icon: "NSPreferencesGeneral", viewController: GeneralViewController.self),
+        TabInfo(id: HoldersCardsViewController.className(), title: "Cards", icon: "NSAdvanced", viewController: HoldersCardsViewController.self),
     ]
     var toolbarTabsIdentifierArray: [String] = []
 
@@ -33,6 +34,6 @@ class SettingsWindowToolbar: NSToolbar {
     }
 
     func getViewControllerTypeBy(_ id: String) -> NSViewController.Type? {
-        return ((self.toolbarTabsArray.filter { $0.viewController.className() == id }).first)?.viewController
+        return ((self.toolbarTabsArray.filter { $0.id == id }).first)?.viewController
     }
 }
