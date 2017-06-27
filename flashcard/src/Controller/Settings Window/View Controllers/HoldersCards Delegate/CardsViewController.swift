@@ -18,6 +18,8 @@ class CardsViewController: NSObject {
         super.init()
         view.cardsList.dataSource = presenter
         view.cardsList.delegate = self
+
+        view.delegate = self
     }
 }
 

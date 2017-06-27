@@ -39,6 +39,8 @@ class HoldersViewController: NSObject {
         })
         view.holdersList.dataSource = presenter
         view.holdersList.delegate = self
+
+        view.delegate = self
     }
 }
 
