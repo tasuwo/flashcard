@@ -24,8 +24,6 @@ class SettingsWindowControllerTests: XCTestCase {
             defer: false)
         )
         self.toolbar = self.vc.toolbar
-        
-        Realm.Configuration.defaultConfiguration.inMemoryIdentifier = self.name
     }
     
     override func tearDown() {

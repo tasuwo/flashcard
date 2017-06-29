@@ -11,39 +11,35 @@ import KeyHolder
 import Magnet
 
 class GeneralViewController: NSViewController {
-    var holdersPresenter: CardHoldersListPresenter!
+    var presenter: CardHolderPresenter
+    var settings: AppSettings
+    var generalView: GeneralView!
+
+    convenience init() {
+        self.init(presenter: CardHolderPresenterImpl(), appSettings: AppSettingsImpl())
+    }
+
+    init(presenter: CardHolderPresenter, appSettings: AppSettings) {
+        self.presenter = presenter
+        self.settings = appSettings
+        super.init(nibName: nil, bundle: nil)!
+    }
+
+    required init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func loadView() {
         let winSize = SettingsWindowController.defaultSize()
-        let view = GeneralView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
-        view.hotkeyDelegate = self
+        self.generalView = GeneralView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
+        generalView.hotkeyDelegate = self
 
-        holdersPresenter = CardHoldersListPresenter()
-        holdersPresenter.load(updated: { changes in
-            switch changes {
-            case .initial:
-                view.defaultHolderTableView.reloadData()
-                if let s = AppSettings.get(), let hi = s.defaultHolderId, let h = CardHolder.get(hi), let i = self.holdersPresenter.holders?.index(of: h) {
-                    view.defaultHolderTableView.selectRowIndexes(IndexSet([i]), byExtendingSelection: false)
-                }
+        let tableView = generalView.defaultHolderTableView!
+        presenter.load(targetTableView: tableView)
+        tableView.dataSource = presenter
+        tableView.delegate = self
 
-            case let .update(_, del, ins, upd):
-                view.defaultHolderTableView.beginUpdates()
-                view.defaultHolderTableView.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                view.defaultHolderTableView.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                view.defaultHolderTableView.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                view.defaultHolderTableView.endUpdates()
-                if let s = AppSettings.get(), let hi = s.defaultHolderId, let h = CardHolder.get(hi), let i = self.holdersPresenter.holders?.index(of: h) {
-                    view.defaultHolderTableView.selectRowIndexes(IndexSet([i]), byExtendingSelection: false)
-                }
-
-            default: break
-            }
-        })
-        view.defaultHolderTableView.dataSource = self.holdersPresenter
-        view.defaultHolderTableView.delegate = self
-
-        self.view = view
+        self.view = generalView
     }
 }
 
@@ -58,18 +54,16 @@ extension GeneralViewController: RecordViewDelegate {
     }
 
     func recordViewDidClearShortcut(_ recordView: RecordView) {
-        if let id = recordView.identifier,
-            let settings = AppSettings.get() {
-            switch id {
-            case "Play":
-                settings.playKeyCombo = nil
-            case "Search":
-                settings.searchKeyCombo = nil
-            default:
-                break
+        if let id = recordView.identifier {
+            do {
+                try settings.setKeyCombo(id, value: nil)
+            } catch AppSettingsError.NoSuchKey {
+                print("Unexpected key was passed to AppSettings. Check the definition of row identifier in record view.")
+            } catch let error {
+                print(error.localizedDescription)
             }
-            settings.apply()
-            settings.save()
+        } else {
+            print("A Row identifier in record view is nil. Check the definition.")
         }
     }
 
@@ -78,24 +72,21 @@ extension GeneralViewController: RecordViewDelegate {
 
     func recordView(_ recordView: RecordView, didChangeKeyCombo keyCombo: KeyCombo) {
         if let id = recordView.identifier {
-            let settings = AppSettings.get() ?? AppSettings(playKeyCombo: nil, searchKeyCombo: nil)
-            switch id {
-            case "Play":
-                settings.playKeyCombo = keyCombo
-            case "Search":
-                settings.searchKeyCombo = keyCombo
-            default:
-                break
+            do {
+                try settings.setKeyCombo(id, value: keyCombo)
+            } catch AppSettingsError.NoSuchKey {
+                print("Unexpected key was passed to AppSettings. Check the definition of row identifier in record view.")
+            } catch let error {
+                print(error.localizedDescription)
             }
-            settings.apply()
-            settings.save()
+        } else {
+            print("A Row identifier in record view is nil. Check the definition.")
         }
     }
 }
 
 extension GeneralViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor _: NSTableColumn?, row _: Int) -> NSView? {
-
         var result = tableView.make(withIdentifier: "cardHolderCell", owner: nil) as? NSTextField
 
         if result == nil {
@@ -112,10 +103,12 @@ extension GeneralViewController: NSTableViewDelegate {
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         let table = notification.object as! NSTableView
-        if let p = self.holdersPresenter, let h = p.holders, !(table.selectedRow < 0), h.count > table.selectedRow {
-            let settings = AppSettings.get() ?? AppSettings()
-            settings.defaultHolderId = h[table.selectedRow].id
-            settings.save()
+        didSelectDefaultHolder(row: table.selectedRow)
+    }
+
+    func didSelectDefaultHolder(row: Int) {
+        if let selectedHolder = presenter.getHolder(at: row) {
+            settings.setDefaultHolderId(selectedHolder.id)
         }
     }
 }

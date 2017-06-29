@@ -53,7 +53,7 @@ extension EditCardViewController: EditCardViewDelegate {
 
     func didPressCommandEnter() {
         let card = Card(id: Card.lastId() + 1, frontText: self.cardText.0, backText: self.cardText.1)
-        if let s = AppSettings.get(), let hi = s.defaultHolderId, let h = CardHolder.get(hi) {
+        if let s = AppSettingsImpl.get(), let h = try! CardHolder.get(s.getDefaultHolderId()) {
             Card.add(card, to: h)
         } else if let h = CardHolder.get(0) {
             // Save card to default holder

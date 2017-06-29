@@ -18,6 +18,7 @@ class SettingsWindowController: NSWindowController {
         toolbar.delegate = self
         self.window!.toolbar = toolbar
 
+        // Set first view controller
         let controller = GeneralViewController()
         self.window!.contentViewController = controller
     }

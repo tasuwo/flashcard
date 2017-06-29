@@ -17,8 +17,8 @@ class HoldersCardsViewController: NSViewController {
         let winSize = SettingsWindowController.defaultSize()
         let view = HoldersCardsView(frame: NSMakeRect(0, 0, winSize.width, winSize.height))
 
-        holdersVC = HoldersViewController(view: view.holdersView)
-        cardsVC = CardsViewController(view: view.cardsView)
+        holdersVC = HoldersViewController(view: view.holdersView, presenter: CardHolderPresenterImpl())
+        cardsVC = CardsViewController(view: view.cardsView, presenter: CardPresenterImpl())
         holdersVC.delegate = cardsVC
 
         self.view = view

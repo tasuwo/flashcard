@@ -15,28 +15,15 @@ protocol HolderSelectDelegate {
 
 class HoldersViewController: NSObject {
     open var delegate: HolderSelectDelegate?
-    var presenter: CardHoldersListPresenter
+    var presenter: CardHolderPresenter
     var view: HoldersView
 
-    init(view: HoldersView) {
+    init(view: HoldersView, presenter: CardHolderPresenter) {
         self.view = view
-        self.presenter = CardHoldersListPresenter()
+        self.presenter = presenter
         super.init()
-        presenter.load(updated: { changes in
-            switch changes {
-            case .initial:
-                view.holdersList.reloadData()
 
-            case let .update(_, del, ins, upd):
-                view.holdersList.beginUpdates()
-                view.holdersList.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
-                view.holdersList.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
-                view.holdersList.removeRows(at: IndexSet(del), withAnimation: .slideUp)
-                view.holdersList.endUpdates()
-
-            default: break
-            }
-        })
+        presenter.load(targetTableView: view.holdersList)
         view.holdersList.dataSource = presenter
         view.holdersList.delegate = self
 
@@ -51,7 +38,7 @@ extension HoldersViewController: NSTableViewDelegate {
         cell.wraps = true
         cell.isEditable = true
         cell.font = NSFont.systemFont(ofSize: NSFont.systemFontSize())
-        if let v = self.presenter.tableView(tableView, objectValueFor: tableColumn, row: row) as? String {
+        if let v = self.presenter.tableView!(tableView, objectValueFor: tableColumn, row: row) as? String {
             cell.stringValue = v
             return cell
         }
@@ -64,9 +51,7 @@ extension HoldersViewController: NSTableViewDelegate {
     }
 
     func tableViewSelectionDidChange(_: Notification) {
-        if let holders = self.presenter.holders,
-            holders.count > self.view.holdersList.selectedRow,
-            !(self.view.holdersList.selectedRow < 0) {
+        if let _ = presenter.getHolder(at: view.holdersList.selectedRow) {
             self.delegate?.didSelectHolder(holderId: self.view.holdersList.selectedRow)
         } else {
             self.delegate?.didSelectHolder(holderId: nil)
@@ -76,16 +61,12 @@ extension HoldersViewController: NSTableViewDelegate {
 
 extension HoldersViewController: HoldersViewDelegate {
     func didPressAddCardHolder() {
-        let holder = CardHolder(name: "Untitled")
-        CardHolder.add(holder)
+        CardHolder.add(CardHolder(name: "Untitled"))
     }
 
     func didPressRemoveCardHolder(selectedRow: Int) {
-        if selectedRow == 0 { return }
         view.holdersList.deselectAll(self)
-
-        if selectedRow == -1 { return }
-        if let selectedCardHolder = self.presenter.holders?[selectedRow] {
+        if let selectedCardHolder = self.presenter.getHolder(at: selectedRow) {
             CardHolder.delete(selectedCardHolder)
         }
     }

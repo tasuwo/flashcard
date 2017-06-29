@@ -10,7 +10,14 @@ import Foundation
 import Cocoa
 import RealmSwift
 
-class CardsListPresenter: NSObject {
+protocol CardPresenter: NSTableViewDataSource {
+    func load(holderId: Int, targetTableView: NSTableView)
+    func releaseNotificationBlock()
+    func getCard(at: Int) -> Card?
+    func cardsCount() -> Int?
+}
+
+class CardPresenterImpl: NSObject, CardPresenter {
     private(set) var cards: Results<Card>?
     private var refreshToken: NotificationToken?
 
@@ -20,9 +27,42 @@ class CardsListPresenter: NSObject {
         refreshToken = cards?.addNotificationBlock(updated)
     }
 
+    func load(holderId: Int, targetTableView: NSTableView) {
+        refreshToken?.stop()
+        cards = Card.all(in: holderId)
+        refreshToken = cards?.addNotificationBlock({ changes in
+            switch changes {
+            case .initial:
+                targetTableView.reloadData()
+
+            case let .update(_, del, ins, upd):
+                targetTableView.beginUpdates()
+                targetTableView.insertRows(at: IndexSet(ins), withAnimation: .slideDown)
+                targetTableView.reloadData(forRowIndexes: IndexSet(upd), columnIndexes: IndexSet(integer: 0))
+                targetTableView.removeRows(at: IndexSet(del), withAnimation: .slideUp)
+                targetTableView.endUpdates()
+
+            default: break
+            }
+        })
+    }
+
     func releaseNotificationBlock() {
         refreshToken?.stop()
         refreshToken = nil
+    }
+
+    func getCard(at index: Int) -> Card? {
+        if let cs = cards,
+            index > 0 && index < cs.count {
+            return cs[index]
+        } else {
+            return nil
+        }
+    }
+
+    func cardsCount() -> Int? {
+        return self.cards?.count
     }
 
     deinit {
@@ -30,7 +70,7 @@ class CardsListPresenter: NSObject {
     }
 }
 
-extension CardsListPresenter: NSTableViewDataSource {
+extension CardPresenterImpl: NSTableViewDataSource {
     func tableView(_ tableView: NSTableView, setObjectValue object: Any?, for tableColumn: NSTableColumn?, row: Int) {
         if let c = cards, let colId = tableColumn?.identifier, let v = object as? String {
             if c.count > row {

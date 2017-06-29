@@ -16,6 +16,9 @@ target 'flashcard' do
     # Pods for testing
   end
 
+  target 'flashcardUITests' do
+    inherit! :search_paths
+  end
 end
 
 post_install do |installer|

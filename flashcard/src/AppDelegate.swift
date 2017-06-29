@@ -70,9 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.statusBarController = StatusBarController()
 
         // Load App Setttings
-        if let settings = AppSettings.get() {
-            settings.apply()
-        }
+        AppSettingsImpl.get()?.applyHotKeys()
     }
 }
 

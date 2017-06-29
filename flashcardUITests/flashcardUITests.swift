@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RealmSwift
 
 class flashcardUITests: XCTestCase {
         

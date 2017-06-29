@@ -31,14 +31,14 @@ class GeneralView: NSView {
         super.init(frame: frame)
 
         searchHotKeyRecordView = myRecordView(id: "Search")
-        if let settings = AppSettings.get(), let keycombo = settings.searchKeyCombo {
-            searchHotKeyRecordView.keyCombo = keycombo
+        if let settings = AppSettingsImpl.get() {
+            searchHotKeyRecordView.keyCombo = settings.getKeyCombos().play
         }
         self.addSubview(searchHotKeyRecordView)
 
         playHotKeyRecordView = myRecordView(id: "Play")
-        if let settings = AppSettings.get(), let keycombo = settings.playKeyCombo {
-            playHotKeyRecordView.keyCombo = keycombo
+        if let settings = AppSettingsImpl.get() {
+            playHotKeyRecordView.keyCombo = settings.getKeyCombos().play
         }
         self.addSubview(playHotKeyRecordView)
 

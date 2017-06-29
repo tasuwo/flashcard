@@ -9,25 +9,29 @@
 import Foundation
 import Magnet
 
-class AppSettings: NSObject, NSCoding {
-    var searchKeyCombo: KeyCombo?
-    var playKeyCombo: KeyCombo?
-    private var _defaultHolderId: Int = 0
-    var defaultHolderId: Int? {
-        set {
-            self._defaultHolderId = newValue ?? 0
-        }
-        get {
-            if let _ = CardHolder.get(self._defaultHolderId) {}
-            else {
-                return 0
-            }
+protocol AppSettings {
+    func setKeyCombo(_ key: String, value: KeyCombo?) throws
+    func getKeyCombos() -> AppSettingsKeyCombos
+    func setDefaultHolderId(_: Int)
+    func getDefaultHolderId() throws -> Int
+}
 
-            return self._defaultHolderId
-        }
-    }
+enum AppSettingsError: Error {
+    case NoSuchKey
+    case NoAppDefaultHolder
+}
 
-    init(playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int? = nil) {
+struct AppSettingsKeyCombos {
+    let search: KeyCombo?
+    let play: KeyCombo?
+}
+
+class AppSettingsImpl: NSObject, NSCoding {
+    fileprivate var searchKeyCombo: KeyCombo?
+    fileprivate var playKeyCombo: KeyCombo?
+    fileprivate var defaultHolderId: Int = 0
+
+    init(playKeyCombo: KeyCombo? = nil, searchKeyCombo: KeyCombo? = nil, defaultHolderId: Int = 0) {
         super.init()
         self.playKeyCombo = playKeyCombo
         self.searchKeyCombo = searchKeyCombo
@@ -41,7 +45,7 @@ class AppSettings: NSObject, NSCoding {
         self.init(
             playKeyCombo: playkeycombo,
             searchKeyCombo: searchkeycombo,
-            defaultHolderId: defaultHolderId
+            defaultHolderId: defaultHolderId ?? 0
         )
     }
 
@@ -50,10 +54,14 @@ class AppSettings: NSObject, NSCoding {
         aCoder.encode(self.searchKeyCombo, forKey: "searchKeyCombo")
         aCoder.encode(self.defaultHolderId, forKey: "defaultHolderId")
     }
-}
 
-extension AppSettings {
-    func apply() {
+    fileprivate func save() {
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self)
+        UserDefaults.standard.set(encodedData, forKey: "AppSettings")
+        UserDefaults.standard.synchronize()
+    }
+
+    func applyHotKeys() {
         let appDelegate = NSApplication.shared().delegate as! AppDelegate
         HotKeyCenter.shared.unregisterHotKey(with: "Search")
         HotKeyCenter.shared.unregisterHotKey(with: "Play")
@@ -67,16 +75,47 @@ extension AppSettings {
             hotKey.register()
         }
     }
+}
 
-    func save() {
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: self)
-        UserDefaults.standard.set(encodedData, forKey: "AppSettings")
-        UserDefaults.standard.synchronize()
+extension AppSettingsImpl: AppSettings {
+    func setKeyCombo(_ key: String, value: KeyCombo?) throws {
+        switch key {
+        case "Play":
+            self.playKeyCombo = value
+        case "Search":
+            self.searchKeyCombo = value
+        default:
+            throw AppSettingsError.NoSuchKey
+        }
+        applyHotKeys()
+        save()
     }
 
-    class func get() -> AppSettings? {
+    func getKeyCombos() -> AppSettingsKeyCombos {
+        return AppSettingsKeyCombos(search: self.searchKeyCombo, play: self.playKeyCombo)
+    }
+
+    func setDefaultHolderId(_ id: Int) {
+        self.defaultHolderId = id
+        save()
+    }
+
+    func getDefaultHolderId() throws -> Int {
+        if let _ = CardHolder.get(defaultHolderId) {
+            return defaultHolderId
+        }
+
+        guard let _ = CardHolder.get(0) else {
+            throw AppSettingsError.NoAppDefaultHolder
+        }
+        self.defaultHolderId = 0
+
+        return 0
+    }
+
+    class func get() -> AppSettingsImpl? {
         if let decoded = UserDefaults.standard.object(forKey: "AppSettings") as? Data,
-            let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettings {
+            let settings = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? AppSettingsImpl {
             return settings
         }
         return nil
